@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 
-def get_primary_xml (index_url: str) -> str | None:
+def get_primary_xml(index_url: str) -> str | None:
     """
     Given a filing index page, return the full XML URL if it exists.
     """
@@ -30,10 +30,60 @@ def get_primary_xml (index_url: str) -> str | None:
                             return full_url
 
     except Exception as e:
-        print(f"❌ Error while fetching XML link: {e}")
+        print(f"Error while fetching XML link: {e}")
 
-    print(f"⚠️ No XML link found on page: {index_url}")
+    print(f"No XML link found on page: {index_url}")
     return None
+
+def parse_insider_trade(xml_url: str) -> list[dict]:
+    """
+    Parses the XML Form 4 filing and extracts all insider trades.
+    Returns a list of dictionaries with relevant data.
+    """
+
+    headers = {
+        "User-Agent": "InsiderBot - CaseStudy (thicoaraujo1@gmail.com)"
+    }
+
+    res = requests.get(xml_url, headers=headers)
+    soup = BeautifulSoup(res.content, "xml")
+
+    # Get insider info
+    owner_name = soup.find("rptOwnerName")
+    officer_title = soup.find("officerTitle")
+    owner_name = owner_name.text if owner_name else "Unknown"
+    officer_title = officer_title.text if officer_title else "Unknown"
+
+    trades = []
+
+    for transaction in soup.find_all("nonDerivativeTransaction"):
+        try:
+            security = transaction.find("securityTitle").value.text
+            code = transaction.find("transactionCode").text
+            shares = float(transaction.find("transactionShares").value.text)
+            price = float(transaction.find("transactionPricePerShare").value.text)
+            total_value = round(shares * price, 2)
+
+            trade = {
+                "insider_name": owner_name,
+                "title": officer_title,
+                "type": "Buy" if code == "P" else "Sell",
+                "security": security,
+                "shares": shares,
+                "price": price,
+                "value": total_value,
+                "code": code
+            }
+
+            trades.append(trade)
+
+
+        except Exception as e:
+            print(f"Error parsing transaction: {e}")
+            continue
+
+    return trades 
+
 
 ## Downloading Atom Feed
 url = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&owner=only&count=100&output=atom" ## Gets 100 latests filings
@@ -57,4 +107,10 @@ xml_url = get_primary_xml(test_index_url)
 if xml_url:
     print(f"Found XML link:\n{xml_url}")
 else:
-    print("❌ Could not find XML link.")
+    print("Could not find XML link.")
+
+## Testing
+trades = parse_insider_trade(xml_url)
+
+for t in trades:
+    print(t)
