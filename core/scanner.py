@@ -1,0 +1,68 @@
+import json
+from datetime import datetime, timedelta
+from time import sleep
+
+from core.utils.file_manager import get_latest_filing_date, save_trades_to_csv, save_daily_trades_to_csv
+from core.utils.sec_api import get_trades_from_last_year, get_daily_trades
+
+def scan_all_companies_from_json(json_path: str, limit_per_feed: int = 100):
+    with open(json_path, "r") as f:
+        companies = json.load(f)
+
+    print(f"🔍 Scanning {len(companies)} companies...")
+
+    for entry in companies:
+        ticker = entry["ticker"]
+        name =  entry["name"]
+        print(f"\n🚨 {ticker} ({name})")
+
+        latest_date = get_latest_filing_date(ticker)
+        if latest_date is None:
+            latest_date = datetime.now() - timedelta(days=365)
+            print("  ➤ No previous data. Starting from 1 year ago.")
+        else:
+            print(f"  ➤ Last filing date: {latest_date.date()}")
+
+        sleep(1)
+        trades = get_trades_from_last_year(ticker, since=latest_date, limit=limit_per_feed)
+
+        if trades:
+            print(f"  ✅ {len(trades)} trades fetched. Saving...")
+            save_trades_to_csv(ticker, trades)
+        else:
+            print("  ⚠️  No new trades found.")
+
+def daily_run():
+    today = datetime.today()
+    print(f"📅 Running daily insider scan for {today.date()}...")
+
+    trades = get_daily_trades(today)
+
+    if not trades:
+        print("⚠️ No insider trades found for today.")
+        return
+
+    save_daily_trades_to_csv(trades, today)
+    print(f"✅ Daily run completed. {len(trades)} trades saved.")
+
+def scan_for_company():
+    """
+    Prompts user for a ticker, then scans and saves insider trades for that company.
+    """
+    ticker = input("Enter the TICKER (e.g., AAPL): ").upper().strip()
+    print(f"\n🔍 Running scan for {ticker}...\n")
+
+    latest_date = get_latest_filing_date(ticker)
+    if latest_date is None:
+        latest_date = datetime.now() - timedelta(days=365)
+        print("  ➤ No previous data. Starting from 1 year ago.")
+    else:
+        print(f"  ➤ Last filing date: {latest_date.date()}")
+
+    trades = get_trades_from_last_year(ticker, since=latest_date, limit=50)
+
+    if trades:
+        print(f"  ✅ {len(trades)} trades fetched. Saving...")
+        save_trades_to_csv(ticker, trades)
+    else:
+        print("  ⚠️  No new trades found.")
