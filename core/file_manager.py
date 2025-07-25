@@ -32,6 +32,7 @@ def save_trades_to_csv(ticker: str, trades: list[dict]):
             keep="last",
             inplace=True
         )
+        combined["filing_date"] = pd.to_datetime(combined["filing_date"])
         combined.sort_values(by="filing_date", ascending=False, inplace=True)
         combined.to_csv(file_path, index=False)
     else:
@@ -57,6 +58,7 @@ def save_daily_trades_to_csv(trades: list[dict], date: datetime):
             keep="last",
             inplace=True
         )
+        combined["filing_date"] = pd.to_datetime(combined["filing_date"])
         combined.sort_values(by="filing_date", ascending=False, inplace=True)
         combined.to_csv(file_path, index=False)
     else:

@@ -2,8 +2,8 @@ import json
 from datetime import datetime, timedelta
 from time import sleep
 
-from core.utils.file_manager import get_latest_filing_date, save_trades_to_csv, save_daily_trades_to_csv
-from core.utils.sec_api import get_trades_from_last_year, get_daily_trades
+from core.file_manager import get_latest_filing_date, save_trades_to_csv, save_daily_trades_to_csv
+from core.sec_controller import get_company_trades, get_daily_trades
 
 def scan_all_companies_from_json(json_path: str, limit_per_feed: int = 100):
     with open(json_path, "r") as f:
@@ -24,7 +24,7 @@ def scan_all_companies_from_json(json_path: str, limit_per_feed: int = 100):
             print(f"  ➤ Last filing date: {latest_date.date()}")
 
         sleep(1)
-        trades = get_trades_from_last_year(ticker, since=latest_date, limit=limit_per_feed)
+        trades = get_company_trades(ticker, since=latest_date, limit=limit_per_feed)
 
         if trades:
             print(f"  ✅ {len(trades)} trades fetched. Saving...")
@@ -33,8 +33,8 @@ def scan_all_companies_from_json(json_path: str, limit_per_feed: int = 100):
             print("  ⚠️  No new trades found.")
 
 def daily_run():
-    today = datetime.today()
-    print(f"📅 Running daily insider scan for {today.date()}...")
+    today = datetime.today().date()
+    print(f"📅 Running daily insider scan for {today}...")
 
     trades = get_daily_trades(today)
 
@@ -59,7 +59,7 @@ def scan_for_company():
     else:
         print(f"  ➤ Last filing date: {latest_date.date()}")
 
-    trades = get_trades_from_last_year(ticker, since=latest_date, limit=50)
+    trades = get_company_trades(ticker, since=latest_date, limit=50)
 
     if trades:
         print(f"  ✅ {len(trades)} trades fetched. Saving...")
