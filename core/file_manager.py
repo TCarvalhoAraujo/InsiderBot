@@ -4,6 +4,7 @@ from datetime import datetime
 
 RAW_DATA_DIR = "data/raw"
 DAILY_DATA_DIR = "data/daily_feed"
+FINVIZ_DATA_DIR = "data/finviz"
 
 def ensure_raw_data_dir():
     if not os.path.exists(RAW_DATA_DIR):
@@ -12,6 +13,10 @@ def ensure_raw_data_dir():
 def ensure_daily_dir():
     if not os.path.exists(DAILY_DATA_DIR):
         os.makedirs(DAILY_DATA_DIR)
+
+def ensure_finviz_dir():
+    if not os.path.exists(FINVIZ_DATA_DIR):
+        os.makedirs(FINVIZ_DATA_DIR)
 
 def save_trades_to_csv(ticker: str, trades: list[dict]):
     """
@@ -90,3 +95,29 @@ def get_latest_filing_date(ticker: str) -> datetime | None:
         return None
 
     return df["filing_date"].max()
+
+def save_finviz_trades_to_csv(new_trades: pd.DataFrame):
+    ensure_finviz_dir()
+
+    today_str = datetime.today().strftime("%Y-%m-%d")
+    daily_file = os.path.join(FINVIZ_DATA_DIR, f"{today_str}.csv")
+    master_file = os.path.join(FINVIZ_DATA_DIR, "finviz_all_trades.csv")
+
+    # Save today's file
+    new_trades.to_csv(daily_file, index=False)
+
+    # Merge with existing master file
+    if os.path.exists(master_file):
+        existing = pd.read_csv(master_file, parse_dates=["transaction_date"])
+        combined = pd.concat([existing, new_trades], ignore_index=True)
+    else:
+        combined = new_trades.copy()
+
+    # Remove duplicates — assuming sec_form4 is unique
+    combined.drop_duplicates(subset=["sec_form4"], inplace=True)
+
+    # Sort by date descending
+    combined.sort_values(by="transaction_date", ascending=False, inplace=True)
+
+    # Save updated master file
+    combined.to_csv(master_file, index=False)

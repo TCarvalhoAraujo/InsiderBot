@@ -1,4 +1,4 @@
-from core.scanner import scan_all_companies_from_json, daily_run, scan_for_company
+from core.scanner import scan_all_companies_from_json, daily_run, scan_for_company, scan_from_finviz
 import os
 
 # ticker = "AMZN"
@@ -21,6 +21,7 @@ def print_main_menu():
     print("\n📊 INSIDERBOT MENU")
     print("1 - Run daily insider trade scan (global Atom feed)")
     print("2 - Run full company scan (based on tickers.json)")
+    print("3 - Run scan from finviz website (filters only buys)")
     print("0 - Exit")
 
 def print_company_menu():
@@ -62,6 +63,9 @@ def main():
 
         elif choice == "2":
             handle_company_scan()
+
+        elif choice == "3":
+            scan_from_finviz()
 
         elif choice == "0":
             print("👋 Exiting InsiderBot. Have a great day!")

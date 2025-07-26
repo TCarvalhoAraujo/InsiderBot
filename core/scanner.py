@@ -2,8 +2,9 @@ import json
 from datetime import datetime, timedelta
 from time import sleep
 
-from core.file_manager import get_latest_filing_date, save_trades_to_csv, save_daily_trades_to_csv
+from core.file_manager import get_latest_filing_date, save_trades_to_csv, save_daily_trades_to_csv, save_finviz_trades_to_csv
 from core.sec_controller import get_company_trades, get_daily_trades
+from core.finviz_scraper import finviz_scraper
 
 def scan_all_companies_from_json(json_path: str, limit_per_feed: int = 100):
     with open(json_path, "r") as f:
@@ -66,3 +67,21 @@ def scan_for_company():
         save_trades_to_csv(ticker, trades)
     else:
         print("  ⚠️  No new trades found.")
+
+def scan_from_finviz():
+    """
+    Scans the Finviz insider trading page for recent BUY trades only,
+    and saves them to the data/finviz/ folder with deduplication.
+    """
+    print("\n🔍 Scanning Finviz for insider BUY trades...\n")
+    
+    try:
+        trades = finviz_scraper()
+        if not trades.empty:
+            print(f"  ✅ {len(trades)} trades fetched. Saving to CSV...")
+            save_finviz_trades_to_csv(trades)
+            print("  📁 Saved and merged to data/finviz/")
+        else:
+            print("  ⚠️  No trades found on Finviz.")
+    except Exception as e:
+        print(f"  ❌ An error occurred during scan: {e}")
