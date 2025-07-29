@@ -1,5 +1,7 @@
 from core.scanner import scan_all_companies_from_json, daily_run, scan_for_company, scan_from_finviz
 from core.engine.analyzer import analyze_finviz_trade
+from core.io.file_manager import load_latest_tagged_trades
+from core.engine.ohlc import update_ohlc
 
 import os
 
@@ -11,6 +13,7 @@ def print_main_menu():
     print("2 - Run full company scan (based on tickers.json)")
     print("3 - Run scan from finviz website (filters only buys)")
     print("4 - Tag trades from finviz")
+    print("5 - Update OHLC data")
     print("0 - Exit")
 
 def print_company_menu():
@@ -58,6 +61,10 @@ def main():
 
         elif choice == "4":
             analyze_finviz_trade()
+
+        elif choice == "5":
+            df = load_latest_tagged_trades()
+            update_ohlc(df)
 
         elif choice == "0":
             print("👋 Exiting InsiderBot. Have a great day!")
