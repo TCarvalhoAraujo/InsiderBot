@@ -1,0 +1,362 @@
+{
+  "AMTB": {
+    "market_cap": 849725824,
+    "sector": null,
+    "industry": null,
+    "short_name": "Amerant Bancorp Inc."
+  },
+  "CHMG": {
+    "market_cap": 252717408,
+    "sector": null,
+    "industry": null,
+    "short_name": "Chemung Financial Corp"
+  },
+  "LOOP": {
+    "market_cap": 80166912,
+    "sector": null,
+    "industry": null,
+    "short_name": "Loop Industries, Inc."
+  },
+  "CVM": {
+    "market_cap": 55935036,
+    "sector": null,
+    "industry": null,
+    "short_name": "Cel-Sci Corporation"
+  },
+  "CBAN": {
+    "market_cap": 288515200,
+    "sector": null,
+    "industry": null,
+    "short_name": "Colony Bankcorp, Inc."
+  },
+  "MSCI": {
+    "market_cap": 42766708736,
+    "sector": null,
+    "industry": null,
+    "short_name": "MSCI Inc."
+  },
+  "MH": {
+    "market_cap": 3166813184,
+    "sector": null,
+    "industry": null,
+    "short_name": "McGraw Hill, Inc."
+  },
+  "NWFL": {
+    "market_cap": 227808800,
+    "sector": null,
+    "industry": null,
+    "short_name": "Norwood Financial Corp."
+  },
+  "SIGI": {
+    "market_cap": 4766536192,
+    "sector": null,
+    "industry": null,
+    "short_name": "Selective Insurance Group, Inc."
+  },
+  "PMT": {
+    "market_cap": 1062472704,
+    "sector": null,
+    "industry": null,
+    "short_name": "PennyMac Mortgage Investment Tr"
+  },
+  "NBBK": {
+    "market_cap": 747733184,
+    "sector": null,
+    "industry": null,
+    "short_name": "NB Bancorp, Inc."
+  },
+  "WTFC": {
+    "market_cap": 8843142144,
+    "sector": null,
+    "industry": null,
+    "short_name": "Wintrust Financial Corporation"
+  },
+  "REZI": {
+    "market_cap": 3690324480,
+    "sector": null,
+    "industry": null,
+    "short_name": "Resideo Technologies, Inc."
+  },
+  "CB": {
+    "market_cap": 106039836672,
+    "sector": null,
+    "industry": null,
+    "short_name": "Chubb Limited"
+  },
+  "TPL": {
+    "market_cap": 22511306752,
+    "sector": null,
+    "industry": null,
+    "short_name": "Texas Pacific Land Corporation"
+  },
+  "RCG": {
+    "market_cap": 18241038,
+    "sector": null,
+    "industry": null,
+    "short_name": "153389"
+  },
+  "CARL": {
+    "market_cap": 384486336,
+    "sector": null,
+    "industry": null,
+    "short_name": "Carlsmed, Inc."
+  },
+  "NIQ": {
+    "market_cap": 5634500096,
+    "sector": null,
+    "industry": null,
+    "short_name": "NIQ Global Intelligence plc"
+  },
+  "RLI": {
+    "market_cap": 6120436736,
+    "sector": null,
+    "industry": null,
+    "short_name": "RLI Corp."
+  },
+  "PASG": {
+    "market_cap": 21998116,
+    "sector": null,
+    "industry": null,
+    "short_name": "Passage Bio, Inc."
+  },
+  "ASAN": {
+    "market_cap": 3506303744,
+    "sector": null,
+    "industry": null,
+    "short_name": "Asana, Inc."
+  },
+  "PEBO": {
+    "market_cap": 1062362816,
+    "sector": null,
+    "industry": null,
+    "short_name": "Peoples Bancorp Inc."
+  },
+  "SHEN": {
+    "market_cap": 825599360,
+    "sector": null,
+    "industry": null,
+    "short_name": "Shenandoah Telecommunications C"
+  },
+  "FFIN": {
+    "market_cap": 5205177856,
+    "sector": null,
+    "industry": null,
+    "short_name": "First Financial Bankshares, Inc"
+  },
+  "SMPL": {
+    "market_cap": 3224349952,
+    "sector": null,
+    "industry": null,
+    "short_name": "The Simply Good Foods Company"
+  },
+  "PRGS": {
+    "market_cap": 2190551296,
+    "sector": null,
+    "industry": null,
+    "short_name": "Progress Software Corporation"
+  },
+  "DMAC": {
+    "market_cap": 260538896,
+    "sector": null,
+    "industry": null,
+    "short_name": "DiaMedica Therapeutics Inc."
+  },
+  "SFNC": {
+    "market_cap": 2863276800,
+    "sector": null,
+    "industry": null,
+    "short_name": "Simmons First National Corporat"
+  },
+  "NTRP": {
+    "market_cap": 31072536,
+    "sector": null,
+    "industry": null,
+    "short_name": "NextTrip, Inc."
+  },
+  "PGC": {
+    "market_cap": 466127424,
+    "sector": null,
+    "industry": null,
+    "short_name": "Peapack-Gladstone Financial Cor"
+  },
+  "OMCC": {
+    "market_cap": 40577760,
+    "sector": null,
+    "industry": null,
+    "short_name": "Old Market Capital Corporation"
+  },
+  "RMCF": {
+    "market_cap": 13717299,
+    "sector": null,
+    "industry": null,
+    "short_name": "Rocky Mountain Chocolate Factor"
+  },
+  "PLAY": {
+    "market_cap": 1135477248,
+    "sector": null,
+    "industry": null,
+    "short_name": "Dave & Buster's Entertainment, "
+  },
+  "CALC": {
+    "market_cap": 53093440,
+    "sector": null,
+    "industry": null,
+    "short_name": "CalciMedica, Inc."
+  },
+  "UNOV": {
+    "market_cap": null,
+    "sector": null,
+    "industry": null,
+    "short_name": "Innovator U.S. Equity Ultra Buf"
+  },
+  "IFS": {
+    "market_cap": 4140645888,
+    "sector": null,
+    "industry": null,
+    "short_name": "Intercorp Financial Services In"
+  },
+  "MERC": {
+    "market_cap": 291556704,
+    "sector": null,
+    "industry": null,
+    "short_name": "Mercer International Inc."
+  },
+  "TBN": {
+    "market_cap": 330166688,
+    "sector": null,
+    "industry": null,
+    "short_name": "Tamboran Resources Corporation"
+  },
+  "UPXI": {
+    "market_cap": 316299904,
+    "sector": null,
+    "industry": null,
+    "short_name": "Upexi, Inc."
+  },
+  "STRW": {
+    "market_cap": 572314368,
+    "sector": null,
+    "industry": null,
+    "short_name": "Strawberry Fields REIT, Inc."
+  },
+  "PLBC": {
+    "market_cap": 292082208,
+    "sector": null,
+    "industry": null,
+    "short_name": "Plumas Bancorp"
+  },
+  "KYN": {
+    "market_cap": 2065028480,
+    "sector": null,
+    "industry": null,
+    "short_name": "Kayne Anderson MLP/Midstream In"
+  },
+  "DLPN": {
+    "market_cap": 14328704,
+    "sector": null,
+    "industry": null,
+    "short_name": "Dolphin Entertainment, Inc."
+  },
+  "GALT": {
+    "market_cap": 193672288,
+    "sector": null,
+    "industry": null,
+    "short_name": "Galectin Therapeutics Inc."
+  },
+  "CTAS": {
+    "market_cap": 88801681408,
+    "sector": null,
+    "industry": null,
+    "short_name": "Cintas Corporation"
+  },
+  "RVP": {
+    "market_cap": 21659564,
+    "sector": null,
+    "industry": null,
+    "short_name": "Retractable Technologies, Inc."
+  },
+  "XAIR": {
+    "market_cap": 14847168,
+    "sector": null,
+    "industry": null,
+    "short_name": "Beyond Air, Inc."
+  },
+  "PETS": {
+    "market_cap": 73330576,
+    "sector": null,
+    "industry": null,
+    "short_name": "PetMed Express, Inc."
+  },
+  "GF": {
+    "market_cap": 194319408,
+    "sector": null,
+    "industry": null,
+    "short_name": "New Germany Fund, Inc. (The)"
+  },
+  "BRCC": {
+    "market_cap": 231000000,
+    "sector": null,
+    "industry": null,
+    "short_name": "BRC Inc."
+  },
+  "ANIX": {
+    "market_cap": 105974520,
+    "sector": null,
+    "industry": null,
+    "short_name": "Anixa Biosciences, Inc."
+  },
+  "RFMZ": {
+    "market_cap": 304957600,
+    "sector": null,
+    "industry": null,
+    "short_name": null
+  },
+  "FSCO": {
+    "market_cap": 1469817984,
+    "sector": null,
+    "industry": null,
+    "short_name": null
+  },
+  "CDXS": {
+    "market_cap": 251848192,
+    "sector": null,
+    "industry": null,
+    "short_name": "Codexis, Inc."
+  },
+  "NHS": {
+    "market_cap": 227356960,
+    "sector": null,
+    "industry": null,
+    "short_name": "Neuberger Berman High Yield Str"
+  },
+  "NEGG": {
+    "market_cap": 761200256,
+    "sector": null,
+    "industry": null,
+    "short_name": "Newegg Commerce, Inc."
+  },
+  "ATRA": {
+    "market_cap": 80256392,
+    "sector": null,
+    "industry": null,
+    "short_name": "Atara Biotherapeutics, Inc."
+  },
+  "LRHC": {
+    "market_cap": 5487246,
+    "sector": null,
+    "industry": null,
+    "short_name": "La Rosa Holdings Corp."
+  },
+  "PBT": {
+    "market_cap": 630150976,
+    "sector": null,
+    "industry": null,
+    "short_name": "Permian Basin Royalty Trust"
+  },
+  "ASIC": {
+    "market_cap": 1002991040,
+    "sector": null,
+    "industry": null,
+    "short_name": "Ategrity Specialty Insurance Co"
+  }
+}
