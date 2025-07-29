@@ -33,7 +33,6 @@ def finviz_scraper():
             "value": cols[7],
             "shares_total": cols[8],
             "sec_form4": "https://finviz.com/" + row.find_all("td")[9].find("a")["href"],
-            "source": "finviz"
         }
 
         data.append(trade)
