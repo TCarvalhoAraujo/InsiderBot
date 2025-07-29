@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta
 from time import sleep
 
-from core.file_manager import get_latest_filing_date, save_trades_to_csv, save_daily_trades_to_csv, save_finviz_trades_to_csv
+from core.io.file_manager import get_latest_filing_date, save_trades_to_csv, save_daily_trades_to_csv, save_finviz_trades_to_csv
 from core.sec_controller import get_company_trades, get_daily_trades
 from core.finviz_scraper import finviz_scraper
 
