@@ -100,7 +100,7 @@ def save_finviz_trades_to_csv(new_trades: pd.DataFrame):
     ensure_finviz_dir()
 
     today_str = datetime.today().strftime("%Y-%m-%d")
-    daily_file = os.path.join(FINVIZ_DATA_DIR, f"{today_str}.csv")
+    daily_file = os.path.join(FINVIZ_DATA_DIR, f"{today_str}_finviz.csv")
     master_file = os.path.join(FINVIZ_DATA_DIR, "finviz_all_trades.csv")
 
     # Save today's file
@@ -113,8 +113,10 @@ def save_finviz_trades_to_csv(new_trades: pd.DataFrame):
     else:
         combined = new_trades.copy()
 
-    # Remove duplicates — assuming sec_form4 is unique
-    combined.drop_duplicates(subset=["sec_form4"], inplace=True)
+    combined.drop_duplicates(
+        subset=["ticker", "insider_name", "relationship", "transaction_date", "transaction_type", "price", "shares", "sec_form4"],
+        inplace=True
+    )
 
     # Sort by date descending
     combined.sort_values(by="transaction_date", ascending=False, inplace=True)

@@ -1,19 +1,7 @@
 from core.scanner import scan_all_companies_from_json, daily_run, scan_for_company, scan_from_finviz
-import os
+from core.engine.analyzer import analyze_finviz_trade
 
-# ticker = "AMZN"
-# 
-# latest_date = get_latest_filing_date(ticker)
-# if latest_date is None:
-#     print("No previous data. Using 1 year ago.")
-#     latest_date = datetime.now() - timedelta(days=365)
-# 
-# print(f"Checking filings since: {latest_date.date()}")
-# 
-# trades = get_trades_from_atom_since(ticker, since=latest_date)
-# 
-# print(f"Fetched {len(trades)} new trades.")
-# save_trades_to_csv(ticker, trades)
+import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -22,6 +10,7 @@ def print_main_menu():
     print("1 - Run daily insider trade scan (global Atom feed)")
     print("2 - Run full company scan (based on tickers.json)")
     print("3 - Run scan from finviz website (filters only buys)")
+    print("4 - Tag trades from finviz")
     print("0 - Exit")
 
 def print_company_menu():
@@ -66,6 +55,9 @@ def main():
 
         elif choice == "3":
             scan_from_finviz()
+
+        elif choice == "4":
+            analyze_finviz_trade()
 
         elif choice == "0":
             print("👋 Exiting InsiderBot. Have a great day!")
