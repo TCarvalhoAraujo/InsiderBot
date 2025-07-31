@@ -1,13 +1,15 @@
 import os
 import pandas as pd
+from datetime import timedelta
 from yahooquery import Ticker
 
 from core.engine.classifier import tag_trade
 from core.io.file_manager import FINVIZ_DATA_DIR, ensure_finviz_dir
 from core.io.cache import load_snapshot_cache, save_snapshot_cache
 from core.utils.utils import calculate_ownership_pct
+from core.engine.ohlc import enrich_trades_with_price_deltas
 
-TAGGED_FILE = "tagged_trades.csv"
+TAGGED_FILE = "tagged_trades_30.csv"
 
 def analyze_finviz_trade() -> None:
     """Main entrypoint for analyzing Finviz insider trades and tagging them."""    
@@ -52,7 +54,8 @@ def tag_and_annotate(df: pd.DataFrame, snapshots: dict) -> pd.DataFrame:
     """
     Applies trade tags and ownership percentage to each row in the DataFrame
     using the snapshot data for each ticker.
-    """    
+    """
+    df = enrich_trades_with_price_deltas(df)
     df["tags"] = df.apply(lambda row: tag_trade(row, snapshots.get(row["ticker"], {})), axis=1)
     df["ownership_pct"] = df.apply(lambda row: calculate_ownership_pct(row, snapshots.get(row["ticker"], {})), axis=1)
     return df
