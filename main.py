@@ -1,6 +1,6 @@
 from core.scanner import scan_all_companies_from_json, daily_run, scan_for_company, scan_from_finviz
 from core.engine.analyzer import analyze_finviz_trade
-from core.io.file_manager import load_latest_tagged_trades
+from core.io.file_manager import load_finviz_all_trades
 from core.engine.ohlc import update_ohlc
 
 import os
@@ -63,7 +63,7 @@ def main():
             analyze_finviz_trade()
 
         elif choice == "5":
-            df = load_latest_tagged_trades()
+            df = load_finviz_all_trades()
             update_ohlc(df)
 
         elif choice == "0":

@@ -136,3 +136,16 @@ def load_latest_tagged_trades(filename: str = "tagged_trades.csv") -> pd.DataFra
     df = pd.read_csv(path)
     print(f"📥 Loaded {len(df)} tagged trades from {filename}")
     return df
+
+def load_finviz_all_trades(filename: str = "finviz_all_trades.csv") -> pd.DataFrame:
+    """
+    Loads all finviz entries from disk.
+    """
+    path = os.path.join(FINVIZ_DATA_DIR, filename)
+
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"❌ file not found: {path}")
+    
+    df = pd.read_csv(path)
+    print(f"📥 Loaded {len(df)} trades from {filename}")
+    return df
