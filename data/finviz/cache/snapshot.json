@@ -358,5 +358,215 @@
     "sector": null,
     "industry": null,
     "short_name": "Ategrity Specialty Insurance Co"
+  },
+  "MTH": {
+    "market_cap": 4992311808,
+    "sector": null,
+    "industry": null,
+    "short_name": "Meritage Homes Corporation"
+  },
+  "MSTR": {
+    "market_cap": 112213262336,
+    "sector": null,
+    "industry": null,
+    "short_name": "MicroStrategy Incorporated"
+  },
+  "SNV": {
+    "market_cap": 6849384960,
+    "sector": null,
+    "industry": null,
+    "short_name": "Synovus Financial Corp."
+  },
+  "EPD": {
+    "market_cap": 68384768000,
+    "sector": null,
+    "industry": null,
+    "short_name": "Enterprise Products Partners L."
+  },
+  "PCB": {
+    "market_cap": 308236896,
+    "sector": null,
+    "industry": null,
+    "short_name": "PCB Bancorp"
+  },
+  "MOFG": {
+    "market_cap": 585910400,
+    "sector": null,
+    "industry": null,
+    "short_name": "MidWestOne Financial Group, Inc"
+  },
+  "AIO": {
+    "market_cap": 866045952,
+    "sector": null,
+    "industry": null,
+    "short_name": "AllianzGI Artificial Intelligen"
+  },
+  "SONO": {
+    "market_cap": 1424231808,
+    "sector": null,
+    "industry": null,
+    "short_name": "Sonos, Inc."
+  },
+  "CNC": {
+    "market_cap": 12671230976,
+    "sector": null,
+    "industry": null,
+    "short_name": "Centene Corporation"
+  },
+  "KMI": {
+    "market_cap": 61996032000,
+    "sector": null,
+    "industry": null,
+    "short_name": "Kinder Morgan, Inc."
+  },
+  "ABSI": {
+    "market_cap": 430523520,
+    "sector": null,
+    "industry": null,
+    "short_name": "Absci Corporation"
+  },
+  "NG": {
+    "market_cap": 2110166144,
+    "sector": null,
+    "industry": null,
+    "short_name": "Novagold Resources Inc."
+  },
+  "DOC": {
+    "market_cap": 12206322688,
+    "sector": null,
+    "industry": null,
+    "short_name": "Healthpeak Properties, Inc."
+  },
+  "AUB": {
+    "market_cap": 4692938752,
+    "sector": null,
+    "industry": null,
+    "short_name": "Atlantic Union Bankshares Corpo"
+  },
+  "CHCO": {
+    "market_cap": 1829413888,
+    "sector": null,
+    "industry": null,
+    "short_name": "City Holding Company"
+  },
+  "EBF": {
+    "market_cap": 464605792,
+    "sector": null,
+    "industry": null,
+    "short_name": "Ennis, Inc."
+  },
+  "BUSE": {
+    "market_cap": 2042725248,
+    "sector": null,
+    "industry": null,
+    "short_name": "First Busey Corporation"
+  },
+  "ARX": {
+    "market_cap": 6224532480,
+    "sector": null,
+    "industry": null,
+    "short_name": "Accelerant Holdings"
+  },
+  "FBNC": {
+    "market_cap": 2118397824,
+    "sector": null,
+    "industry": null,
+    "short_name": "First Bancorp"
+  },
+  "TLRY": {
+    "market_cap": 656045760,
+    "sector": null,
+    "industry": null,
+    "short_name": "Tilray Brands, Inc."
+  },
+  "TLYS": {
+    "market_cap": 55479496,
+    "sector": null,
+    "industry": null,
+    "short_name": "Tilly's, Inc."
+  },
+  "OVLY": {
+    "market_cap": 223465712,
+    "sector": null,
+    "industry": null,
+    "short_name": "Oak Valley Bancorp (CA)"
+  },
+  "LEXX": {
+    "market_cap": 17896668,
+    "sector": null,
+    "industry": null,
+    "short_name": "Lexaria Bioscience Corp."
+  },
+  "GAM": {
+    "market_cap": 1332792704,
+    "sector": null,
+    "industry": null,
+    "short_name": "General American Investors, Inc"
+  },
+  "SSB": {
+    "market_cap": 9735688192,
+    "sector": null,
+    "industry": null,
+    "short_name": "SouthState Corporation"
+  },
+  "GSHD": {
+    "market_cap": 3434688256,
+    "sector": null,
+    "industry": null,
+    "short_name": "Goosehead Insurance, Inc."
+  },
+  "MBWM": {
+    "market_cap": 749715008,
+    "sector": null,
+    "industry": null,
+    "short_name": "Mercantile Bank Corporation"
+  },
+  "NVCR": {
+    "market_cap": 1226435072,
+    "sector": null,
+    "industry": null,
+    "short_name": "NovoCure Limited"
+  },
+  "DMA": {
+    "market_cap": 77800928,
+    "sector": null,
+    "industry": null,
+    "short_name": null
+  },
+  "JMSB": {
+    "market_cap": 264704048,
+    "sector": null,
+    "industry": null,
+    "short_name": "John Marshall Bancorp, Inc."
+  },
+  "TCBX": {
+    "market_cap": 531762912,
+    "sector": null,
+    "industry": null,
+    "short_name": "Third Coast Bancshares, Inc."
+  },
+  "MPB": {
+    "market_cap": 622376832,
+    "sector": null,
+    "industry": null,
+    "short_name": "Mid Penn Bancorp"
+  },
+  "FNWB": {
+    "market_cap": 69198200,
+    "sector": null,
+    "industry": null,
+    "short_name": "First Northwest Bancorp"
+  },
+  "IKNA": {
+    "market_cap": 718823808,
+    "sector": null,
+    "industry": null,
+    "short_name": "Ikena Oncology, Inc."
+  },
+  "IMA": {
+    "market_cap": 177364000,
+    "sector": null,
+    "industry": null,
+    "short_name": "75244"
   }
 }
