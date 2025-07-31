@@ -1,31 +1,74 @@
 from yahooquery import Ticker
 import pandas as pd
 from datetime import timedelta
+from pandas.tseries.holiday import USFederalHolidayCalendar
+from pandas.tseries.offsets import CustomBusinessDay
 
 from core.io.cache import load_ohlc_cache, save_ohlc_cache
 
+us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
+
+def determine_fetch_range(trades_df: pd.DataFrame):
+    """
+    Determines the minimal start and end date needed for OHLC data fetch
+    across all transactions, using business days and US holiday calendar.
+    """
+    today = pd.Timestamp.today().normalize().date() - timedelta(days=1)
+    trades_df["transaction_date"] = pd.to_datetime(trades_df["transaction_date"]).dt.date
+
+    start_dates = []
+    end_dates = []
+
+    for _, row in trades_df.iterrows():
+        ticker = row["ticker"]
+        T = row["transaction_date"]
+
+        # Smart window: [T - 10BD (15 days), T + 22BD (1 month)] 
+        win_start = (pd.Timestamp(T) - 10 * us_bd).date()
+        win_end = (pd.Timestamp(T) + 20 * us_bd).date()
+
+        # Check if cached window is complete
+        cached = load_ohlc_cache(ticker)
+        cached_dates = set(cached["date"]) if not cached.empty else set()
+        required_days = pd.date_range(start=win_start, end=win_end, freq="B").date
+
+        for d in required_days:
+            if d not in cached_dates:
+                if d < T:
+                    start_dates.append(win_start)
+                elif d > T:
+                    end_dates.append(win_end)
+                break  # Once missing, move to next row
+
+    if not start_dates and not end_dates:
+        print("✅ All OHLC windows are satisfied.")
+        return None, None
+
+    fetch_start = min(start_dates + end_dates)
+    fetch_end = today
+
+    return fetch_start, fetch_end
+
 def update_ohlc(trades_df: pd.DataFrame):
     """
-    Reads tagged trades, computes required OHLC range per ticker,
-    and updates the local OHLC cache in batch.
+    Reads tagged trades, determines minimal OHLC fetch range across all tickers,
+    and updates the local OHLC cache using one batch call.
     """
-    trades_df["transaction_date"] = pd.to_datetime(trades_df["transaction_date"])
-    today = pd.Timestamp.today().normalize() - pd.Timedelta(days=1)
+    # Make sure transaction_date is datetime.date
+    trades_df["transaction_date"] = pd.to_datetime(trades_df["transaction_date"]).dt.date
 
-    # Compute smart max date: min(trade + 60d, today)
-    date_ranges = trades_df.groupby("ticker")["transaction_date"].agg(["min", "max"]).reset_index()
-    date_ranges["min"] = date_ranges["min"] - pd.Timedelta(days=7)
-    date_ranges["max"] = date_ranges["max"] + pd.Timedelta(days=60)
-    date_ranges["max"] = date_ranges["max"].apply(lambda d: min(d, today))
+    # Get global fetch window using smart per-transaction windows
+    fetch_start, fetch_end = determine_fetch_range(trades_df)
 
-    tickers = date_ranges["ticker"].tolist()
-    start = date_ranges["min"].min().date()
-    end = date_ranges["max"].max().date()
+    if fetch_start is None or fetch_end is None:
+        print("✅ No OHLC update needed.")
+        return
 
-    print(f"📅 Fetching OHLC for {len(tickers)} tickers: {start} → {end}")
+    tickers = trades_df["ticker"].unique().tolist()
+    print(f"📅 Fetching OHLC for {len(tickers)} tickers: {fetch_start} → {fetch_end}")
 
     # Batch fetch OHLC
-    ohlc_data = fetch_bulk_ohlc(tickers, start, end)
+    ohlc_data = fetch_bulk_ohlc(tickers, fetch_start, fetch_end)
 
     # Save to cache
     for ticker, df in ohlc_data.items():
@@ -33,6 +76,7 @@ def update_ohlc(trades_df: pd.DataFrame):
             cached = load_ohlc_cache(ticker)
             combined = pd.concat([cached, df], ignore_index=True).drop_duplicates(subset="date")
             save_ohlc_cache(ticker, combined)
+
 
 def fetch_bulk_ohlc(tickers: list[str], start_date, end_date) -> dict[str, pd.DataFrame]:
     """
@@ -54,7 +98,11 @@ def fetch_bulk_ohlc(tickers: list[str], start_date, end_date) -> dict[str, pd.Da
                     continue
 
                 df = df[["date", "open", "high", "low", "close", "volume"]]
-                df["date"] = pd.to_datetime(df["date"]).dt.date
+
+                df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce")  # safely force uniform dtype
+                df["date"] = df["date"].dt.tz_localize(None)  # remove tz
+                df["date"] = df["date"].dt.date  # convert to plain date
+
                 result[ticker] = df
 
     except Exception as e:
