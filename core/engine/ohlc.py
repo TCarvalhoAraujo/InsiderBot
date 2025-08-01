@@ -5,8 +5,18 @@ from pandas.tseries.holiday import USFederalHolidayCalendar
 from pandas.tseries.offsets import CustomBusinessDay
 
 from core.io.cache import load_ohlc_cache, save_ohlc_cache
+from config.ipo_tickers import IPO_TICKERS
 
 us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
+
+def missing_day_tolerance(date, cached_dates):
+    """
+    Returns True if a single missing date is surrounded by existing dates.
+    Used to tolerate gaps caused by illiquid or halted stocks.
+    """
+    before = (pd.Timestamp(date) - 1 * us_bd).date()
+    after = (pd.Timestamp(date) + 1 * us_bd).date()
+    return before in cached_dates and after in cached_dates
 
 def determine_fetch_range(trades_df: pd.DataFrame):
     """
@@ -21,6 +31,11 @@ def determine_fetch_range(trades_df: pd.DataFrame):
 
     for _, row in trades_df.iterrows():
         ticker = row["ticker"]
+
+        if ticker in IPO_TICKERS:
+            print(f"🟡 Skipping known IPO or problematic ticker: {ticker}")
+            continue
+
         T = row["transaction_date"]
 
         # Smart window: [T - 10BD (15 days), T + 22BD (1 month)] 
@@ -34,11 +49,14 @@ def determine_fetch_range(trades_df: pd.DataFrame):
 
         for d in required_days:
             if d not in cached_dates:
+                if missing_day_tolerance(d, cached_dates):
+                    print(f"🟡 Skipping isolated missing day for {ticker}: {d}")
+                    continue
                 if d < T:
                     start_dates.append(win_start)
                 elif d > T:
                     end_dates.append(win_end)
-                break  # Once missing, move to next row
+                break  # Only trigger fetch window once per row
 
     if not start_dates and not end_dates:
         print("✅ All OHLC windows are satisfied.")
@@ -46,6 +64,10 @@ def determine_fetch_range(trades_df: pd.DataFrame):
 
     fetch_start = min(start_dates + end_dates)
     fetch_end = today
+
+    if fetch_start > fetch_end:
+        print(f"⚠️ Skipping OHLC fetch: start date {fetch_start} is after end date {fetch_end}")
+        return None, None
 
     return fetch_start, fetch_end
 
