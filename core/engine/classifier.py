@@ -7,37 +7,34 @@ from core.utils.utils import calculate_ownership_pct
 us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
 
 def classify_insider_role(relationship: str) -> str:
+    """
+    Maps relationship string to an insider role tag with emoji.
+    """
     if not relationship:
         return ""
 
     rel = relationship.lower().replace("&", "and")
 
-    if "ceo" in rel or "chief executive" in rel:
-        return "👑 CEO"
-    elif "cfo" in rel or "chief financial" in rel:
-        return "💼 CFO"
-    elif "coo" in rel or "chief operating" in rel:
-        return "⚙️ COO"
-    elif "cro" in rel or "chief revenue" in rel:
-        return "💰 CRO"
-    elif "cio" in rel or "chief investment" in rel:
-        return "📈 CIO"
-    elif "cbo" in rel or "chief business" in rel:
-        return "🧠 CBO"
-    elif "chairman" in rel:
-        return "🪑 Chairman"
-    elif "president" in rel:
-        return "🎖️ President"
-    elif "evp" in rel:
-        return "🧍 EVP"
-    elif "portfolio manager" in rel:
-        return "📊 Portfolio Manager"
-    elif "10% owner" in rel or "10 percent" in rel:
-        return "🔟 10% Owner"
-    elif "director" in rel:
-        return "📋 Director"
-    else:
-        return "🕵️ Other"
+    role_map = [
+        (["ceo", "chief executive"], "👑 CEO"),
+        (["cfo", "chief financial"], "💼 CFO"),
+        (["coo", "chief operating"], "⚙️ COO"),
+        (["cro", "chief revenue"], "💰 CRO"),
+        (["cio", "chief investment"], "📈 CIO"),
+        (["cbo", "chief business"], "🧠 CBO"),
+        (["chairman"], "🪑 Chairman"),
+        (["president"], "🎖️ President"),
+        (["evp"], "🧍 EVP"),
+        (["portfolio manager"], "📊 Portfolio Manager"),
+        (["10% owner", "10 percent"], "🔟 10% Owner"),
+        (["director"], "📋 Director"),
+    ]
+
+    for keywords, tag in role_map:
+        if any(keyword in rel for keyword in keywords):
+            return tag
+
+    return "🕵️ Other"
 
 def classify_company_cap(market_cap: float) -> str:
     if market_cap is None:
@@ -300,7 +297,7 @@ def add_smart_insider_tag(df: pd.DataFrame, min_trades: int = 5, min_winrate: fl
 
     return df
 
-def is_near_earnings(row, snapshot: dict, window: int = 14) -> bool:
+def near_earnings_tag(row, snapshot: dict, window: int = 14) -> bool:
     """
     Returns True if the trade happened within `window` days before the earnings date.
     """
@@ -353,7 +350,7 @@ def tag_trade(row, snapshot):
         tags.append(outcome_tag)
 
     # Near Earnings Tag
-    if is_near_earnings(row, snapshot):
+    if near_earnings_tag(row, snapshot):
         tags.append("📅 NEAR EARNINGS")
 
     return tags
