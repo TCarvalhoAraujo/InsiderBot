@@ -53,6 +53,29 @@ def classify_company_cap(market_cap: float) -> str:
     else:
         return "🏔️ MEGA CAP"
 
+def classify_sector_tag(sector: str | None) -> str:
+    """
+    Converts sector string into a tag with emoji.
+    """
+    if not sector:
+        return ""
+
+    sector_map = {
+        "Technology": "📡 Tech",
+        "Healthcare": "🏥 Healthcare",
+        "Financial Services": "🏦 Financial",
+        "Consumer Cyclical": "🛍️ Consumer Cyclical",
+        "Consumer Defensive": "🥫 Consumer Defensive",
+        "Energy": "⚡ Energy",
+        "Utilities": "🔌 Utilities",
+        "Industrials": "🏗️ Industrial",
+        "Real Estate": "🏘️ Real Estate",
+        "Basic Materials": "⚙️ Materials",
+        "Communication Services": "📞 Communication",
+    }
+
+    return sector_map.get(sector, f"🧰 {sector}")
+
 def classify_trade_size(row, snapshot) -> str:
     ownership_pct = calculate_ownership_pct(row, snapshot)
 
@@ -315,6 +338,11 @@ def tag_trade(row, snapshot):
     if cap_tag:
         tags.append(cap_tag)
 
+    # Sector Tag
+    sector_tag = classify_sector_tag(snapshot.get("sector"))
+    if sector_tag:
+        tags.append(sector_tag)
+
     # Timing Context
     timing_tags = classify_timing_tags(row)
     tags += timing_tags
@@ -324,7 +352,7 @@ def tag_trade(row, snapshot):
     if outcome_tag:
         tags.append(outcome_tag)
 
-    # Near Earnings tag
+    # Near Earnings Tag
     if is_near_earnings(row, snapshot):
         tags.append("📅 NEAR EARNINGS")
 
