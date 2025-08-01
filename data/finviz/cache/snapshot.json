@@ -568,5 +568,101 @@
     "sector": null,
     "industry": null,
     "short_name": "75244"
+  },
+  "CIVB": {
+    "market_cap": 375913120,
+    "sector": null,
+    "industry": null,
+    "short_name": "Civista Bancshares, Inc."
+  },
+  "CZWI": {
+    "market_cap": 147237856,
+    "sector": null,
+    "industry": null,
+    "short_name": "Citizens Community Bancorp, Inc"
+  },
+  "EFSI": {
+    "market_cap": 177473312,
+    "sector": null,
+    "industry": null,
+    "short_name": "Eagle Financial Services Inc"
+  },
+  "PBBK": {
+    "market_cap": 42979716,
+    "sector": null,
+    "industry": null,
+    "short_name": "PB Bankshares, Inc."
+  },
+  "CHTR": {
+    "market_cap": 36792152064,
+    "sector": null,
+    "industry": null,
+    "short_name": "Charter Communications, Inc."
+  },
+  "CBNK": {
+    "market_cap": 522001344,
+    "sector": null,
+    "industry": null,
+    "short_name": "Capital Bancorp, Inc."
+  },
+  "PNFP": {
+    "market_cap": 6817389568,
+    "sector": null,
+    "industry": null,
+    "short_name": "Pinnacle Financial Partners, In"
+  },
+  "CCO": {
+    "market_cap": 526517888,
+    "sector": null,
+    "industry": null,
+    "short_name": "Clear Channel Outdoor Holdings,"
+  },
+  "SNYR": {
+    "market_cap": 31188820,
+    "sector": null,
+    "industry": null,
+    "short_name": "Synergy CHC Corp."
+  },
+  "KFS": {
+    "market_cap": 397452800,
+    "sector": null,
+    "industry": null,
+    "short_name": "Kingsway Financial Services, In"
+  },
+  "MMC": {
+    "market_cap": 97931501568,
+    "sector": null,
+    "industry": null,
+    "short_name": "Marsh & McLennan Companies, Inc"
+  },
+  "CRDF": {
+    "market_cap": 157666368,
+    "sector": null,
+    "industry": null,
+    "short_name": "Cardiff Oncology, Inc."
+  },
+  "FCNCA": {
+    "market_cap": 25763323904,
+    "sector": null,
+    "industry": null,
+    "short_name": "First Citizens BancShares, Inc."
+  },
+  "ASRV": {
+    "market_cap": 46419232,
+    "sector": null,
+    "industry": null,
+    "short_name": "AmeriServ Financial Inc."
+  },
+  "TBBK": {
+    "market_cap": 2921964800,
+    "sector": null,
+    "industry": null,
+    "short_name": "The Bancorp, Inc."
+  },
+  "NVTS": {
+    "market_cap": 1407242752,
+    "sector": null,
+    "industry": null,
+    "short_name": "Navitas Semiconductor Corporati"
   }
 }
