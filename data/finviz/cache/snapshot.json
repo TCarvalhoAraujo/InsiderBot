@@ -1,668 +1,530 @@
 {
-  "AMTB": {
-    "market_cap": 849725824,
-    "sector": null,
-    "industry": null,
-    "short_name": "Amerant Bancorp Inc."
-  },
-  "CHMG": {
-    "market_cap": 252717408,
-    "sector": null,
-    "industry": null,
-    "short_name": "Chemung Financial Corp"
-  },
-  "LOOP": {
-    "market_cap": 80166912,
-    "sector": null,
-    "industry": null,
-    "short_name": "Loop Industries, Inc."
-  },
-  "CVM": {
-    "market_cap": 55935036,
-    "sector": null,
-    "industry": null,
-    "short_name": "Cel-Sci Corporation"
-  },
-  "CBAN": {
-    "market_cap": 288515200,
-    "sector": null,
-    "industry": null,
-    "short_name": "Colony Bankcorp, Inc."
-  },
-  "MSCI": {
-    "market_cap": 42766708736,
-    "sector": null,
-    "industry": null,
-    "short_name": "MSCI Inc."
-  },
-  "MH": {
-    "market_cap": 3166813184,
-    "sector": null,
-    "industry": null,
-    "short_name": "McGraw Hill, Inc."
-  },
-  "NWFL": {
-    "market_cap": 227808800,
-    "sector": null,
-    "industry": null,
-    "short_name": "Norwood Financial Corp."
-  },
-  "SIGI": {
-    "market_cap": 4766536192,
-    "sector": null,
-    "industry": null,
-    "short_name": "Selective Insurance Group, Inc."
-  },
-  "PMT": {
-    "market_cap": 1062472704,
-    "sector": null,
-    "industry": null,
-    "short_name": "PennyMac Mortgage Investment Tr"
-  },
-  "NBBK": {
-    "market_cap": 747733184,
-    "sector": null,
-    "industry": null,
-    "short_name": "NB Bancorp, Inc."
-  },
-  "WTFC": {
-    "market_cap": 8843142144,
-    "sector": null,
-    "industry": null,
-    "short_name": "Wintrust Financial Corporation"
-  },
-  "REZI": {
-    "market_cap": 3690324480,
-    "sector": null,
-    "industry": null,
-    "short_name": "Resideo Technologies, Inc."
-  },
-  "CB": {
-    "market_cap": 106039836672,
-    "sector": null,
-    "industry": null,
-    "short_name": "Chubb Limited"
-  },
-  "TPL": {
-    "market_cap": 22511306752,
-    "sector": null,
-    "industry": null,
-    "short_name": "Texas Pacific Land Corporation"
-  },
-  "RCG": {
-    "market_cap": 18241038,
-    "sector": null,
-    "industry": null,
-    "short_name": "153389"
-  },
-  "CARL": {
-    "market_cap": 384486336,
-    "sector": null,
-    "industry": null,
-    "short_name": "Carlsmed, Inc."
-  },
-  "NIQ": {
-    "market_cap": 5634500096,
-    "sector": null,
-    "industry": null,
-    "short_name": "NIQ Global Intelligence plc"
-  },
-  "RLI": {
-    "market_cap": 6120436736,
-    "sector": null,
-    "industry": null,
-    "short_name": "RLI Corp."
-  },
-  "PASG": {
-    "market_cap": 21998116,
-    "sector": null,
-    "industry": null,
-    "short_name": "Passage Bio, Inc."
-  },
-  "ASAN": {
-    "market_cap": 3506303744,
-    "sector": null,
-    "industry": null,
-    "short_name": "Asana, Inc."
-  },
-  "PEBO": {
-    "market_cap": 1062362816,
-    "sector": null,
-    "industry": null,
-    "short_name": "Peoples Bancorp Inc."
-  },
-  "SHEN": {
-    "market_cap": 825599360,
-    "sector": null,
-    "industry": null,
-    "short_name": "Shenandoah Telecommunications C"
-  },
-  "FFIN": {
-    "market_cap": 5205177856,
-    "sector": null,
-    "industry": null,
-    "short_name": "First Financial Bankshares, Inc"
-  },
-  "SMPL": {
-    "market_cap": 3224349952,
-    "sector": null,
-    "industry": null,
-    "short_name": "The Simply Good Foods Company"
-  },
-  "PRGS": {
-    "market_cap": 2190551296,
-    "sector": null,
-    "industry": null,
-    "short_name": "Progress Software Corporation"
-  },
-  "DMAC": {
-    "market_cap": 260538896,
-    "sector": null,
-    "industry": null,
-    "short_name": "DiaMedica Therapeutics Inc."
-  },
-  "SFNC": {
-    "market_cap": 2863276800,
-    "sector": null,
-    "industry": null,
-    "short_name": "Simmons First National Corporat"
-  },
-  "NTRP": {
-    "market_cap": 31072536,
-    "sector": null,
-    "industry": null,
-    "short_name": "NextTrip, Inc."
-  },
-  "PGC": {
-    "market_cap": 466127424,
-    "sector": null,
-    "industry": null,
-    "short_name": "Peapack-Gladstone Financial Cor"
-  },
-  "OMCC": {
-    "market_cap": 40577760,
-    "sector": null,
-    "industry": null,
-    "short_name": "Old Market Capital Corporation"
-  },
-  "RMCF": {
-    "market_cap": 13717299,
-    "sector": null,
-    "industry": null,
-    "short_name": "Rocky Mountain Chocolate Factor"
-  },
-  "PLAY": {
-    "market_cap": 1135477248,
-    "sector": null,
-    "industry": null,
-    "short_name": "Dave & Buster's Entertainment, "
-  },
-  "CALC": {
-    "market_cap": 53093440,
-    "sector": null,
-    "industry": null,
-    "short_name": "CalciMedica, Inc."
-  },
-  "UNOV": {
-    "market_cap": null,
-    "sector": null,
-    "industry": null,
-    "short_name": "Innovator U.S. Equity Ultra Buf"
-  },
-  "IFS": {
-    "market_cap": 4140645888,
-    "sector": null,
-    "industry": null,
-    "short_name": "Intercorp Financial Services In"
-  },
-  "MERC": {
-    "market_cap": 291556704,
-    "sector": null,
-    "industry": null,
-    "short_name": "Mercer International Inc."
-  },
-  "TBN": {
-    "market_cap": 330166688,
-    "sector": null,
-    "industry": null,
-    "short_name": "Tamboran Resources Corporation"
-  },
-  "UPXI": {
-    "market_cap": 316299904,
-    "sector": null,
-    "industry": null,
-    "short_name": "Upexi, Inc."
-  },
-  "STRW": {
-    "market_cap": 572314368,
-    "sector": null,
-    "industry": null,
-    "short_name": "Strawberry Fields REIT, Inc."
-  },
-  "PLBC": {
-    "market_cap": 292082208,
-    "sector": null,
-    "industry": null,
-    "short_name": "Plumas Bancorp"
-  },
-  "KYN": {
-    "market_cap": 2065028480,
-    "sector": null,
-    "industry": null,
-    "short_name": "Kayne Anderson MLP/Midstream In"
-  },
-  "DLPN": {
-    "market_cap": 14328704,
-    "sector": null,
-    "industry": null,
-    "short_name": "Dolphin Entertainment, Inc."
-  },
-  "GALT": {
-    "market_cap": 193672288,
-    "sector": null,
-    "industry": null,
-    "short_name": "Galectin Therapeutics Inc."
-  },
-  "CTAS": {
-    "market_cap": 88801681408,
-    "sector": null,
-    "industry": null,
-    "short_name": "Cintas Corporation"
-  },
-  "RVP": {
-    "market_cap": 21659564,
-    "sector": null,
-    "industry": null,
-    "short_name": "Retractable Technologies, Inc."
-  },
-  "XAIR": {
-    "market_cap": 14847168,
-    "sector": null,
-    "industry": null,
-    "short_name": "Beyond Air, Inc."
-  },
-  "PETS": {
-    "market_cap": 73330576,
-    "sector": null,
-    "industry": null,
-    "short_name": "PetMed Express, Inc."
-  },
-  "GF": {
-    "market_cap": 194319408,
-    "sector": null,
-    "industry": null,
-    "short_name": "New Germany Fund, Inc. (The)"
-  },
-  "BRCC": {
-    "market_cap": 231000000,
-    "sector": null,
-    "industry": null,
-    "short_name": "BRC Inc."
-  },
-  "ANIX": {
-    "market_cap": 105974520,
-    "sector": null,
-    "industry": null,
-    "short_name": "Anixa Biosciences, Inc."
-  },
-  "RFMZ": {
-    "market_cap": 304957600,
-    "sector": null,
-    "industry": null,
-    "short_name": null
-  },
-  "FSCO": {
-    "market_cap": 1469817984,
-    "sector": null,
-    "industry": null,
-    "short_name": null
-  },
-  "CDXS": {
-    "market_cap": 251848192,
-    "sector": null,
-    "industry": null,
-    "short_name": "Codexis, Inc."
-  },
-  "NHS": {
-    "market_cap": 227356960,
-    "sector": null,
-    "industry": null,
-    "short_name": "Neuberger Berman High Yield Str"
-  },
-  "NEGG": {
-    "market_cap": 761200256,
-    "sector": null,
-    "industry": null,
-    "short_name": "Newegg Commerce, Inc."
-  },
-  "ATRA": {
-    "market_cap": 80256392,
-    "sector": null,
-    "industry": null,
-    "short_name": "Atara Biotherapeutics, Inc."
-  },
-  "LRHC": {
-    "market_cap": 5487246,
-    "sector": null,
-    "industry": null,
-    "short_name": "La Rosa Holdings Corp."
-  },
-  "PBT": {
-    "market_cap": 630150976,
-    "sector": null,
-    "industry": null,
-    "short_name": "Permian Basin Royalty Trust"
-  },
-  "ASIC": {
-    "market_cap": 1002991040,
-    "sector": null,
-    "industry": null,
-    "short_name": "Ategrity Specialty Insurance Co"
-  },
   "MTH": {
-    "market_cap": 4992311808,
-    "sector": null,
-    "industry": null,
-    "short_name": "Meritage Homes Corporation"
-  },
-  "MSTR": {
-    "market_cap": 112213262336,
-    "sector": null,
-    "industry": null,
-    "short_name": "MicroStrategy Incorporated"
-  },
-  "SNV": {
-    "market_cap": 6849384960,
-    "sector": null,
-    "industry": null,
-    "short_name": "Synovus Financial Corp."
-  },
-  "EPD": {
-    "market_cap": 68384768000,
-    "sector": null,
-    "industry": null,
-    "short_name": "Enterprise Products Partners L."
-  },
-  "PCB": {
-    "market_cap": 308236896,
-    "sector": null,
-    "industry": null,
-    "short_name": "PCB Bancorp"
-  },
-  "MOFG": {
-    "market_cap": 585910400,
-    "sector": null,
-    "industry": null,
-    "short_name": "MidWestOne Financial Group, Inc"
-  },
-  "AIO": {
-    "market_cap": 866045952,
-    "sector": null,
-    "industry": null,
-    "short_name": "AllianzGI Artificial Intelligen"
-  },
-  "SONO": {
-    "market_cap": 1424231808,
-    "sector": null,
-    "industry": null,
-    "short_name": "Sonos, Inc."
-  },
-  "CNC": {
-    "market_cap": 12671230976,
-    "sector": null,
-    "industry": null,
-    "short_name": "Centene Corporation"
-  },
-  "KMI": {
-    "market_cap": 61996032000,
-    "sector": null,
-    "industry": null,
-    "short_name": "Kinder Morgan, Inc."
-  },
-  "ABSI": {
-    "market_cap": 430523520,
-    "sector": null,
-    "industry": null,
-    "short_name": "Absci Corporation"
-  },
-  "NG": {
-    "market_cap": 2110166144,
-    "sector": null,
-    "industry": null,
-    "short_name": "Novagold Resources Inc."
-  },
-  "DOC": {
-    "market_cap": 12206322688,
-    "sector": null,
-    "industry": null,
-    "short_name": "Healthpeak Properties, Inc."
-  },
-  "AUB": {
-    "market_cap": 4692938752,
-    "sector": null,
-    "industry": null,
-    "short_name": "Atlantic Union Bankshares Corpo"
-  },
-  "CHCO": {
-    "market_cap": 1829413888,
-    "sector": null,
-    "industry": null,
-    "short_name": "City Holding Company"
-  },
-  "EBF": {
-    "market_cap": 464605792,
-    "sector": null,
-    "industry": null,
-    "short_name": "Ennis, Inc."
-  },
-  "BUSE": {
-    "market_cap": 2042725248,
-    "sector": null,
-    "industry": null,
-    "short_name": "First Busey Corporation"
-  },
-  "ARX": {
-    "market_cap": 6224532480,
-    "sector": null,
-    "industry": null,
-    "short_name": "Accelerant Holdings"
-  },
-  "FBNC": {
-    "market_cap": 2118397824,
-    "sector": null,
-    "industry": null,
-    "short_name": "First Bancorp"
-  },
-  "TLRY": {
-    "market_cap": 656045760,
-    "sector": null,
-    "industry": null,
-    "short_name": "Tilray Brands, Inc."
-  },
-  "TLYS": {
-    "market_cap": 55479496,
-    "sector": null,
-    "industry": null,
-    "short_name": "Tilly's, Inc."
-  },
-  "OVLY": {
-    "market_cap": 223465712,
-    "sector": null,
-    "industry": null,
-    "short_name": "Oak Valley Bancorp (CA)"
-  },
-  "LEXX": {
-    "market_cap": 17896668,
-    "sector": null,
-    "industry": null,
-    "short_name": "Lexaria Bioscience Corp."
-  },
-  "GAM": {
-    "market_cap": 1332792704,
-    "sector": null,
-    "industry": null,
-    "short_name": "General American Investors, Inc"
-  },
-  "SSB": {
-    "market_cap": 9735688192,
-    "sector": null,
-    "industry": null,
-    "short_name": "SouthState Corporation"
-  },
-  "GSHD": {
-    "market_cap": 3434688256,
-    "sector": null,
-    "industry": null,
-    "short_name": "Goosehead Insurance, Inc."
-  },
-  "MBWM": {
-    "market_cap": 749715008,
-    "sector": null,
-    "industry": null,
-    "short_name": "Mercantile Bank Corporation"
-  },
-  "NVCR": {
-    "market_cap": 1226435072,
-    "sector": null,
-    "industry": null,
-    "short_name": "NovoCure Limited"
-  },
-  "DMA": {
-    "market_cap": 77800928,
-    "sector": null,
-    "industry": null,
-    "short_name": null
-  },
-  "JMSB": {
-    "market_cap": 264704048,
-    "sector": null,
-    "industry": null,
-    "short_name": "John Marshall Bancorp, Inc."
-  },
-  "TCBX": {
-    "market_cap": 531762912,
-    "sector": null,
-    "industry": null,
-    "short_name": "Third Coast Bancshares, Inc."
-  },
-  "MPB": {
-    "market_cap": 622376832,
-    "sector": null,
-    "industry": null,
-    "short_name": "Mid Penn Bancorp"
-  },
-  "FNWB": {
-    "market_cap": 69198200,
-    "sector": null,
-    "industry": null,
-    "short_name": "First Northwest Bancorp"
-  },
-  "IKNA": {
-    "market_cap": 718823808,
-    "sector": null,
-    "industry": null,
-    "short_name": "Ikena Oncology, Inc."
-  },
-  "IMA": {
-    "market_cap": 177364000,
-    "sector": null,
-    "industry": null,
-    "short_name": "75244"
+    "market_cap": 4791651328,
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction",
+    "earnings_date": "2025-07-23"
   },
   "CIVB": {
     "market_cap": 375913120,
-    "sector": null,
-    "industry": null,
-    "short_name": "Civista Bancshares, Inc."
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-24"
   },
   "CZWI": {
-    "market_cap": 147237856,
-    "sector": null,
-    "industry": null,
-    "short_name": "Citizens Community Bancorp, Inc"
+    "market_cap": 147282080,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-27"
   },
   "EFSI": {
     "market_cap": 177473312,
-    "sector": null,
-    "industry": null,
-    "short_name": "Eagle Financial Services Inc"
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-24"
   },
   "PBBK": {
     "market_cap": 42979716,
-    "sector": null,
-    "industry": null,
-    "short_name": "PB Bankshares, Inc."
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": null
   },
   "CHTR": {
     "market_cap": 36792152064,
-    "sector": null,
-    "industry": null,
-    "short_name": "Charter Communications, Inc."
+    "sector": "Communication Services",
+    "industry": "Telecom Services",
+    "earnings_date": "2025-07-25"
   },
   "CBNK": {
     "market_cap": 522001344,
-    "sector": null,
-    "industry": null,
-    "short_name": "Capital Bancorp, Inc."
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-28"
+  },
+  "DOC": {
+    "market_cap": 11771996160,
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities",
+    "earnings_date": "2025-10-23"
   },
   "PNFP": {
     "market_cap": 6817389568,
-    "sector": null,
-    "industry": null,
-    "short_name": "Pinnacle Financial Partners, In"
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-14"
   },
   "CCO": {
     "market_cap": 526517888,
-    "sector": null,
-    "industry": null,
-    "short_name": "Clear Channel Outdoor Holdings,"
+    "sector": "Communication Services",
+    "industry": "Advertising Agencies",
+    "earnings_date": "2025-08-05"
+  },
+  "ASAN": {
+    "market_cap": 3454526976,
+    "sector": "Technology",
+    "industry": "Software - Application",
+    "earnings_date": "2025-09-03"
   },
   "SNYR": {
     "market_cap": 31188820,
-    "sector": null,
-    "industry": null,
-    "short_name": "Synergy CHC Corp."
+    "sector": "Healthcare",
+    "industry": "Medical Distribution",
+    "earnings_date": "2025-05-15"
+  },
+  "ANIX": {
+    "market_cap": 98565968,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-09-04"
+  },
+  "SHEN": {
+    "market_cap": 805302272,
+    "sector": "Communication Services",
+    "industry": "Telecom Services",
+    "earnings_date": "2025-07-31"
   },
   "KFS": {
     "market_cap": 397452800,
-    "sector": null,
-    "industry": null,
-    "short_name": "Kingsway Financial Services, In"
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships",
+    "earnings_date": "2025-08-07"
   },
   "MMC": {
     "market_cap": 97931501568,
-    "sector": null,
-    "industry": null,
-    "short_name": "Marsh & McLennan Companies, Inc"
+    "sector": "Financial Services",
+    "industry": "Insurance Brokers",
+    "earnings_date": "2025-07-17"
+  },
+  "RCG": {
+    "market_cap": 18170896,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "OMCC": {
+    "market_cap": 37430640,
+    "sector": "Financial Services",
+    "industry": "Credit Services",
+    "earnings_date": "2025-08-14"
+  },
+  "JMSB": {
+    "market_cap": 262000064,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-22"
+  },
+  "CDXS": {
+    "market_cap": 222024064,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-13"
+  },
+  "TLYS": {
+    "market_cap": 53971900,
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail",
+    "earnings_date": "2025-09-03"
   },
   "CRDF": {
     "market_cap": 157666368,
-    "sector": null,
-    "industry": null,
-    "short_name": "Cardiff Oncology, Inc."
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-14"
+  },
+  "RVP": {
+    "market_cap": 22033780,
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies",
+    "earnings_date": "2025-08-12"
+  },
+  "TPL": {
+    "market_cap": 22254694400,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "earnings_date": "2025-08-06"
+  },
+  "TLRY": {
+    "market_cap": 638136128,
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic",
+    "earnings_date": "2025-10-09"
+  },
+  "OVLY": {
+    "market_cap": 223381888,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-17"
+  },
+  "LEXX": {
+    "market_cap": 17603280,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-07-10"
+  },
+  "GAM": {
+    "market_cap": 1340059008,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-08-04"
+  },
+  "SSB": {
+    "market_cap": 9558066176,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
+  },
+  "EPD": {
+    "market_cap": 67214213120,
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream",
+    "earnings_date": "2025-10-28"
+  },
+  "PCB": {
+    "market_cap": 293040096,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
   },
   "FCNCA": {
-    "market_cap": 25763323904,
-    "sector": null,
-    "industry": null,
-    "short_name": "First Citizens BancShares, Inc."
+    "market_cap": 25784666112,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
   },
   "ASRV": {
     "market_cap": 46419232,
-    "sector": null,
-    "industry": null,
-    "short_name": "AmeriServ Financial Inc."
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-21"
+  },
+  "GSHD": {
+    "market_cap": 3414406912,
+    "sector": "Financial Services",
+    "industry": "Insurance Brokers",
+    "earnings_date": "2025-10-22"
+  },
+  "MBWM": {
+    "market_cap": 742403072,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-21"
+  },
+  "MSTR": {
+    "market_cap": 113948598272,
+    "sector": "Technology",
+    "industry": "Software - Application",
+    "earnings_date": "2025-10-30"
+  },
+  "NWFL": {
+    "market_cap": 224475008,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-24"
+  },
+  "PEBO": {
+    "market_cap": 1021694720,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-21"
+  },
+  "MOFG": {
+    "market_cap": 571994816,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
   },
   "TBBK": {
     "market_cap": 2921964800,
-    "sector": null,
-    "industry": null,
-    "short_name": "The Bancorp, Inc."
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-24"
+  },
+  "AIO": {
+    "market_cap": 853664064,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "MPB": {
+    "market_cap": 629022272,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-22"
+  },
+  "TCBX": {
+    "market_cap": 521512768,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-22"
+  },
+  "DMA": {
+    "market_cap": 78338712,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "NVCR": {
+    "market_cap": 1293514368,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-07-24"
+  },
+  "NEGG": {
+    "market_cap": 1242501632,
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail",
+    "earnings_date": "2025-08-26"
+  },
+  "SNV": {
+    "market_cap": 6556534272,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-15"
+  },
+  "SONO": {
+    "market_cap": 1298140544,
+    "sector": "Technology",
+    "industry": "Consumer Electronics",
+    "earnings_date": "2025-08-06"
+  },
+  "CALC": {
+    "market_cap": 48063680,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-11"
+  },
+  "CHCO": {
+    "market_cap": 1769839488,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
+  },
+  "SIGI": {
+    "market_cap": 4744498176,
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty",
+    "earnings_date": "2025-07-23"
+  },
+  "AUB": {
+    "market_cap": 4491731968,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-20"
+  },
+  "NG": {
+    "market_cap": 2111800576,
+    "sector": "Basic Materials",
+    "industry": "Gold",
+    "earnings_date": "2025-10-01"
+  },
+  "LOOP": {
+    "market_cap": 77780992,
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals",
+    "earnings_date": "2025-07-15"
+  },
+  "EBF": {
+    "market_cap": 458424736,
+    "sector": "Industrials",
+    "industry": "Business Equipment & Supplies",
+    "earnings_date": "2025-09-22"
   },
   "NVTS": {
     "market_cap": 1407242752,
-    "sector": null,
-    "industry": null,
-    "short_name": "Navitas Semiconductor Corporati"
+    "sector": "Technology",
+    "industry": "Semiconductors",
+    "earnings_date": "2025-08-04"
+  },
+  "CNC": {
+    "market_cap": 12803836928,
+    "sector": "Healthcare",
+    "industry": "Healthcare Plans",
+    "earnings_date": "2025-10-24"
+  },
+  "KMI": {
+    "market_cap": 62351564800,
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream",
+    "earnings_date": "2025-07-16"
+  },
+  "ABSI": {
+    "market_cap": 408168032,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-12"
+  },
+  "FNWB": {
+    "market_cap": 68305320,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-24"
+  },
+  "CHMG": {
+    "market_cap": 243386000,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-17"
+  },
+  "DLPN": {
+    "market_cap": 12619953,
+    "sector": "Communication Services",
+    "industry": "Advertising Agencies",
+    "earnings_date": "2025-08-14"
+  },
+  "AMTB": {
+    "market_cap": 809685120,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-22"
+  },
+  "CBAN": {
+    "market_cap": 286185792,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-22"
+  },
+  "MH": {
+    "market_cap": 3073222144,
+    "sector": "Consumer Defensive",
+    "industry": "Education & Training Services",
+    "earnings_date": "2025-08-14"
+  },
+  "CVM": {
+    "market_cap": 55798564,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-14"
+  },
+  "CB": {
+    "market_cap": 106067484672,
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty",
+    "earnings_date": "2025-07-22"
+  },
+  "REZI": {
+    "market_cap": 4054159104,
+    "sector": "Industrials",
+    "industry": "Industrial Distribution",
+    "earnings_date": "2025-08-05"
+  },
+  "BUSE": {
+    "market_cap": 1988817024,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-22"
+  },
+  "IMA": {
+    "market_cap": 200152432,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": null
+  },
+  "ARX": {
+    "market_cap": 6058442240,
+    "sector": "Financial Services",
+    "industry": "Insurance Brokers",
+    "earnings_date": null
+  },
+  "MSCI": {
+    "market_cap": 43429728256,
+    "sector": "Financial Services",
+    "industry": "Financial Data & Stock Exchanges",
+    "earnings_date": "2025-07-22"
+  },
+  "PMT": {
+    "market_cap": 1025925696,
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage",
+    "earnings_date": "2025-10-21"
+  },
+  "IKNA": {
+    "market_cap": 718823808,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-07"
+  },
+  "NBBK": {
+    "market_cap": 721161600,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-28"
+  },
+  "WTFC": {
+    "market_cap": 8566687232,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-20"
+  },
+  "RLI": {
+    "market_cap": 6059828736,
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty",
+    "earnings_date": "2025-10-20"
+  },
+  "XAIR": {
+    "market_cap": 13826425,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-08-12"
+  },
+  "PETS": {
+    "market_cap": 64448276,
+    "sector": "Healthcare",
+    "industry": "Pharmaceutical Retailers",
+    "earnings_date": "2025-08-01"
+  },
+  "FSCO": {
+    "market_cap": 1477752192,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-09-04"
+  },
+  "RFMZ": {
+    "market_cap": 303910464,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "GF": {
+    "market_cap": 190276064,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "BRCC": {
+    "market_cap": 193448112,
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods",
+    "earnings_date": "2025-08-04"
+  },
+  "LRHC": {
+    "market_cap": 4471794,
+    "sector": "Real Estate",
+    "industry": "Real Estate Services",
+    "earnings_date": null
+  },
+  "ATRA": {
+    "market_cap": 78285664,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-14"
+  },
+  "NHS": {
+    "market_cap": 226805424,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "PBT": {
+    "market_cap": 624091840,
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream",
+    "earnings_date": "2025-08-14"
+  },
+  "ASIC": {
+    "market_cap": 940392640,
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty",
+    "earnings_date": "2025-08-11"
   }
 }
