@@ -50,6 +50,23 @@ This document explains the meaning and detection logic for each tag used to clas
 
 ---
 
+## 🏭 Sector Tags
+
+| Tag Example              | Meaning                        | Detection (from snapshot)         |
+|--------------------------|--------------------------------|-----------------------------------|
+| 📡 **Tech**              | Technology sector              | `snapshot["sector"] == Technology` |
+| 🏥 **Healthcare**        | Healthcare sector              | ... and so on                    |
+| 🛍️ **Consumer Cyclical** | Discretionary spending sector |                                   |
+| ⚡ **Energy**             | Oil, gas, renewables          |                                   |
+| 🏗️ **Industrial**         | Manufacturing, services       |                                   |
+| 🔌 **Utilities**          | Power, water, gas providers   |                                   |
+| 🏘️ **Real Estate**        | REITs, property companies     |                                   |
+| ⚙️ **Materials**          | Chemicals, mining             |                                   |
+| 📞 **Communication**      | Media, telecom                |                                   |
+| 🧰 **Other**              | Any unknown or unmatched tag  | Fallback                         |
+
+---
+
 ### ⏱️ Timing and Price Action Tags
 
 | Tag                        | Meaning                                                    | How to Detect                                                                 |
@@ -61,6 +78,18 @@ This document explains the meaning and detection logic for each tag used to clas
 | 📉 BELOW CLOSE            | Trade price ≤1% below market close                         | `price <= close * 0.99`                                                       |
 | 🚀 SPIKE +X% [Xd]         | Price increased by ≥5%, 10%, or 20% after 7/14/30 days     | Compare max price within [Xd] window after trade to close on trade day        |
 | 📉 DIP -X% [Xd]           | Price dropped by ≥5%, 10%, or 20% after 7/14/30 days       | Compare min price within [Xd] window after trade to close on trade day        |
+
+---
+
+## 🧠 Behavioral Tags
+
+| Tag                          | Meaning                                                        | Detection Logic                                                                 |
+|------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------------------|
+| 🔁 **CLUSTER BUY**           | 3+ insiders bought within 5 business days                     | Group trades by ticker ± 5bd window and count unique insiders                   |
+| 🧠 **SMART INSIDER**         | Insider has >70% win rate historically                        | Analyze past trades with outcome tags                                           |                                  |
+| 🧩 **MULTIPLE BUYS**         | Insider bought multiple times within 14 business days         | Group by insider name + ticker ± 7bd, must include at least one small+ trade   |
+
+---
 
 ### 📈 Outcome Tags
 
@@ -76,13 +105,7 @@ This document explains the meaning and detection logic for each tag used to clas
 
 | Tag                      | Meaning                                                        | How to Detect                                                            |
 | ------------------------ | -------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| 📅 **Near Earnings**     | Trade happened shortly before earnings                         | Use snapshot cache to get `earnings_date`, compare to `transaction_date` |
-| 🔁 **Cluster Buy**       | Multiple insiders bought in a short window (e.g. 3+ in 5 days) | Group by `ticker + transaction_date ± 5d`, count distinct insiders       |
-| 🧠 **Smart Insider**     | High win-rate insider in the past                              | Track success rate of insiders over time, tag them if > threshold        |
 | 🤯 **Unusual Buyer**     | Insider who rarely buys suddenly buys                          | If insider has <3 lifetime buys and this is a large one                  |
-| 🩸 **Post-Sell-Off Buy** | Insider buys right after a big dip (e.g. -10% over 5d)         | Use OHLC to detect recent crash before trade                             |
-| 🧩 **Multiple Buys**     | Same insider buys multiple times within 1–2 weeks              | Look at repeated filings for same insider                                |
-| 🏭 **Sector Tag**        | Sector tag (e.g. Tech, Energy, Healthcare...)                  | Add `sector` to your company list JSON and propagate to the trade        |
 
 ---
 
