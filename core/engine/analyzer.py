@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from yahooquery import Ticker
 
-from core.engine.classifier import tag_trade, add_cluster_buy_tag
+from core.engine.classifier import tag_trade, add_cluster_buy_tag, add_multiple_buys_tag
 from core.io.file_manager import FINVIZ_DATA_DIR, ensure_finviz_dir
 from core.io.cache import load_snapshot_cache, save_snapshot_cache
 from core.utils.utils import calculate_ownership_pct
@@ -66,7 +66,8 @@ def tag_and_annotate(df: pd.DataFrame, snapshots: dict) -> pd.DataFrame:
 
     # Post-processing multi-trade tags
     df = add_cluster_buy_tag(df)
-
+    df = add_multiple_buys_tag(df)
+    
     return df
 
 def get_bulk_snapshots(tickers: list[str]) -> dict:

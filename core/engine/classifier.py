@@ -204,6 +204,42 @@ def add_cluster_buy_tag(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
+def add_multiple_buys_tag(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Adds '🧩 MULTIPLE BUYS' tag only if:
+    - Insider made 2+ trades in same stock within ±10 business days
+    - At least one of those trades is SMALL or bigger
+    """
+    df = df.copy()
+    df["transaction_date"] = pd.to_datetime(df["transaction_date"])
+
+    for idx, row in df.iterrows():
+        insider = row["insider_name"]
+        ticker = row["ticker"]
+        txn_date = row["transaction_date"]
+
+        window_start = txn_date - 5 * us_bd
+        window_end = txn_date + 5 * us_bd
+
+        # All trades by this insider in this window
+        insider_trades = df[
+            (df["ticker"] == ticker) &
+            (df["insider_name"] == insider) &
+            (df["transaction_date"] >= window_start) &
+            (df["transaction_date"] <= window_end)
+        ]
+
+        if len(insider_trades) >= 2:
+            # Check if at least one trade is tagged with a valid size
+            has_meaningful_buy = insider_trades["tags"].apply(
+                lambda tags: any(tag in tags for tag in ["🟢 SMALL TRADE", "💰 LARGE TRADE", "🔥 VERY LARGE TRADE"])
+            ).any()
+
+            if has_meaningful_buy:
+                df.at[idx, "tags"] = row["tags"] + ["🧩 MULTIPLE BUYS"]
+
+    return df
+
 def tag_trade(row, snapshot):
     tags = []
 
