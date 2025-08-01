@@ -55,6 +55,7 @@ This document explains the meaning and detection logic for each tag used to clas
 | Tag                        | Meaning                                                    | How to Detect                                                                 |
 |----------------------------|------------------------------------------------------------|--------------------------------------------------------------------------------|
 | 📉 DIP BUY                | Insider bought after a dip from recent 7-day low           | `(close - low_7d)/close ≥ ~10%`                                               |
+| 🧨 CAUGHT THE KNIFE [Xd]  | Insider bought **below** lowest price in last 7 or 14 days | `price < low_7d` or `price < low_14d`                                         |
 | 🚀 BUYING INTO STRENGTH   | Price surged from recent 15-day low                        | `(close - low_15d)/low_15d ≥ ~10%`                                            |
 | 📈 ABOVE CLOSE            | Trade price ≥1% above market close                         | `price >= close * 1.01`                                                       |
 | 📉 BELOW CLOSE            | Trade price ≤1% below market close                         | `price <= close * 0.99`                                                       |

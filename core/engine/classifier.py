@@ -100,6 +100,12 @@ def classify_timing_tags(row) -> list[str]:
         if strength_pct >= strength_required:
             tags.append("🚀 BUYING INTO STRENGTH")
 
+    # CAUGHT THE KNIFE
+    if price and low_7 and price < low_7:
+        tags.append("🧨 CAUGHT THE KNIFE [7d]")
+    elif price and low_15 and price < low_15:
+        tags.append("🧨 CAUGHT THE KNIFE [14d]")
+
     # ABOVE / BELOW CLOSE
     if price and close and close > 0:
         diff_pct = (price - close) / close * 100
