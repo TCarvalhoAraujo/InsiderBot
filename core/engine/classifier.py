@@ -1,4 +1,10 @@
+import pandas as pd
+from datetime import timedelta
+from pandas.tseries.holiday import USFederalHolidayCalendar
+from pandas.tseries.offsets import CustomBusinessDay
 from core.utils.utils import calculate_ownership_pct
+
+us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
 
 def classify_insider_role(relationship: str) -> str:
     if not relationship:
@@ -75,58 +81,128 @@ def classify_timing_tags(row) -> list[str]:
     low_7 = row.get("low_minus_7d")
     low_15 = row.get("low_minus_15d")
 
-    tolerance = 0.15  # 15%
-    base_threshold = 10  # 10%
+    # Thresholds and tolerance
+    tolerance = 0.15
+    base_threshold = 10.0
+
+    dip_required = base_threshold * (1 - tolerance)
+    strength_required = base_threshold * (1 - tolerance)
 
     # DIP BUY
-    if close is not None and low_7 is not None and close > 0:
+    if close and low_7 and close > 0:
         dip_pct = (close - low_7) / close * 100
-        if dip_pct >= base_threshold * (1 - tolerance):
+        if dip_pct >= dip_required:
             tags.append("📉 DIP BUY")
 
     # BUYING INTO STRENGTH
-    if close is not None and low_15 is not None and low_15 > 0:
+    if close and low_15 and low_15 > 0:
         strength_pct = (close - low_15) / low_15 * 100
-        if strength_pct >= base_threshold * (1 - tolerance):
+        if strength_pct >= strength_required:
             tags.append("🚀 BUYING INTO STRENGTH")
 
-    # ABOVE CLOSE / BELOW CLOSE
-    if price is not None and close is not None and close > 0:
+    # ABOVE / BELOW CLOSE
+    if price and close and close > 0:
         diff_pct = (price - close) / close * 100
         if diff_pct >= 1:
             tags.append("📈 ABOVE CLOSE")
         elif diff_pct <= -1:
             tags.append("📉 BELOW CLOSE")
 
-    # SPIKE +X%
+    # SPIKE +X% [tolerant thresholds]
+    spike_thresholds = {
+        20: 20 * (1 - tolerance),
+        10: 10 * (1 - tolerance),
+        5: 5 * (1 - tolerance)
+    }
+
     for label, gain in [
         ("7d", row.get("max_gain_7d")),
         ("14d", row.get("max_gain_14d")),
         ("30d", row.get("max_gain_30d"))
     ]:
         if gain is not None:
-            if gain >= 20:
+            if gain >= spike_thresholds[20]:
                 tags.append(f"🚀 SPIKE +20% [{label}]")
-            elif gain >= 10:
+            elif gain >= spike_thresholds[10]:
                 tags.append(f"🚀 SPIKE +10% [{label}]")
-            elif gain >= 5:
+            elif gain >= spike_thresholds[5]:
                 tags.append(f"🚀 SPIKE +5% [{label}]")
 
-    # DIP -X%
+    # DIP -X% [tolerant thresholds]
+    dip_thresholds = {
+        -20: -20 * (1 - tolerance),
+        -10: -10 * (1 - tolerance),
+        -5: -5 * (1 - tolerance)
+    }
+
     for label, drop in [
         ("7d", row.get("max_drawdown_7d")),
         ("14d", row.get("max_drawdown_14d")),
         ("30d", row.get("max_drawdown_30d"))
     ]:
         if drop is not None:
-            if drop <= -20:
+            if drop <= dip_thresholds[-20]:
                 tags.append(f"📉 DIP -20% [{label}]")
-            elif drop <= -10:
+            elif drop <= dip_thresholds[-10]:
                 tags.append(f"📉 DIP -10% [{label}]")
-            elif drop <= -5:
+            elif drop <= dip_thresholds[-5]:
                 tags.append(f"📉 DIP -5% [{label}]")
 
     return tags
+
+def classify_outcome_tag(row) -> str:
+    """
+    Classifies trade based on post-trade price movement.
+    - 🟢 Successful: gain >= threshold * (1 - tolerance)
+    - 🔴 Unsuccessful: drop < 0%
+    - ⚪ Neutral: flat or small gain
+    """
+
+    threshold = 10.0
+    tolerance = 0.10
+    min_success_gain = threshold * (1 - tolerance)
+
+    gains = {
+        "7d": row.get("max_gain_7d"),
+        "14d": row.get("max_gain_14d"),
+        "30d": row.get("max_gain_30d")
+    }
+
+    # Check if there's at least one valid gain value
+    valid_gains = [g for g in gains.values() if g is not None and not pd.isna(g)]
+
+    if not valid_gains:
+        return ""
+
+    max_gain = max(valid_gains)
+
+    if max_gain >= min_success_gain:
+        return "🟢 SUCCESSFUL TRADE"
+    elif max_gain < 0:
+        return "🔴 UNSUCCESSFUL TRADE"
+    else:
+        return "⚪ NEUTRAL TRADE"
+
+def add_cluster_buy_tag(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+    df["transaction_date"] = pd.to_datetime(df["transaction_date"])
+
+    for idx, row in df.iterrows():
+        ticker = row["ticker"]
+        txn_date = row["transaction_date"]
+        window_start = txn_date - 5 * us_bd
+        window_end = txn_date + 5 * us_bd
+
+        ticker_window = df[
+            (df["ticker"] == ticker) &
+            (df["transaction_date"] >= window_start) &
+            (df["transaction_date"] <= window_end)
+        ]
+
+        if ticker_window["insider_name"].nunique() >= 3:
+            df.at[idx, "tags"] = row["tags"] + ["🔁 CLUSTER BUY"]
+
+    return df
 
 def tag_trade(row, snapshot):
     tags = []
@@ -149,6 +225,11 @@ def tag_trade(row, snapshot):
 
     # Timing Context
     timing_tags = classify_timing_tags(row)
-    tags += timing_tags  
+    tags += timing_tags
+
+    # Outcome Tag
+    outcome_tag = classify_outcome_tag(row)
+    if outcome_tag:
+        tags.append(outcome_tag)
 
     return tags

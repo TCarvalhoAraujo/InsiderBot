@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from yahooquery import Ticker
 
-from core.engine.classifier import tag_trade
+from core.engine.classifier import tag_trade, add_cluster_buy_tag
 from core.io.file_manager import FINVIZ_DATA_DIR, ensure_finviz_dir
 from core.io.cache import load_snapshot_cache, save_snapshot_cache
 from core.utils.utils import calculate_ownership_pct
@@ -57,9 +57,16 @@ def tag_and_annotate(df: pd.DataFrame, snapshots: dict) -> pd.DataFrame:
     Applies trade tags and ownership percentage to each row in the DataFrame
     using the snapshot data for each ticker.
     """
+    # Add additional info to dataframe
     df = enrich_trades_with_price_deltas(df)
-    df["tags"] = df.apply(lambda row: tag_trade(row, snapshots.get(row["ticker"], {})), axis=1)
     df["ownership_pct"] = df.apply(lambda row: calculate_ownership_pct(row, snapshots.get(row["ticker"], {})), axis=1)
+
+    # Apply simple tags
+    df["tags"] = df.apply(lambda row: tag_trade(row, snapshots.get(row["ticker"], {})), axis=1)
+
+    # Post-processing multi-trade tags
+    df = add_cluster_buy_tag(df)
+
     return df
 
 def get_bulk_snapshots(tickers: list[str]) -> dict:
