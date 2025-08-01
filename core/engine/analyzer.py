@@ -127,6 +127,6 @@ def get_bulk_snapshots(tickers: list[str]) -> dict:
         except Exception as e:
             print(f"❌ Error fetching batch: {e}")
 
-        time.sleep(random.uniform(0.8, 2.5))  # Sleep *after* batch fetch, before next one
+        time.sleep(random.uniform(0.8, 2.5))  # Sleep between batches
 
     return snapshots

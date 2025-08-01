@@ -1,5 +1,7 @@
-from yahooquery import Ticker
+import time
+import random
 import pandas as pd
+from yahooquery import Ticker
 from datetime import timedelta
 from pandas.tseries.holiday import USFederalHolidayCalendar
 from pandas.tseries.offsets import CustomBusinessDay
@@ -105,30 +107,43 @@ def fetch_bulk_ohlc(tickers: list[str], start_date, end_date) -> dict[str, pd.Da
     Fetches OHLC history in batch for a list of tickers.
     Returns a dict of {ticker: DataFrame}.
     """
+    batch_size = 40
     result = {}
 
-    try:
-        tq = Ticker(tickers)
-        hist = tq.history(start=str(start_date), end=str(end_date + timedelta(days=1)), interval="1d")
+    total_batches = (len(tickers) + batch_size - 1) // batch_size
 
-        if isinstance(hist, pd.DataFrame) and not hist.empty:
-            hist = hist.reset_index()
+    for i in range(0, len(tickers), batch_size):
+        batch = tickers[i:i + batch_size]
+        print(f"📊 Fetching OHLC batch {i // batch_size + 1} of {total_batches}")
 
-            for ticker in tickers:
-                df = hist[hist["symbol"] == ticker].copy()
-                if df.empty:
-                    continue
+        try:
+            tq = Ticker(batch)
+            hist = tq.history(
+                start=str(start_date),
+                end=str(end_date + timedelta(days=1)),
+                interval="1d"
+            )
 
-                df = df[["date", "open", "high", "low", "close", "volume"]]
+            if isinstance(hist, pd.DataFrame) and not hist.empty:
+                hist = hist.reset_index()
 
-                df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce")  # safely force uniform dtype
-                df["date"] = df["date"].dt.tz_localize(None)  # remove tz
-                df["date"] = df["date"].dt.date  # convert to plain date
+                for ticker in batch:
+                    df = hist[hist["symbol"] == ticker].copy()
+                    if df.empty:
+                        continue
 
-                result[ticker] = df
+                    df = df[["date", "open", "high", "low", "close", "volume"]]
 
-    except Exception as e:
-        print(f"❌ Failed bulk OHLC fetch: {e}")
+                    df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce")  # safely force uniform dtype
+                    df["date"] = df["date"].dt.tz_localize(None)  # remove tz
+                    df["date"] = df["date"].dt.date  # convert to plain date
+
+                    result[ticker] = df
+
+        except Exception as e:
+            print(f"❌ Error fetching OHLC for batch: {e}")
+
+        time.sleep(random.uniform(0.8, 2.5))
 
     return result
 
