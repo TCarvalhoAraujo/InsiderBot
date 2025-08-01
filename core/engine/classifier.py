@@ -277,6 +277,25 @@ def add_smart_insider_tag(df: pd.DataFrame, min_trades: int = 5, min_winrate: fl
 
     return df
 
+def is_near_earnings(row, snapshot: dict, window: int = 14) -> bool:
+    """
+    Returns True if the trade happened within `window` days before the earnings date.
+    """
+    txn_date = pd.to_datetime(row["transaction_date"]).date()
+    earnings_date = snapshot.get("earnings_date")
+
+    if earnings_date is None:
+        return False
+
+    if isinstance(earnings_date, str):
+        try:
+            earnings_date = pd.to_datetime(earnings_date).date()
+        except Exception:
+            return False
+
+    delta = (earnings_date - txn_date).days
+    return 0 < delta <= window
+
 def tag_trade(row, snapshot):
     tags = []
 
@@ -304,5 +323,9 @@ def tag_trade(row, snapshot):
     outcome_tag = classify_outcome_tag(row)
     if outcome_tag:
         tags.append(outcome_tag)
+
+    # Near Earnings tag
+    if is_near_earnings(row, snapshot):
+        tags.append("📅 NEAR EARNINGS")
 
     return tags
