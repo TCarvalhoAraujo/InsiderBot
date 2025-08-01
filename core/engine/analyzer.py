@@ -1,21 +1,22 @@
 import os
 import pandas as pd
-from datetime import timedelta
 from yahooquery import Ticker
 
 from core.engine.classifier import tag_trade
 from core.io.file_manager import FINVIZ_DATA_DIR, ensure_finviz_dir
 from core.io.cache import load_snapshot_cache, save_snapshot_cache
 from core.utils.utils import calculate_ownership_pct
-from core.engine.ohlc import enrich_trades_with_price_deltas
+from core.engine.ohlc import enrich_trades_with_price_deltas, update_ohlc
 
-TAGGED_FILE = "tagged_trades_30.csv"
+TAGGED_FILE = "finviz_tagged.csv"
 
 def analyze_finviz_trade() -> None:
     """Main entrypoint for analyzing Finviz insider trades and tagging them."""    
     df = load_finviz_data()
     tickers = df["ticker"].unique()
     
+    update_ohlc(df)
+
     snapshot_cache = load_snapshot_cache()
     snapshot_cache = fetch_missing_snapshots(tickers, snapshot_cache)
 
@@ -24,6 +25,7 @@ def analyze_finviz_trade() -> None:
 
     tagged_path = os.path.join(FINVIZ_DATA_DIR, TAGGED_FILE)
     df.to_csv(tagged_path, index=False)
+    print(f"✅ Tagged trades saved to {tagged_path}")
 
 def load_finviz_data() -> pd.DataFrame:
     """Loads the full Finviz trades CSV file from disk."""
