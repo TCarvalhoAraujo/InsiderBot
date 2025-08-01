@@ -29,7 +29,7 @@ def save_snapshot_cache(cache: dict):
     cache_path = os.path.join(CACHE_DIR, "snapshot.json")
 
     with open(cache_path, "w") as f:
-        json.dump(cache, f, indent=2)
+        json.dump(cache, f, indent=2, default=str)
     print(f"📦 Snapshot cache saved to {cache_path} ({len(cache)} tickers)")
 
 def get_ohlc_cache_path(ticker: str) -> str:
