@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from yahooquery import Ticker
 
-from core.engine.classifier import tag_trade, add_cluster_buy_tag, add_multiple_buys_tag
+from core.engine.classifier import tag_trade, add_cluster_buy_tag, add_multiple_buys_tag, add_smart_insider_tag
 from core.io.file_manager import FINVIZ_DATA_DIR, ensure_finviz_dir
 from core.io.cache import load_snapshot_cache, save_snapshot_cache
 from core.utils.utils import calculate_ownership_pct
@@ -67,6 +67,7 @@ def tag_and_annotate(df: pd.DataFrame, snapshots: dict) -> pd.DataFrame:
     # Post-processing multi-trade tags
     df = add_cluster_buy_tag(df)
     df = add_multiple_buys_tag(df)
+    df = add_smart_insider_tag(df, min_trades=5, min_winrate=0.7)
     
     return df
 
