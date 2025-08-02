@@ -1,6 +1,8 @@
 import os
 import json
 import pandas as pd
+from ta.trend import SMAIndicator
+from ta.momentum import RSIIndicator
 
 CACHE_DIR = "data/finviz/cache"
 OHLC_CACHE_DIR = "data/finviz/cache/ohlc"
@@ -36,13 +38,48 @@ def get_ohlc_cache_path(ticker: str) -> str:
     ensure_ohlc_dir()
     return os.path.join(OHLC_CACHE_DIR, f"{ticker.upper()}.csv")
 
+from ta.trend import SMAIndicator
+from ta.momentum import RSIIndicator
+
 def load_ohlc_cache(ticker: str) -> pd.DataFrame:
     path = get_ohlc_cache_path(ticker)
+
     if os.path.exists(path):
         df = pd.read_csv(path, parse_dates=["date"])
         df["date"] = df["date"].dt.date
+
+        if not df.empty:
+            df = df.sort_values("date")
+
+            # Add missing indicators
+            updated = False
+
+            if "sma_20" not in df.columns:
+                df["sma_20"] = SMAIndicator(close=df["close"], window=20).sma_indicator()
+                updated = True
+            if "rsi_14" not in df.columns:
+                df["rsi_14"] = RSIIndicator(close=df["close"], window=14).rsi()
+                updated = True
+
+            # Add shifted values
+            if "price_prev" not in df.columns:
+                df["price_prev"] = df["close"].shift(1)
+                updated = True
+            if "sma_20_prev" not in df.columns:
+                df["sma_20_prev"] = df["sma_20"].shift(1)
+                updated = True
+
+            if updated:
+                save_ohlc_cache(ticker, df)
+
         return df
-    return pd.DataFrame(columns=["date", "open", "high", "low", "close", "volume"])
+
+    # If file doesn't exist, return empty with proper structure
+    return pd.DataFrame(columns=[
+        "date", "open", "high", "low", "close", "volume",
+        "price", "sma_20", "rsi_14", "price_prev", "sma_20_prev"
+    ])
+
 
 def save_ohlc_cache(ticker: str, df: pd.DataFrame):
     path = get_ohlc_cache_path(ticker)
