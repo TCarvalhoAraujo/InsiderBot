@@ -178,7 +178,15 @@ def get_window_high_low(ohlc: pd.DataFrame, trade_date: pd.Timestamp, days_back:
 def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
     df["transaction_date"] = pd.to_datetime(df["transaction_date"])
 
+    market_open_at_trade = []
     market_close_at_trade = []
+    low_at_trade = []
+    high_at_trade = []
+
+    sma_20_at_trade = []
+    rsi_14_at_trade = []
+    sma_20_prev = []
+    price_prev = []
 
     high_plus_7d = []
     low_plus_7d = []
@@ -207,7 +215,8 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
         ohlc = load_ohlc_cache(ticker)
         if ohlc.empty:
             # Append all None if no data
-            market_close_at_trade.append(None)
+            market_close_at_trade.append(None); market_open_at_trade.append(None); low_at_trade.append(None); high_at_trade.append(None)
+            sma_20_at_trade.append(None); rsi_14_at_trade.append(None); sma_20_prev.append(None); price_prev.append(None)
             high_plus_7d.append(None);  low_plus_7d.append(None);  max_gain_7d.append(None);  max_drawdown_7d.append(None)
             high_plus_14d.append(None); low_plus_14d.append(None); max_gain_14d.append(None); max_drawdown_14d.append(None)
             high_plus_30d.append(None); low_plus_30d.append(None); max_gain_30d.append(None); max_drawdown_30d.append(None)
@@ -217,8 +226,40 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
 
         ohlc["date"] = pd.to_datetime(ohlc["date"]).dt.date
         ohlc_map = ohlc.set_index("date")
-        p0 = ohlc_map["close"].get(trade_date, None)
-        market_close_at_trade.append(p0)
+
+        # Safe access if date exists
+        if trade_date in ohlc_map.index:
+            row_ohlc = ohlc_map.loc[trade_date]
+
+            # Trade day
+            market_open_at_trade.append(row_ohlc.get("open"))
+            market_close_at_trade.append(row_ohlc.get("close"))
+            high_at_trade.append(row_ohlc.get("high"))
+            low_at_trade.append(row_ohlc.get("low"))
+
+            # Indicators on trade day
+            sma_20_at_trade.append(row_ohlc.get("sma_20"))
+            rsi_14_at_trade.append(row_ohlc.get("rsi_14"))
+
+            # Previous business day
+            prev_date = (trade_date - us_bd).date()
+            if prev_date in ohlc_map.index:
+                row_prev = ohlc_map.loc[prev_date]
+                sma_20_prev.append(row_prev.get("sma_20"))
+                price_prev.append(row_prev.get("close"))
+            else:
+                sma_20_prev.append(None)
+                price_prev.append(None)
+        else:
+            # If trade_date not found — fill with None for all columns
+            market_open_at_trade.append(None)
+            market_close_at_trade.append(None)
+            high_at_trade.append(None)
+            low_at_trade.append(None)
+            sma_20_at_trade.append(None)
+            rsi_14_at_trade.append(None)
+            sma_20_prev.append(None)
+            price_prev.append(None)
 
         insider_price = row["price"]
 
@@ -238,7 +279,15 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
         high_minus_7d.append(h_7); low_minus_7d.append(l_7)
         high_minus_15d.append(h_15); low_minus_15d.append(l_15)
 
+    df["market_open_at_trade"] = market_open_at_trade
     df["market_close_at_trade"] = market_close_at_trade
+    df["high_at_trade"] = high_at_trade
+    df["low_at_trade"] = low_at_trade
+
+    df["sma_20_at_trade"] = sma_20_at_trade
+    df["rsi_14_at_trade"] = rsi_14_at_trade
+    df["sma_20_prev"] = sma_20_prev
+    df["price_prev"] = price_prev
 
     df["high_plus_7d"] = high_plus_7d
     df["low_plus_7d"] = low_plus_7d
