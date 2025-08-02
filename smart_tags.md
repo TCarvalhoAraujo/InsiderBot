@@ -50,7 +50,7 @@ This document explains the meaning and detection logic for each tag used to clas
 
 ---
 
-## 🏭 Sector Tags
+### 🏭 Sector Tags
 
 | Tag Example              | Meaning                        | Detection (from snapshot)         |
 |--------------------------|--------------------------------|-----------------------------------|
@@ -81,7 +81,24 @@ This document explains the meaning and detection logic for each tag used to clas
 
 ---
 
-## 🧠 Behavioral Tags
+### 📊 Indicator-Based Tags
+
+| Tag                             | Meaning                                                | How to Detect                                        |
+| ------------------------------- | ------------------------------------------------------ | ---------------------------------------------------- |
+| 📈 ABOVE SMA20                  | Price on trade day was above the 20-day moving average | `price > sma_20`                                     |
+| 📉 BELOW SMA20                  | Price was under the 20-day moving average              | `price < sma_20`                                     |
+| ⚡️ SMA SUPPORT RECLAIMED        | Price crossed **above** SMA20 after being below it     | `price_prev < sma_20_prev` and `price > sma_20`      |
+| 🔻 SMA LOST                     | Price crossed **below** SMA20 after being above it     | `price_prev > sma_20_prev` and `price < sma_20`      |
+| 🔻 OVERSOLD (RSI < 30)          | RSI indicates stock may be oversold                    | `rsi_14 < 30`                                        |
+| 🚀 OVERBOUGHT (RSI > 70)        | RSI indicates stock may be overbought                  | `rsi_14 > 70`                                        |
+| 🟡 NEUTRAL (RSI)                | RSI is between 30 and 70 (neutral zone)                | `30 ≤ rsi_14 ≤ 70`                                   |
+| 💪 STRONG TREND                 | Price above SMA20 **and** RSI above 60                 | `price > sma_20` and `rsi_14 > 60`                   |
+| 📉 DIP SETUP                    | Price below SMA20 **and** RSI below 40                 | `price < sma_20` and `rsi_14 < 40`                   |
+| ⚠️ INSUFFICIENT DATA FOR MA/RSI | Indicators not available due to limited price history  | One or more of `sma_20` or `rsi_14` is missing (NaN) |
+
+---
+
+### 🧠 Behavioral Tags
 
 | Tag                          | Meaning                                                        | Detection Logic                                                                 |
 |------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------------------|
