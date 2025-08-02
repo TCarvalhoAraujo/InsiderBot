@@ -96,28 +96,36 @@ def classify_timing_tags(row) -> list[str]:
     tags = []
 
     price = row.get("price")
+
+    open_ = row.get("market_open_at_trade")
     close = row.get("market_close_at_trade")
+
+    low = row.get("low_at_trade")
+    high = row.get("high_at_trade")
 
     low_7 = row.get("low_minus_7d")
     low_15 = row.get("low_minus_15d")
 
-    # Thresholds and tolerance
-    tolerance = 0.15
-    base_threshold = 10.0
-
-    dip_required = base_threshold * (1 - tolerance)
-    strength_required = base_threshold * (1 - tolerance)
+    # % thresholds
+    dip_threshold = 5  # % within the low
+    strength_threshold = 10  # % above recent low
 
     # DIP BUY
-    if close and low_7 and close > 0:
-        dip_pct = (close - low_7) / close * 100
-        if dip_pct >= dip_required:
+    if price and low and low_7:
+        near_recent_low = (price - low_7) / price * 100 <= dip_threshold
+        red_candle = close < open_
+        near_day_low = (price - low) / price * 100 <= dip_threshold
+
+        if near_recent_low and red_candle and near_day_low:
             tags.append("📉 DIP BUY")
 
     # BUYING INTO STRENGTH
-    if close and low_15 and low_15 > 0:
-        strength_pct = (close - low_15) / low_15 * 100
-        if strength_pct >= strength_required:
+    if price and low_15 and close and open_:
+        strength_pct = (price - low_15) / low_15 * 100
+        green_candle = close > open_
+        near_day_high = (high - price) / price * 100 <= dip_threshold
+
+        if strength_pct >= strength_threshold and green_candle and near_day_high:
             tags.append("🚀 BUYING INTO STRENGTH")
 
     # CAUGHT THE KNIFE
@@ -136,9 +144,9 @@ def classify_timing_tags(row) -> list[str]:
 
     # SPIKE +X% [tolerant thresholds]
     spike_thresholds = {
-        20: 20 * (1 - tolerance),
-        10: 10 * (1 - tolerance),
-        5: 5 * (1 - tolerance)
+        20: 20 * (1 - strength_threshold),
+        10: 10 * (1 - strength_threshold),
+        5: 5 * (1 - strength_threshold)
     }
 
     for label, gain in [
@@ -156,9 +164,9 @@ def classify_timing_tags(row) -> list[str]:
 
     # DIP -X% [tolerant thresholds]
     dip_thresholds = {
-        -20: -20 * (1 - tolerance),
-        -10: -10 * (1 - tolerance),
-        -5: -5 * (1 - tolerance)
+        -20: -20 * (1 - dip_threshold),
+        -10: -10 * (1 - dip_threshold),
+        -5: -5 * (1 - dip_threshold)
     }
 
     for label, drop in [
@@ -316,6 +324,49 @@ def near_earnings_tag(row, snapshot: dict, window: int = 14) -> bool:
     delta = (earnings_date - txn_date).days
     return 0 < delta <= window
 
+def classify_metric_tags(row) -> list[str]:
+    tags = []
+    sma_20 = row.get("sma_20_at_trade")
+    rsi_14 = row.get("rsi_14_at_trade")
+    price = row.get("price")
+    
+    sma_20_prev = row.get("sma_20_prev")
+    price_prev = row.get("price_prev")
+
+    # SIMPLE MOVING AVERAGE
+    if pd.notna(sma_20) and price:
+        if price > sma_20:
+            tags.append("📈 ABOVE SMA20")
+        elif price < sma_20:
+            tags.append("📉 BELOW SMA20")
+        
+        if pd.notna(sma_20_prev) and pd.notna(price_prev):
+            if price_prev < sma_20_prev and price > sma_20:
+                tags.append("⚡️ SMA SUPPORT RECLAIMED")
+            elif price_prev > sma_20_prev and price < sma_20:
+                tags.append("🔻 SMA LOST")
+
+    # RSI
+    if pd.notna(rsi_14):
+        if rsi_14 < 30:
+            tags.append("🔻 OVERSOLD (RSI < 30)")
+        elif rsi_14 > 70:
+            tags.append("🚀 OVERBOUGHT (RSI > 70)")
+        else:
+            tags.append("🟡 NEUTRAL (RSI)")
+
+    # CONFLUENCE TAGS
+    if pd.notna(sma_20) and pd.notna(rsi_14) and price:
+        if price > sma_20 and rsi_14 > 60:
+            tags.append("💪 STRONG TREND")
+        elif price < sma_20 and rsi_14 < 40:
+            tags.append("📉 DIP SETUP")
+
+    if pd.isna(sma_20) or pd.isna(rsi_14):
+        tags.append("⚠️ INSUFFICIENT DATA FOR MA/RSI")
+
+    return tags
+
 def tag_trade(row, snapshot):
     tags = []
 
@@ -340,7 +391,7 @@ def tag_trade(row, snapshot):
     if sector_tag:
         tags.append(sector_tag)
 
-    # Timing Context
+    # Timing Context Tags
     timing_tags = classify_timing_tags(row)
     tags += timing_tags
 
@@ -352,5 +403,9 @@ def tag_trade(row, snapshot):
     # Near Earnings Tag
     if near_earnings_tag(row, snapshot):
         tags.append("📅 NEAR EARNINGS")
+
+    # Metric Tags
+    metric_tags = classify_metric_tags(row)
+    tags += metric_tags
 
     return tags
