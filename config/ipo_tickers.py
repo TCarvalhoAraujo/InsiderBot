@@ -1,1 +1,0 @@
-IPO_TICKERS = {"ARX", "ASIC", "CARL", "MH", "NIQ"}

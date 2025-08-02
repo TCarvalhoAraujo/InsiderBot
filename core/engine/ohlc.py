@@ -7,7 +7,7 @@ from pandas.tseries.holiday import USFederalHolidayCalendar
 from pandas.tseries.offsets import CustomBusinessDay
 
 from core.io.cache import load_ohlc_cache, save_ohlc_cache
-from config.ipo_tickers import IPO_TICKERS
+from config.problematic_tickers import IPO_TICKERS
 
 us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
 

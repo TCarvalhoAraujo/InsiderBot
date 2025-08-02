@@ -10,6 +10,7 @@ from core.io.file_manager import FINVIZ_DATA_DIR, ensure_finviz_dir
 from core.io.cache import load_snapshot_cache, save_snapshot_cache
 from core.utils.utils import calculate_ownership_pct
 from core.engine.ohlc import enrich_trades_with_price_deltas, update_ohlc
+from config.problematic_tickers import NO_MARKET_CAP_TICKERS
 
 TAGGED_FILE = "finviz_tagged.csv"
 
@@ -43,6 +44,8 @@ def fetch_missing_snapshots(tickers: list[str], cache: dict) -> dict:
     Checks which tickers are missing from the snapshot cache,
     fetches their data using YahooQuery, and updates the cache.
     """
+    tickers = [t for t in tickers if t not in NO_MARKET_CAP_TICKERS]
+
     missing = [t for t in tickers if t not in cache]
     print(f"🔍 Found {len(missing)} missing tickers.")
 
@@ -60,6 +63,9 @@ def tag_and_annotate(df: pd.DataFrame, snapshots: dict) -> pd.DataFrame:
     Applies trade tags and ownership percentage to each row in the DataFrame
     using the snapshot data for each ticker.
     """
+    # Clean up the dataframe
+    df = group_same_day_insider_trades(df)
+
     # Add additional info to dataframe
     df = enrich_trades_with_price_deltas(df)
     df["ownership_pct"] = df.apply(lambda row: calculate_ownership_pct(row, snapshots.get(row["ticker"], {})), axis=1)
@@ -88,41 +94,44 @@ def get_bulk_snapshots(tickers: list[str]) -> dict:
 
         try:
             t = Ticker(batch)
-
             summary_data = t.summary_detail
             calendar_data = t.calendar_events
             profile_data = t.asset_profile
 
             for ticker in batch:
-                summary = summary_data.get(ticker, {})
-                calendar = calendar_data.get(ticker, {})
-                profile = profile_data.get(ticker, {})
+                try:
+                    summary = summary_data.get(ticker, {})
+                    calendar = calendar_data.get(ticker, {})
+                    profile = profile_data.get(ticker, {})
 
-                # Extract earnings date
-                earnings_date = None
-                earnings_info = calendar.get("earnings", {})
-                earnings_date_raw = earnings_info.get("earningsDate", [])
-                if isinstance(earnings_date_raw, list) and earnings_date_raw:
-                    first_entry = earnings_date_raw[0]
+                    # Extract earnings date
+                    earnings_date = None
+                    earnings_info = calendar.get("earnings", {})
+                    earnings_date_raw = earnings_info.get("earningsDate", [])
 
-                    if isinstance(first_entry, dict) and "raw" in first_entry:
-                        raw_val = first_entry["raw"]
-                        earnings_date = datetime.fromtimestamp(raw_val).date()
+                    if isinstance(earnings_date_raw, list) and earnings_date_raw:
+                        first_entry = earnings_date_raw[0]
 
-                    elif isinstance(first_entry, str):
-                        try:
-                            # Clean trailing `:S` if it exists
-                            clean_str = first_entry.replace(":S", "")
-                            earnings_date = pd.to_datetime(clean_str).date()
-                        except Exception:
-                            print(f"⚠️ Could not parse string earnings date for {ticker}: {first_entry}")
+                        if isinstance(first_entry, dict) and "raw" in first_entry:
+                            raw_val = first_entry["raw"]
+                            earnings_date = datetime.fromtimestamp(raw_val).date()
 
-                snapshots[ticker] = {
-                    "market_cap": summary.get("marketCap"),
-                    "sector": profile.get("sector"),
-                    "industry": profile.get("industry"),
-                    "earnings_date": earnings_date
-                }
+                        elif isinstance(first_entry, str):
+                            try:
+                                clean_str = first_entry.replace(":S", "")
+                                earnings_date = pd.to_datetime(clean_str).date()
+                            except Exception:
+                                print(f"⚠️ Could not parse string earnings date for {ticker}: {first_entry}")
+
+                    snapshots[ticker] = {
+                        "market_cap": summary.get("marketCap"),
+                        "sector": profile.get("sector"),
+                        "industry": profile.get("industry"),
+                        "earnings_date": earnings_date
+                    }
+
+                except Exception as e:
+                    print(f"⚠️ Error parsing ticker {ticker}: {e}")
 
         except Exception as e:
             print(f"❌ Error fetching batch: {e}")
@@ -130,3 +139,23 @@ def get_bulk_snapshots(tickers: list[str]) -> dict:
         time.sleep(random.uniform(0.8, 2.5))  # Sleep between batches
 
     return snapshots
+
+def group_same_day_insider_trades(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Groups trades made by the same insider on the same day for the same ticker and action.
+    Aggregates number of shares and total value, uses the weighted average price.
+    """
+    df["transaction_date"] = pd.to_datetime(df["transaction_date"]).dt.date 
+
+    grouped = (
+        df.groupby(["ticker", "insider_name", "transaction_date", "transaction_type"], as_index=False)
+        .agg({
+            "price": lambda x: (x * df.loc[x.index, "shares"]).sum() / df.loc[x.index, "shares"].sum(),  # weighted avg
+            "shares": "sum",
+            "value": "sum",
+            "relationship": "first",
+            "sec_form4": "first",
+        })
+    )
+
+    return grouped

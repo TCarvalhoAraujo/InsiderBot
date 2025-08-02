@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import ast
 from datetime import datetime
 
 RAW_DATA_DIR = "data/raw"
@@ -124,9 +125,10 @@ def save_finviz_trades_to_csv(new_trades: pd.DataFrame):
     # Save updated master file
     combined.to_csv(master_file, index=False)
 
-def load_latest_tagged_trades(filename: str = "tagged_trades.csv") -> pd.DataFrame:
+def load_latest_tagged_trades(filename: str = "finviz_tagged.csv") -> pd.DataFrame:
     """
     Loads the most recent tagged_trades CSV from disk.
+    Parses the tags column into actual Python lists.
     """
     path = os.path.join(FINVIZ_DATA_DIR, filename)
 
@@ -134,6 +136,10 @@ def load_latest_tagged_trades(filename: str = "tagged_trades.csv") -> pd.DataFra
         raise FileNotFoundError(f"❌ Tagged trades file not found: {path}")
     
     df = pd.read_csv(path)
+
+    # Fix: convert stringified list into real list
+    df["tags"] = df["tags"].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+
     print(f"📥 Loaded {len(df)} tagged trades from {filename}")
     return df
 

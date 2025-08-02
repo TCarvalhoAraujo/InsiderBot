@@ -1,0 +1,3 @@
+IPO_TICKERS = {"ARX", "ASIC", "CARL", "MH", "NIQ"}
+
+NO_MARKET_CAP_TICKERS = {"UNOV", "NIQ"}
