@@ -790,5 +790,173 @@
     "sector": "Industrials",
     "industry": "Specialty Business Services",
     "earnings_date": "2025-09-24"
+  },
+  "FUNC": {
+    "market_cap": 211466720,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-20"
+  },
+  "BRK-B": {
+    "market_cap": 991622463488,
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified",
+    "earnings_date": "2025-11-01"
+  },
+  "BRK-A": {
+    "market_cap": 994178826240,
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified",
+    "earnings_date": "2025-11-01"
+  },
+  "CVBF": {
+    "market_cap": 2577369600,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-22"
+  },
+  "OBIO": {
+    "market_cap": 102677504,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-05-12"
+  },
+  "BLFY": {
+    "market_cap": 183530304,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-29"
+  },
+  "FCF": {
+    "market_cap": 1739673088,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-28"
+  },
+  "UVSP": {
+    "market_cap": 825268992,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-22"
+  },
+  "SIRI": {
+    "market_cap": 7282048512,
+    "sector": "Communication Services",
+    "industry": "Entertainment",
+    "earnings_date": "2025-10-30"
+  },
+  "OXM": {
+    "market_cap": 574415488,
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing",
+    "earnings_date": "2025-09-11"
+  },
+  "HLIT": {
+    "market_cap": 978547072,
+    "sector": "Technology",
+    "industry": "Communication Equipment",
+    "earnings_date": "2025-10-27"
+  },
+  "ARW": {
+    "market_cap": 5979862528,
+    "sector": "Technology",
+    "industry": "Electronics & Computer Distribution",
+    "earnings_date": "2025-10-30"
+  },
+  "FTV": {
+    "market_cap": 15976226816,
+    "sector": "Technology",
+    "industry": "Scientific & Technical Instruments",
+    "earnings_date": "2025-10-29"
+  },
+  "NEWT": {
+    "market_cap": 299224288,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-28"
+  },
+  "ACGL": {
+    "market_cap": 33226655744,
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified",
+    "earnings_date": "2025-10-30"
+  },
+  "PUMP": {
+    "market_cap": 510482880,
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services",
+    "earnings_date": "2025-10-29"
+  },
+  "CNOB": {
+    "market_cap": 1140128128,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
+  },
+  "MEGI": {
+    "market_cap": 754688768,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "KRNY": {
+    "market_cap": 380358528,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-24"
+  },
+  "FCBC": {
+    "market_cap": 658607680,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-22"
+  },
+  "RNST": {
+    "market_cap": 3419744512,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-22"
+  },
+  "SHBI": {
+    "market_cap": 514297952,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
+  },
+  "CLH": {
+    "market_cap": 12680354816,
+    "sector": "Industrials",
+    "industry": "Waste Management",
+    "earnings_date": "2025-10-29"
+  },
+  "SNBR": {
+    "market_cap": 173059600,
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances",
+    "earnings_date": "2025-07-30"
+  },
+  "ALRS": {
+    "market_cap": 533187392,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
+  },
+  "LRMR": {
+    "market_cap": 212240832,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-06"
+  },
+  "ABP": {
+    "market_cap": 14534243,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": null
+  },
+  "NRC": {
+    "market_cap": 315596544,
+    "sector": "Healthcare",
+    "industry": "Health Information Services",
+    "earnings_date": "2025-10-24"
   }
 }
