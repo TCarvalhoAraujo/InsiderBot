@@ -3,6 +3,8 @@ from core.engine.analyzer import analyze_finviz_trade
 from core.io.file_manager import load_finviz_all_trades
 from core.engine.ohlc import update_ohlc
 
+from core.engine.backtest import run_backtest_pipeline
+
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -65,6 +67,9 @@ def main():
         elif choice == "5":
             df = load_finviz_all_trades()
             update_ohlc(df)
+
+        elif choice == "6":
+            run_backtest_pipeline()
 
         elif choice == "0":
             print("👋 Exiting InsiderBot. Have a great day!")

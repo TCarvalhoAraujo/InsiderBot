@@ -128,7 +128,6 @@ def save_finviz_trades_to_csv(new_trades: pd.DataFrame):
 def load_latest_tagged_trades(filename: str = "finviz_tagged.csv") -> pd.DataFrame:
     """
     Loads the most recent tagged_trades CSV from disk.
-    Parses the tags column into actual Python lists.
     """
     path = os.path.join(FINVIZ_DATA_DIR, filename)
 
@@ -136,9 +135,6 @@ def load_latest_tagged_trades(filename: str = "finviz_tagged.csv") -> pd.DataFra
         raise FileNotFoundError(f"❌ Tagged trades file not found: {path}")
     
     df = pd.read_csv(path)
-
-    # Fix: convert stringified list into real list
-    df["tags"] = df["tags"].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
 
     print(f"📥 Loaded {len(df)} tagged trades from {filename}")
     return df
@@ -155,3 +151,14 @@ def load_finviz_all_trades(filename: str = "finviz_all_trades.csv") -> pd.DataFr
     df = pd.read_csv(path)
     print(f"📥 Loaded {len(df)} trades from {filename}")
     return df
+
+def save_scores(df: pd.DataFrame):
+    """
+    Saves all trades into a .csv file
+    """
+    ensure_finviz_dir()
+
+    scores_file = os.path.join(FINVIZ_DATA_DIR, "scores.csv")
+
+    df.to_csv(scores_file, index=False)
+    print(f"✅ Saved scored file to {scores_file}")
