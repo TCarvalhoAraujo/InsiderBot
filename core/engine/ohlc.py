@@ -98,7 +98,8 @@ def update_ohlc(trades_df: pd.DataFrame):
     for ticker, df in ohlc_data.items():
         if not df.empty:
             cached = load_ohlc_cache(ticker)
-            combined = pd.concat([cached, df], ignore_index=True).drop_duplicates(subset="date")
+            frames = [df for df in [cached, df] if not df.empty and not df.isna().all().all()]
+            combined = pd.concat(frames, ignore_index=True).drop_duplicates(subset="date")
             save_ohlc_cache(ticker, combined)
 
 
