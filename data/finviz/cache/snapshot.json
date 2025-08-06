@@ -958,5 +958,179 @@
     "sector": "Healthcare",
     "industry": "Health Information Services",
     "earnings_date": "2025-10-24"
+  },
+  "AUPH": {
+    "market_cap": 1540070912,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-07-31"
+  },
+  "EIG": {
+    "market_cap": 957392384,
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty",
+    "earnings_date": "2025-10-29"
+  },
+  "AIN": {
+    "market_cap": 1770443520,
+    "sector": "Consumer Cyclical",
+    "industry": "Textile Manufacturing",
+    "earnings_date": "2025-10-29"
+  },
+  "AVBC": {
+    "market_cap": 290301856,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": null
+  },
+  "OSBC": {
+    "market_cap": 767550976,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-22"
+  },
+  "XELB": {
+    "market_cap": 2754375,
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing",
+    "earnings_date": "2025-08-14"
+  },
+  "CBZ": {
+    "market_cap": 3383165440,
+    "sector": "Industrials",
+    "industry": "Specialty Business Services",
+    "earnings_date": "2025-10-28"
+  },
+  "RVSB": {
+    "market_cap": 102783384,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-30"
+  },
+  "CHE": {
+    "market_cap": 6237853184,
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities",
+    "earnings_date": "2025-10-29"
+  },
+  "GABC": {
+    "market_cap": 1440098432,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-27"
+  },
+  "RRBI": {
+    "market_cap": 400930432,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-30"
+  },
+  "BPRN": {
+    "market_cap": 209148384,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-24"
+  },
+  "FIG": {
+    "market_cap": 38548414464,
+    "sector": "Technology",
+    "industry": "Software - Application",
+    "earnings_date": null
+  },
+  "AMKR": {
+    "market_cap": 5479160320,
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials",
+    "earnings_date": "2025-07-28"
+  },
+  "BCARU": {
+    "market_cap": null,
+    "sector": "Financial Services",
+    "industry": "Shell Companies",
+    "earnings_date": null
+  },
+  "HTBK": {
+    "market_cap": 572684160,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
+  },
+  "THRY": {
+    "market_cap": 586988928,
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information",
+    "earnings_date": "2025-07-30"
+  },
+  "RGCO": {
+    "market_cap": 217059168,
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas",
+    "earnings_date": "2025-08-12"
+  },
+  "XRX": {
+    "market_cap": 512030432,
+    "sector": "Technology",
+    "industry": "Information Technology Services",
+    "earnings_date": "2025-10-28"
+  },
+  "AOD": {
+    "market_cap": 935172928,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-07-08"
+  },
+  "GOOG": {
+    "market_cap": 2357473312768,
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information",
+    "earnings_date": "2025-07-23"
+  },
+  "GOOGL": {
+    "market_cap": 2358193422336,
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information",
+    "earnings_date": "2025-07-23"
+  },
+  "CLVT": {
+    "market_cap": 2480488192,
+    "sector": "Technology",
+    "industry": "Information Technology Services",
+    "earnings_date": "2025-07-30"
+  },
+  "TSQ": {
+    "market_cap": 113152384,
+    "sector": "Communication Services",
+    "industry": "Advertising Agencies",
+    "earnings_date": "2025-08-06"
+  },
+  "HTOO": {
+    "market_cap": 19039156,
+    "sector": "Utilities",
+    "industry": "Utilities - Renewable",
+    "earnings_date": "2025-06-04"
+  },
+  "DYAI": {
+    "market_cap": 29494904,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-13"
+  },
+  "UMBF": {
+    "market_cap": 8447783424,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-28"
+  },
+  "AWP": {
+    "market_cap": 336306784,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "MTDR": {
+    "market_cap": 5950813184,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "earnings_date": "2025-10-21"
   }
 }
