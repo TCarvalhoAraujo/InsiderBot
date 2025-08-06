@@ -184,38 +184,65 @@ def classify_timing_tags(row) -> list[str]:
 
     return tags
 
-def classify_outcome_tag(row) -> str:
+# def classify_outcome_tag(row) -> str:
+#     """
+#     Classifies trade based on post-trade price movement.
+#     - 🟢 Successful: gain >= threshold * (1 - tolerance)
+#     - 🔴 Unsuccessful: drop < 0%
+#     - ⚪ Neutral: flat or small gain
+#     """
+# 
+#     threshold = 10.0
+#     tolerance = 0.10
+#     min_success_gain = threshold * (1 - tolerance)
+# 
+#     gains = {
+#         "7d": row.get("max_gain_7d"),
+#         "14d": row.get("max_gain_14d"),
+#         "30d": row.get("max_gain_30d")
+#     }
+# 
+#     # Check if there's at least one valid gain value
+#     valid_gains = [g for g in gains.values() if g is not None and not pd.isna(g)]
+# 
+#     if not valid_gains:
+#         return ""
+# 
+#     max_gain = max(valid_gains)
+# 
+#     if max_gain >= min_success_gain:
+#         return "🟢 SUCCESSFUL TRADE"
+#     elif max_gain < 0:
+#         return "🔴 UNSUCCESSFUL TRADE"
+#     else:
+#         return "⚪ NEUTRAL TRADE"
+
+def classify_outcome_case_1(row) -> str:
     """
-    Classifies trade based on post-trade price movement.
-    - 🟢 Successful: gain >= threshold * (1 - tolerance)
-    - 🔴 Unsuccessful: drop < 0%
-    - ⚪ Neutral: flat or small gain
+    Classifies a trade based on the 'Case 1' 30-day strategy:
+    - 🟢 SUCCESSFUL: if any window (7d, 14d, 30d) shows > +15% gain
+    - ⚪ NEUTRAL: if final 30d gain is between +9% and +15%
+    - 🔴 UNSUCCESSFUL: if final 30d gain < +9%
     """
 
-    threshold = 10.0
-    tolerance = 0.10
-    min_success_gain = threshold * (1 - tolerance)
+    gain_7d = row.get("max_gain_7d")
+    gain_14d = row.get("max_gain_14d")
+    gain_30d = row.get("max_gain_30d")
+    final_gain_30d = row.get("final_gain_30d")
 
-    gains = {
-        "7d": row.get("max_gain_7d"),
-        "14d": row.get("max_gain_14d"),
-        "30d": row.get("max_gain_30d")
-    }
+    # Check if spike threshold was reached
+    for gain in [gain_7d, gain_14d, gain_30d]:
+        if gain is not None and not pd.isna(gain) and gain > 0.15:
+            return "🟢 SUCCESSFUL TRADE C1"
 
-    # Check if there's at least one valid gain value
-    valid_gains = [g for g in gains.values() if g is not None and not pd.isna(g)]
-
-    if not valid_gains:
+    # Fallback: final result after 30d
+    if pd.isna(final_gain_30d):
         return ""
 
-    max_gain = max(valid_gains)
-
-    if max_gain >= min_success_gain:
-        return "🟢 SUCCESSFUL TRADE"
-    elif max_gain < 0:
-        return "🔴 UNSUCCESSFUL TRADE"
+    if 0.09 <= final_gain_30d <= 0.15:
+        return "⚪ NEUTRAL TRADE C1"
     else:
-        return "⚪ NEUTRAL TRADE"
+        return "🔴 UNSUCCESSFUL TRADE C1"
 
 def add_cluster_buy_tag(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
@@ -396,9 +423,9 @@ def tag_trade(row, snapshot):
     tags += timing_tags
 
     # Outcome Tag
-    outcome_tag = classify_outcome_tag(row)
-    if outcome_tag:
-        tags.append(outcome_tag)
+    # outcome_tag = classify_outcome_tag(row)
+    # if outcome_tag:
+    #     tags.append(outcome_tag)
 
     # Near Earnings Tag
     if near_earnings_tag(row, snapshot):
@@ -407,5 +434,9 @@ def tag_trade(row, snapshot):
     # Metric Tags
     metric_tags = classify_metric_tags(row)
     tags += metric_tags
+
+    case1_outcome_tag = classify_outcome_case_1(row)
+    if case1_outcome_tag:
+        tags.append(case1_outcome_tag)
 
     return tags

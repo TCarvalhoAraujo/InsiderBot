@@ -209,6 +209,9 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
     high_minus_15d = []
     low_minus_15d = []
 
+    # Backtest Case 1
+    final_gain_30d = []
+
     for _, row in df.iterrows():
         ticker = row["ticker"]
         trade_date = row["transaction_date"].date()
@@ -223,6 +226,7 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
             high_plus_30d.append(None); low_plus_30d.append(None); max_gain_30d.append(None); max_drawdown_30d.append(None)
             high_minus_7d.append(None); low_minus_7d.append(None)
             high_minus_15d.append(None); low_minus_15d.append(None)
+            final_gain_30d.append(None)
             continue
 
         ohlc["date"] = pd.to_datetime(ohlc["date"]).dt.date
@@ -261,6 +265,21 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
             rsi_14_at_trade.append(None)
             sma_20_prev.append(None)
             price_prev.append(None)
+
+        # Final gain after ~30 calendar days (~21 business days)
+        final_close_price = None
+
+        # Make sure OHLC is sorted by date just in case
+        ohlc = ohlc.sort_values("date")
+        future_window = ohlc[ohlc["date"] > trade_date]
+
+        if len(future_window) >= 21:
+            final_row = future_window.iloc[20]
+            final_close_price = final_row["close"]
+            final_gain_value = (final_close_price - insider_price) / insider_price
+            final_gain_30d.append(final_gain_value)
+        else:
+            final_gain_30d.append(None)
 
         insider_price = row["price"]
 
@@ -309,5 +328,7 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
     df["low_minus_7d"] = low_minus_7d
     df["high_minus_15d"] = high_minus_15d
     df["low_minus_15d"] = low_minus_15d
+
+    df["final_gain_30d"] = final_gain_30d
 
     return df
