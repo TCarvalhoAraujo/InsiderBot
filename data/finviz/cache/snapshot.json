@@ -1132,5 +1132,125 @@
     "sector": "Energy",
     "industry": "Oil & Gas E&P",
     "earnings_date": "2025-10-21"
+  },
+  "ASUR": {
+    "market_cap": 224610736,
+    "sector": "Technology",
+    "industry": "Software - Application",
+    "earnings_date": "2025-10-30"
+  },
+  "DLHC": {
+    "market_cap": 79988936,
+    "sector": "Industrials",
+    "industry": "Specialty Business Services",
+    "earnings_date": "2025-08-06"
+  },
+  "BRBR": {
+    "market_cap": 4946533376,
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods",
+    "earnings_date": "2025-08-04"
+  },
+  "ENPH": {
+    "market_cap": 4172252672,
+    "sector": "Technology",
+    "industry": "Solar",
+    "earnings_date": "2025-10-21"
+  },
+  "NSP": {
+    "market_cap": 1902521856,
+    "sector": "Industrials",
+    "industry": "Staffing & Employment Services",
+    "earnings_date": "2025-10-30"
+  },
+  "NEO": {
+    "market_cap": 725981120,
+    "sector": "Healthcare",
+    "industry": "Diagnostics & Research",
+    "earnings_date": "2025-07-29"
+  },
+  "FRST": {
+    "market_cap": 273046624,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
+  },
+  "WSC": {
+    "market_cap": 4466299904,
+    "sector": "Industrials",
+    "industry": "Rental & Leasing Services",
+    "earnings_date": "2025-10-29"
+  },
+  "VNRX": {
+    "market_cap": 69459976,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-08-14"
+  },
+  "IBCP": {
+    "market_cap": 626649600,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
+  },
+  "CHD": {
+    "market_cap": 22533832704,
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products",
+    "earnings_date": "2025-10-31"
+  },
+  "MUSA": {
+    "market_cap": 7091500032,
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail",
+    "earnings_date": "2025-10-29"
+  },
+  "FINS": {
+    "market_cap": 329573184,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "MMLP": {
+    "market_cap": 119703832,
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream",
+    "earnings_date": "2025-10-15"
+  },
+  "EFSC": {
+    "market_cap": 2043951360,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-27"
+  },
+  "PRLB": {
+    "market_cap": 1073411008,
+    "sector": "Industrials",
+    "industry": "Metal Fabrication",
+    "earnings_date": "2025-10-31"
+  },
+  "MOH": {
+    "market_cap": 8255201792,
+    "sector": "Healthcare",
+    "industry": "Healthcare Plans",
+    "earnings_date": "2025-10-22"
+  },
+  "AMSC": {
+    "market_cap": 2477978624,
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery",
+    "earnings_date": "2025-10-29"
+  },
+  "IOR": {
+    "market_cap": 76769384,
+    "sector": "Financial Services",
+    "industry": "Mortgage Finance",
+    "earnings_date": "2025-08-06"
+  },
+  "TCI": {
+    "market_cap": 362851136,
+    "sector": "Real Estate",
+    "industry": "Real Estate Services",
+    "earnings_date": "2025-08-06"
   }
 }
