@@ -4,7 +4,7 @@ import ast
 from core.io.file_manager import load_latest_tagged_trades, save_scores
 
 # --- Settings ---
-OUTCOME_TAGS = {"🟢 SUCCESSFUL TRADE", "⚪ NEUTRAL TRADE", "🔴 UNSUCCESSFUL TRADE"}
+OUTCOME_TAGS = {"🟢 SUCCESSFUL TRADE C1", "⚪ NEUTRAL TRADE C1", "🔴 UNSUCCESSFUL TRADE C1"}
 
 TAG_WEIGHTS = {
     # Insider Role
@@ -58,20 +58,53 @@ def run_backtest_pipeline() -> None:
     df["score"] = df["tags"].apply(score_trade)
     df["bucket"] = df["score"].apply(assign_bucket)
 
-    # Map outcome tag to single label
-    def get_outcome(tags):
+    # Map outcome tag from TAGS (Case 1)
+    def get_outcome_case_1(tags):
         for tag in tags:
             tag_clean = tag.strip()
             if tag_clean in OUTCOME_TAGS:
                 return tag_clean
-        return "❓ Unknown"
+        return None
 
-    df["outcome"] = df["tags"].apply(get_outcome)
+    df["outcome_case_1"] = df["tags"].apply(get_outcome_case_1)
+
+    # Step 3: Parse outcome from CASE 2 column
+    def simplify_case_2_outcome(text: str):
+        if pd.isna(text):
+            return None
+        if "SUCCESSFUL" in text:
+            return "🟢 SUCCESSFUL TRADE"
+        if "NEUTRAL" in text:
+            return "⚪ NEUTRAL TRADE"
+        if "BAD" in text:
+            return "🔴 UNSUCCESSFUL TRADE"
+        return None
+
+    df["outcome_case_2"] = df["case_2_outcome"].apply(simplify_case_2_outcome)
 
     # Save cleaned file
     save_scores(df)
 
-    # --- Show backtest results ---
-    grouped = df.groupby("bucket")["outcome"].value_counts(normalize=True).unstack().fillna(0)
-    print("\n📈 Backtest Success Rate by Score Bucket (%):")
-    print((grouped * 100).round(1))
+    # --- Backtest Case 1 ---
+    df_case1 = df[df["outcome_case_1"].notna()]
+    grouped_1 = (
+        df_case1.groupby("bucket")["outcome_case_1"]
+        .value_counts(normalize=True)
+        .unstack()
+        .fillna(0)
+    )
+
+    print("\n📈 Case 1 – Backtest Based on 30-Day Outcome Tags:")
+    print((grouped_1 * 100).round(1))
+
+    # --- Backtest Case 2 ---
+    df_case2 = df[df["outcome_case_2"].notna()]
+    grouped_2 = (
+        df_case2.groupby("bucket")["outcome_case_2"]
+        .value_counts(normalize=True)
+        .unstack()
+        .fillna(0)
+    )
+
+    print("\n⏳ Case 2 – Backtest Based on Drawdown vs Spike Timing:")
+    print((grouped_2 * 100).round(1))

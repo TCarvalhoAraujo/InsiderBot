@@ -2,7 +2,7 @@ import time
 import random
 import pandas as pd
 from yahooquery import Ticker
-from datetime import timedelta
+from datetime import timedelta, datetime
 from pandas.tseries.holiday import USFederalHolidayCalendar
 from pandas.tseries.offsets import CustomBusinessDay
 
@@ -175,6 +175,50 @@ def get_window_high_low(ohlc: pd.DataFrame, trade_date: pd.Timestamp, days_back:
 
     return window["high"].max(), window["low"].min()
 
+def get_drawdown_vs_gain_sequence(ohlc: pd.DataFrame, trade_date: datetime.date, insider_price: float, final_gain_30d: float = None) -> str:
+    """
+    Determines if a trade is successful, neutral, or bad based on sequence:
+    - DROP before SPIKE = BAD
+    - SPIKE before DROP = SUCCESSFUL
+    - Neither hit, final gain in +9%~15% = NEUTRAL
+    - Otherwise = BAD
+    """
+
+    future_rows = ohlc[ohlc["date"] > trade_date].sort_values("date")
+
+    gain_day = None
+    loss_day = None
+
+    for i, row_ohlc in enumerate(future_rows.itertuples()):
+        high = row_ohlc.high
+        low = row_ohlc.low
+
+        if pd.isna(high) or pd.isna(low):
+            continue
+
+        gain = (high - insider_price) / insider_price
+        drop = (low - insider_price) / insider_price
+
+        if gain_day is None and gain >= 0.15:
+            gain_day = i
+        if loss_day is None and drop <= -0.10:
+            loss_day = i
+
+        if gain_day is not None and loss_day is not None:
+            break
+
+    # Decision logic
+    if loss_day is not None and (gain_day is None or loss_day < gain_day):
+        return "🔻 DROP BEFORE SPIKE - BAD TRADE"
+    elif gain_day is not None and (loss_day is None or gain_day < loss_day):
+        return "🚀 SPIKE BEFORE DROP - SUCCESSFUL TRADE"
+    elif gain_day is None and loss_day is None:
+        if final_gain_30d is not None and 0.09 <= final_gain_30d < 0.15:
+            return "😐 NEUTRAL TRADE"
+        else:
+            return "❌ NO SPIKE OR RECOVERY - BAD TRADE"
+    else:
+        return "❌ UNCLEAR - BAD TRADE"
 
 def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
     df["transaction_date"] = pd.to_datetime(df["transaction_date"])
@@ -209,8 +253,9 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
     high_minus_15d = []
     low_minus_15d = []
 
-    # Backtest Case 1
+    # Backtest Case 1 and 2
     final_gain_30d = []
+    case_2_outcome = []
 
     for _, row in df.iterrows():
         ticker = row["ticker"]
@@ -226,7 +271,7 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
             high_plus_30d.append(None); low_plus_30d.append(None); max_gain_30d.append(None); max_drawdown_30d.append(None)
             high_minus_7d.append(None); low_minus_7d.append(None)
             high_minus_15d.append(None); low_minus_15d.append(None)
-            final_gain_30d.append(None)
+            final_gain_30d.append(None); case_2_outcome.append(None)
             continue
 
         ohlc["date"] = pd.to_datetime(ohlc["date"]).dt.date
@@ -268,6 +313,7 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
 
         # Final gain after ~30 calendar days (~21 business days)
         final_close_price = None
+        final_gain_value = None
 
         # Make sure OHLC is sorted by date just in case
         ohlc = ohlc.sort_values("date")
@@ -282,6 +328,10 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
             final_gain_30d.append(None)
 
         insider_price = row["price"]
+
+        # Backtest 2
+        sequence_result = get_drawdown_vs_gain_sequence(ohlc, trade_date, insider_price, final_gain_value)
+        case_2_outcome.append(sequence_result)
 
         # Future windows
         h7, l7, g7, d7 = get_window_stats(ohlc, trade_date, insider_price, 7)
@@ -330,5 +380,6 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
     df["low_minus_15d"] = low_minus_15d
 
     df["final_gain_30d"] = final_gain_30d
+    df["case_2_outcome"] = case_2_outcome
 
     return df
