@@ -108,7 +108,7 @@ def classify_timing_tags(row) -> list[str]:
 
     # % thresholds
     dip_threshold = 5  # % within the low
-    strength_threshold = 10  # % above recent low
+    strength_threshold = 5  # % above recent low
 
     # DIP BUY
     if price and low and low_7:
