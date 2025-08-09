@@ -24,12 +24,13 @@ def determine_fetch_range(trades_df: pd.DataFrame):
     """
     Determines the minimal start and end date needed for OHLC data fetch
     across all transactions, using business days and US holiday calendar.
+    Also returns the ticker associated with the earliest and latest date.
     """
     today = pd.Timestamp.today().normalize().date() - timedelta(days=1)
     trades_df["transaction_date"] = pd.to_datetime(trades_df["transaction_date"]).dt.date
 
-    start_dates = []
-    end_dates = []
+    start_candidates = []
+    end_candidates = []
 
     for _, row in trades_df.iterrows():
         ticker = row["ticker"]
@@ -40,11 +41,10 @@ def determine_fetch_range(trades_df: pd.DataFrame):
 
         T = row["transaction_date"]
 
-        # Smart window: [T - 10BD (15 days), T + 22BD (1 month)] 
+        # Smart window: [T - 10BD (15 days), T + 20BD (~1 month)]
         win_start = (pd.Timestamp(T) - 10 * us_bd).date()
         win_end = (pd.Timestamp(T) + 20 * us_bd).date()
 
-        # Check if cached window is complete
         cached = load_ohlc_cache(ticker)
         cached_dates = set(cached["date"]) if not cached.empty else set()
         required_days = pd.date_range(start=win_start, end=win_end, freq="B").date
@@ -55,23 +55,25 @@ def determine_fetch_range(trades_df: pd.DataFrame):
                     print(f"🟡 Skipping isolated missing day for {ticker}: {d}")
                     continue
                 if d < T:
-                    start_dates.append(win_start)
+                    start_candidates.append((win_start, ticker))
                 elif d > T:
-                    end_dates.append(win_end)
+                    end_candidates.append((win_end, ticker))
                 break  # Only trigger fetch window once per row
 
-    if not start_dates and not end_dates:
+    if not start_candidates and not end_candidates:
         print("✅ All OHLC windows are satisfied.")
-        return None, None
+        return None, None, None, None
 
-    fetch_start = min(start_dates + end_dates)
+    all_candidates = start_candidates + end_candidates
+    fetch_start, ticker_start = min(all_candidates, key=lambda x: x[0])
     fetch_end = today
+    ticker_end = max(all_candidates, key=lambda x: x[0])[1]
 
     if fetch_start > fetch_end:
         print(f"⚠️ Skipping OHLC fetch: start date {fetch_start} is after end date {fetch_end}")
-        return None, None
+        return None, None, None, None
 
-    return fetch_start, fetch_end
+    return fetch_start, fetch_end, ticker_start, ticker_end
 
 def update_ohlc(trades_df: pd.DataFrame):
     """
@@ -82,14 +84,14 @@ def update_ohlc(trades_df: pd.DataFrame):
     trades_df["transaction_date"] = pd.to_datetime(trades_df["transaction_date"]).dt.date
 
     # Get global fetch window using smart per-transaction windows
-    fetch_start, fetch_end = determine_fetch_range(trades_df)
+    fetch_start, fetch_end, ticker_start, ticker_end = determine_fetch_range(trades_df)
 
     if fetch_start is None or fetch_end is None:
         print("✅ No OHLC update needed.")
         return
 
     tickers = trades_df["ticker"].unique().tolist()
-    print(f"📅 Fetching OHLC for {len(tickers)} tickers: {fetch_start} → {fetch_end}")
+    print(f"📅 Fetching OHLC for {len(tickers)} tickers: {fetch_start} ({ticker_start}) → {fetch_end} ({ticker_end})")
 
     # Batch fetch OHLC
     ohlc_data = fetch_bulk_ohlc(tickers, fetch_start, fetch_end)
