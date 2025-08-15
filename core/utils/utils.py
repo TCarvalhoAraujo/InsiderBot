@@ -12,7 +12,7 @@ def clean_value(value_str):
     return float(value_str.replace("$", "").replace(",", "").strip())
 
 def calculate_ownership_pct(row, snapshot) -> float | None:
-    trade_value = clean_value(row.get("value"))
+    trade_value = row.get("value")
     market_cap = snapshot.get("market_cap")
 
     if market_cap in [None, 0]:
