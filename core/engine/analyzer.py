@@ -143,19 +143,54 @@ def get_bulk_snapshots(tickers: list[str]) -> dict:
 def group_same_day_insider_trades(df: pd.DataFrame) -> pd.DataFrame:
     """
     Groups trades made by the same insider on the same day for the same ticker and action.
-    Aggregates number of shares and total value, uses the weighted average price.
+    - Cleans numeric-like strings (e.g., "64,500", "$1,234.50", "(1,000)") to numbers
+    - Uses weighted-average price by shares
+    - Sums shares and value
+    - Keeps first relationship and sec_form4 as representatives
     """
-    df["transaction_date"] = pd.to_datetime(df["transaction_date"]).dt.date 
+    df = df.copy()
 
+    # Normalize date & transaction_type formatting
+    df["transaction_date"] = pd.to_datetime(df["transaction_date"]).dt.date
+    df["transaction_type"] = df["transaction_type"].astype(str).str.strip().str.title()
+
+    # Helper to coerce strings-with-commas/currency/parentheses to numeric
+    def _to_number(s: pd.Series) -> pd.Series:
+        s = s.astype(str)
+        # negatives like "(1,000)" -> "-1000"
+        s = s.str.replace(r"\((.*)\)", r"-\1", regex=True)
+        # drop anything that's not digit, dot or minus (commas, $ spaces, etc.)
+        s = s.str.replace(r"[^0-9.\-]", "", regex=True)
+        return pd.to_numeric(s, errors="coerce")
+
+    # Clean numeric columns
+    for col in ["price", "shares", "value"]:
+        if col in df.columns:
+            df[col] = _to_number(df[col])
+
+    # If value is missing, compute it
+    df["value"] = df["value"].where(df["value"].notna(), df["price"] * df["shares"])
+
+    # Drop rows that can't be aggregated safely
+    df = df.dropna(subset=["price", "shares"])
+
+    # Group & aggregate
     grouped = (
-        df.groupby(["ticker", "insider_name", "transaction_date", "transaction_type"], as_index=False)
-        .agg({
-            "price": lambda x: (x * df.loc[x.index, "shares"]).sum() / df.loc[x.index, "shares"].sum(),  # weighted avg
-            "shares": "sum",
-            "value": "sum",
-            "relationship": "first",
-            "sec_form4": "first",
-        })
+    df.groupby(
+        ["ticker", "insider_name", "transaction_date", "transaction_type"],
+        as_index=False,
     )
+    .apply(lambda g: pd.Series({
+        "price": (g["price"] * g["shares"]).sum() / g["shares"].sum(),
+        "shares": g["shares"].sum(),
+        "value": g["value"].sum(min_count=1),
+        "relationship": g["relationship"].iloc[0],
+        "sec_form4": g["sec_form4"].iloc[0],
+    }), include_groups=False)
+    .reset_index(drop=True)
+    )
+
+    # Optional: enforce integer shares if you prefer
+    grouped["shares"] = grouped["shares"].round().astype("Int64")
 
     return grouped
