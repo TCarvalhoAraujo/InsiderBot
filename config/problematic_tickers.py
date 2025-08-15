@@ -1,3 +1,3 @@
-IPO_TICKERS = {"ARX", "ASIC", "CARL", "MH", "NIQ", "SI", "FIG"}
+IPO_TICKERS = {"ARX", "ASIC", "AVBC", "CARL", "CFND",  "MH", "NIQ", "SI", "STRC", "FIG", "FLY", "BCARU"}
 
-NO_MARKET_CAP_TICKERS = {"UNOV", "NIQ", "FIG"}
+NO_MARKET_CAP_TICKERS = {"UNOV", "NIQ", "FIG", "SI", "STRC", "IRET"}
