@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from datetime import timedelta
 from pandas.tseries.holiday import USFederalHolidayCalendar
 from pandas.tseries.offsets import CustomBusinessDay
@@ -220,26 +221,35 @@ def classify_timing_tags(row) -> list[str]:
 def classify_outcome_case_1(row) -> str:
     """
     Classifies a trade based on the 'Case 1' 30-day strategy:
-    - 🟢 SUCCESSFUL: if any window (7d, 14d, 30d) shows > +15% gain
+    - 🟢 SUCCESSFUL: if any window (7d, 14d, 30d) shows > +15%
     - ⚪ NEUTRAL: if final 30d gain is between +9% and +15%
     - 🔴 UNSUCCESSFUL: if final 30d gain < +9%
-    """
 
-    gain_7d = row.get("max_gain_7d")
-    gain_14d = row.get("max_gain_14d")
-    gain_30d = row.get("max_gain_30d")
-    final_gain_30d = row.get("final_gain_30d")
+    Handles gains given in dollars by converting them to percentages using the insider entry price.
+    """
+    entry_price = row.get("price")
+
+    def pct(gain):
+        """Convert dollar gain to % gain."""
+        if pd.isna(gain) or pd.isna(entry_price) or entry_price == 0:
+            return np.nan
+        return float(gain) / float(entry_price)
+
+    gain_7d = pct(row.get("max_gain_7d"))
+    gain_14d = pct(row.get("max_gain_14d"))
+    gain_30d = pct(row.get("max_gain_30d"))
+    final_gain_30d = pct(row.get("final_gain_30d"))
 
     # Check if spike threshold was reached
     for gain in [gain_7d, gain_14d, gain_30d]:
-        if gain is not None and not pd.isna(gain) and gain > 0.15:
+        if pd.notna(gain) and gain >= 0.20:
             return "🟢 SUCCESSFUL TRADE C1"
 
     # Fallback: final result after 30d
     if pd.isna(final_gain_30d):
         return ""
 
-    if 0.09 <= final_gain_30d <= 0.15:
+    if 0.09 <= final_gain_30d < 0.20:
         return "⚪ NEUTRAL TRADE C1"
     else:
         return "🔴 UNSUCCESSFUL TRADE C1"
