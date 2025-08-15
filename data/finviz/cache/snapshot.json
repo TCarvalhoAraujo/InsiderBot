@@ -2158,5 +2158,269 @@
     "sector": "Financial Services",
     "industry": "Asset Management",
     "earnings_date": null
+  },
+  "FCUV": {
+    "market_cap": 16739475,
+    "sector": "Technology",
+    "industry": "Scientific & Technical Instruments",
+    "earnings_date": "2025-08-12"
+  },
+  "AAOI": {
+    "market_cap": 1394542720,
+    "sector": "Technology",
+    "industry": "Communication Equipment",
+    "earnings_date": "2025-11-06"
+  },
+  "TSE": {
+    "market_cap": 90241024,
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals",
+    "earnings_date": "2025-11-05"
+  },
+  "KODK": {
+    "market_cap": 504061600,
+    "sector": "Industrials",
+    "industry": "Specialty Business Services",
+    "earnings_date": "2025-11-10"
+  },
+  "ICUI": {
+    "market_cap": 2985735424,
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies",
+    "earnings_date": "2025-08-07"
+  },
+  "ALSN": {
+    "market_cap": 7274653184,
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts",
+    "earnings_date": "2025-11-04"
+  },
+  "INR": {
+    "market_cap": 206315744,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "earnings_date": "2025-11-10"
+  },
+  "INSG": {
+    "market_cap": 129519360,
+    "sector": "Technology",
+    "industry": "Communication Equipment",
+    "earnings_date": "2025-08-07"
+  },
+  "OMI": {
+    "market_cap": 438747040,
+    "sector": "Healthcare",
+    "industry": "Medical Distribution",
+    "earnings_date": "2025-11-03"
+  },
+  "SPG": {
+    "market_cap": 65362427904,
+    "sector": "Real Estate",
+    "industry": "REIT - Retail",
+    "earnings_date": "2025-08-04"
+  },
+  "NGS": {
+    "market_cap": 306282976,
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services",
+    "earnings_date": "2025-11-10"
+  },
+  "GLP": {
+    "market_cap": 1695049984,
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream",
+    "earnings_date": "2025-11-06"
+  },
+  "AIOT": {
+    "market_cap": 609834560,
+    "sector": "Technology",
+    "industry": "Software - Infrastructure",
+    "earnings_date": "2025-11-10"
+  },
+  "VVV": {
+    "market_cap": 4999433216,
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships",
+    "earnings_date": "2025-08-06"
+  },
+  "PKOH": {
+    "market_cap": 278835040,
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery",
+    "earnings_date": "2025-11-05"
+  },
+  "CDE": {
+    "market_cap": 7513350144,
+    "sector": "Basic Materials",
+    "industry": "Gold",
+    "earnings_date": "2025-08-06"
+  },
+  "GPMT": {
+    "market_cap": 130808816,
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage",
+    "earnings_date": "2025-11-05"
+  },
+  "AXON": {
+    "market_cap": 59211157504,
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense",
+    "earnings_date": "2025-08-04"
+  },
+  "BWB": {
+    "market_cap": 432849376,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-23"
+  },
+  "MIAX": {
+    "market_cap": 2472026368,
+    "sector": "Financial Services",
+    "industry": "Capital Markets",
+    "earnings_date": null
+  },
+  "AVNS": {
+    "market_cap": 519708000,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-10-29"
+  },
+  "GEN": {
+    "market_cap": 19381397504,
+    "sector": "Technology",
+    "industry": "Software - Infrastructure",
+    "earnings_date": "2025-10-29"
+  },
+  "ALDX": {
+    "market_cap": 323645248,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-07"
+  },
+  "ECL": {
+    "market_cap": 79650406400,
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals",
+    "earnings_date": "2025-10-28"
+  },
+  "UAA": {
+    "market_cap": 2182443264,
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing",
+    "earnings_date": "2025-11-06"
+  },
+  "PRCT": {
+    "market_cap": 2313897216,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-10-28"
+  },
+  "ENOV": {
+    "market_cap": 1689072000,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-08-07"
+  },
+  "KURA": {
+    "market_cap": 637091456,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-06"
+  },
+  "RAMP": {
+    "market_cap": 1747071744,
+    "sector": "Technology",
+    "industry": "Software - Infrastructure",
+    "earnings_date": "2025-11-05"
+  },
+  "SGU": {
+    "market_cap": 388489984,
+    "sector": "Energy",
+    "industry": "Oil & Gas Refining & Marketing",
+    "earnings_date": "2025-08-06"
+  },
+  "PRMB": {
+    "market_cap": 9166205952,
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Non-Alcoholic",
+    "earnings_date": "2025-11-06"
+  },
+  "SRTS": {
+    "market_cap": 55074000,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-08-07"
+  },
+  "RF": {
+    "market_cap": 22843084800,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-17"
+  },
+  "ALTO": {
+    "market_cap": 82041552,
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals",
+    "earnings_date": "2025-11-05"
+  },
+  "ASLE": {
+    "market_cap": 401514560,
+    "sector": "Industrials",
+    "industry": "Airports & Air Services",
+    "earnings_date": "2025-11-06"
+  },
+  "UA": {
+    "market_cap": 2185993472,
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing",
+    "earnings_date": "2025-11-06"
+  },
+  "FLL": {
+    "market_cap": 128195824,
+    "sector": "Consumer Cyclical",
+    "industry": "Resorts & Casinos",
+    "earnings_date": "2025-11-06"
+  },
+  "VRSK": {
+    "market_cap": 37424058368,
+    "sector": "Industrials",
+    "industry": "Consulting Services",
+    "earnings_date": "2025-10-29"
+  },
+  "RAL": {
+    "market_cap": 4904146432,
+    "sector": "Technology",
+    "industry": "Electronic Components",
+    "earnings_date": null
+  },
+  "USEG": {
+    "market_cap": 41131168,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "earnings_date": "2025-08-05"
+  },
+  "RYAM": {
+    "market_cap": 345054656,
+    "sector": "Basic Materials",
+    "industry": "Chemicals",
+    "earnings_date": "2025-11-04"
+  },
+  "FIVN": {
+    "market_cap": 2011920896,
+    "sector": "Technology",
+    "industry": "Software - Infrastructure",
+    "earnings_date": "2025-07-31"
+  },
+  "UTI": {
+    "market_cap": 1416646400,
+    "sector": "Consumer Defensive",
+    "industry": "Education & Training Services",
+    "earnings_date": "2025-08-06"
+  },
+  "UFCS": {
+    "market_cap": 781584704,
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty",
+    "earnings_date": "2025-11-04"
   }
 }
