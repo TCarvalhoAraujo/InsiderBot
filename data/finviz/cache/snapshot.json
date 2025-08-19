@@ -2422,5 +2422,161 @@
     "sector": "Financial Services",
     "industry": "Insurance - Property & Casualty",
     "earnings_date": "2025-11-04"
+  },
+  "EXE": {
+    "market_cap": 22095185920,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "earnings_date": "2025-10-28"
+  },
+  "MYO": {
+    "market_cap": 40069164,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-11-05"
+  },
+  "LAB": {
+    "market_cap": 458777312,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-10-29"
+  },
+  "CWBC": {
+    "market_cap": 386436128,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-17"
+  },
+  "FVR": {
+    "market_cap": 243917792,
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified",
+    "earnings_date": "2025-11-12"
+  },
+  "QRHC": {
+    "market_cap": 35417864,
+    "sector": "Industrials",
+    "industry": "Waste Management",
+    "earnings_date": "2025-11-06"
+  },
+  "IHRT": {
+    "market_cap": 334382688,
+    "sector": "Communication Services",
+    "industry": "Broadcasting",
+    "earnings_date": "2025-11-06"
+  },
+  "HTLD": {
+    "market_cap": 613072960,
+    "sector": "Industrials",
+    "industry": "Trucking",
+    "earnings_date": "2025-07-24"
+  },
+  "HTH": {
+    "market_cap": 2027397888,
+    "sector": "Financial Services",
+    "industry": "Financial Conglomerates",
+    "earnings_date": "2025-10-23"
+  },
+  "AEBI": {
+    "market_cap": 923432832,
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery",
+    "earnings_date": "2025-11-07"
+  },
+  "RICK": {
+    "market_cap": 317424768,
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants",
+    "earnings_date": "2025-08-11"
+  },
+  "GMRE": {
+    "market_cap": 905739968,
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities",
+    "earnings_date": "2025-11-06"
+  },
+  "EOLS": {
+    "market_cap": 432745344,
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic",
+    "earnings_date": "2025-11-05"
+  },
+  "MGEE": {
+    "market_cap": 3047586048,
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric",
+    "earnings_date": "2025-11-05"
+  },
+  "IRIX": {
+    "market_cap": 19880990,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-11-11"
+  },
+  "OBDC": {
+    "market_cap": 7236439552,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-11-05"
+  },
+  "FSEA": {
+    "market_cap": 53185392,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-08-07"
+  },
+  "DPG": {
+    "market_cap": 463044224,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-06-19"
+  },
+  "DTF": {
+    "market_cap": 79152960,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-06-19"
+  },
+  "ACDC": {
+    "market_cap": 689265472,
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services",
+    "earnings_date": "2025-11-04"
+  },
+  "ATAI": {
+    "market_cap": 868068928,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-13"
+  },
+  "CCEL": {
+    "market_cap": 34081744,
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities",
+    "earnings_date": "2025-07-14"
+  },
+  "CE": {
+    "market_cap": 4720717312,
+    "sector": "Basic Materials",
+    "industry": "Chemicals",
+    "earnings_date": "2025-11-03"
+  },
+  "FPI": {
+    "market_cap": 477429440,
+    "sector": "Real Estate",
+    "industry": "REIT - Specialty",
+    "earnings_date": "2025-07-23"
+  },
+  "TBCH": {
+    "market_cap": 314330752,
+    "sector": "Technology",
+    "industry": "Consumer Electronics",
+    "earnings_date": "2025-11-06"
+  },
+  "NTRS": {
+    "market_cap": 24223479808,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-10-22"
   }
 }
