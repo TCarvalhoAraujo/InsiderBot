@@ -218,7 +218,7 @@ def get_drawdown_vs_gain_sequence(ohlc: pd.DataFrame, trade_date: datetime.date,
         if final_gain_30d is not None and 0.09 <= final_gain_30d < 0.15:
             return "😐 NEUTRAL TRADE"
         else:
-            return "❌ NO SPIKE OR RECOVERY - BAD TRADE"
+            return "⚪ NO SPIKE OR RECOVERY - NEUTRAL TRADE"
     else:
         return "❌ UNCLEAR - BAD TRADE"
 
