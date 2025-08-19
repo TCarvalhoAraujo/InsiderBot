@@ -162,3 +162,14 @@ def save_scores(df: pd.DataFrame):
 
     df.to_csv(scores_file, index=False)
     print(f"✅ Saved scored file to {scores_file}")
+
+def save_scores_filtered(df: pd.DataFrame):
+    """
+    Saves all trades into a .csv file
+    """
+    ensure_finviz_dir()
+
+    filtered_scores_file = os.path.join(FINVIZ_DATA_DIR, "filtered_scores.csv")
+
+    df.to_csv(filtered_scores_file, index=False)
+    print(f"✅ Saved scored file to {filtered_scores_file}")
