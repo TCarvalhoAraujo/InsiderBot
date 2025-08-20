@@ -220,36 +220,32 @@ def classify_timing_tags(row) -> list[str]:
 
 def classify_outcome_case_1(row) -> str:
     """
-    Classifies a trade based on the 'Case 1' 30-day strategy:
-    - 🟢 SUCCESSFUL: if any window (7d, 14d, 30d) shows > +15%
-    - ⚪ NEUTRAL: if final 30d gain is between +9% and +15%
+    'Case 1' 30-day strategy:
+    - 🟢 SUCCESSFUL: if any window (7d, 14d, 30d) shows > +18%
+    - ⚪ NEUTRAL: if final 30d gain is between +9% and +18%
     - 🔴 UNSUCCESSFUL: if final 30d gain < +9%
 
-    Handles gains given in dollars by converting them to percentages using the insider entry price.
+    Assumes max_gain_* columns are already in percentages (not raw $).
     """
-    entry_price = row.get("price")
 
-    def pct(gain):
-        """Convert dollar gain to % gain."""
-        if pd.isna(gain) or pd.isna(entry_price) or entry_price == 0:
-            return np.nan
-        return float(gain) / float(entry_price)
+    SUCCESS_THRESH = 18.0   # % > 15 is success
+    NEUTRAL_MIN    = 9.0    # % between 9 and 15 is neutral
 
-    gain_7d = pct(row.get("max_gain_7d"))
-    gain_14d = pct(row.get("max_gain_14d"))
-    gain_30d = pct(row.get("max_gain_30d"))
-    final_gain_30d = pct(row.get("final_gain_30d"))
+    gain_7d  = row.get("max_gain_7d")
+    gain_14d = row.get("max_gain_14d")
+    gain_30d = row.get("max_gain_30d")
+    final_30d = row.get("final_gain_30d")
 
-    # Check if spike threshold was reached
-    for gain in [gain_7d, gain_14d, gain_30d]:
-        if pd.notna(gain) and gain >= 0.20:
+    # Success check
+    for g in [gain_7d, gain_14d, gain_30d]:
+        if pd.notna(g) and g > SUCCESS_THRESH:
             return "🟢 SUCCESSFUL TRADE C1"
 
-    # Fallback: final result after 30d
-    if pd.isna(final_gain_30d):
+    # Fallback: check final 30d outcome
+    if pd.isna(final_30d):
         return ""
 
-    if 0.09 <= final_gain_30d < 0.20:
+    if NEUTRAL_MIN <= final_30d <= SUCCESS_THRESH:
         return "⚪ NEUTRAL TRADE C1"
     else:
         return "🔴 UNSUCCESSFUL TRADE C1"
