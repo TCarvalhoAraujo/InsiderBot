@@ -2578,5 +2578,119 @@
     "sector": "Financial Services",
     "industry": "Asset Management",
     "earnings_date": "2025-10-22"
+  },
+  "STRZ": {
+    "market_cap": 217048960,
+    "sector": "Communication Services",
+    "industry": "Entertainment",
+    "earnings_date": "2025-11-13"
+  },
+  "EPSN": {
+    "market_cap": 128363408,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "earnings_date": "2025-11-12"
+  },
+  "HNRG": {
+    "market_cap": 655045312,
+    "sector": "Energy",
+    "industry": "Thermal Coal",
+    "earnings_date": "2025-11-10"
+  },
+  "ELA": {
+    "market_cap": 181237792,
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods",
+    "earnings_date": "2025-11-04"
+  },
+  "EONR": {
+    "market_cap": 12218726,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "earnings_date": null
+  },
+  "TISI": {
+    "market_cap": 83993528,
+    "sector": "Industrials",
+    "industry": "Specialty Business Services",
+    "earnings_date": "2025-11-10"
+  },
+  "MDU": {
+    "market_cap": 3366353408,
+    "sector": "Industrials",
+    "industry": "Conglomerates",
+    "earnings_date": "2025-11-06"
+  },
+  "SND": {
+    "market_cap": 86247216,
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services",
+    "earnings_date": "2025-11-11"
+  },
+  "BW": {
+    "market_cap": 149119552,
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery",
+    "earnings_date": "2025-11-10"
+  },
+  "TTMI": {
+    "market_cap": 4070532352,
+    "sector": "Technology",
+    "industry": "Electronic Components",
+    "earnings_date": "2025-10-29"
+  },
+  "SD": {
+    "market_cap": 405740960,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "earnings_date": "2025-11-05"
+  },
+  "JYNT": {
+    "market_cap": 159571360,
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities",
+    "earnings_date": "2025-08-07"
+  },
+  "AEYE": {
+    "market_cap": 138592896,
+    "sector": "Technology",
+    "industry": "Software - Application",
+    "earnings_date": "2025-11-06"
+  },
+  "AEI": {
+    "market_cap": 14082121,
+    "sector": "Real Estate",
+    "industry": "Real Estate - Development",
+    "earnings_date": "2025-08-12"
+  },
+  "ISBA": {
+    "market_cap": 232133024,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-23"
+  },
+  "MYSE": {
+    "market_cap": 9977146,
+    "sector": "Technology",
+    "industry": "Software - Application",
+    "earnings_date": null
+  },
+  "OPAL": {
+    "market_cap": 395340608,
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas",
+    "earnings_date": "2025-11-06"
+  },
+  "XBP": {
+    "market_cap": 68159280,
+    "sector": "Technology",
+    "industry": "Software - Infrastructure",
+    "earnings_date": null
+  },
+  "GCTS": {
+    "market_cap": 64797484,
+    "sector": "Technology",
+    "industry": "Semiconductors",
+    "earnings_date": "2025-11-13"
   }
 }
