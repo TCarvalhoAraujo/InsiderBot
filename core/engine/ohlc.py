@@ -177,15 +177,17 @@ def get_window_high_low(ohlc: pd.DataFrame, trade_date: pd.Timestamp, days_back:
 
     return window["high"].max(), window["low"].min()
 
-def get_drawdown_vs_gain_sequence(ohlc: pd.DataFrame, trade_date: datetime.date, insider_price: float, final_gain_30d: float = None) -> str:
+def get_drawdown_vs_gain_sequence(ohlc: pd.DataFrame, trade_date: datetime.date, insider_price: float, final_gain_30d: float = None) -> str | None:
     """
     Determines if a trade is successful, neutral, or bad based on sequence:
     - DROP before SPIKE = BAD
     - SPIKE before DROP = SUCCESSFUL
-    - Neither hit, final gain in +9%~15% = NEUTRAL
-    - Otherwise = BAD
+    - Neither hit:
+        - if final_gain_30d is available:
+            - +7% to +15% → NEUTRAL
+            - < +7%       → BAD
+        - if final_gain_30d is missing → return None
     """
-
     future_rows = ohlc[ohlc["date"] > trade_date].sort_values("date")
 
     gain_day = None
@@ -199,28 +201,29 @@ def get_drawdown_vs_gain_sequence(ohlc: pd.DataFrame, trade_date: datetime.date,
             continue
 
         gain = (high - insider_price) / insider_price
-        drop = (low - insider_price) / insider_price
+        drop = (low  - insider_price) / insider_price
 
-        if gain_day is None and gain >= 0.17:
+        if gain_day is None and gain >= 0.15:
             gain_day = i
-        if loss_day is None and drop <= -0.12:
+        if loss_day is None and drop <= -0.10:
             loss_day = i
 
         if gain_day is not None and loss_day is not None:
             break
 
-    # Decision logic
+    # Event-based decisions first
     if loss_day is not None and (gain_day is None or loss_day < gain_day):
-        return "🔻 DROP BEFORE SPIKE - BAD TRADE"
+        return "🔴 DROP BEFORE SPIKE - BAD TRADE"
     elif gain_day is not None and (loss_day is None or gain_day < loss_day):
-        return "🚀 SPIKE BEFORE DROP - SUCCESSFUL TRADE"
-    elif gain_day is None and loss_day is None:
-        if final_gain_30d is not None and 0.09 <= final_gain_30d < 0.17:
-            return "😐 NEUTRAL TRADE"
-        else:
-            return "⚪ NO SPIKE OR RECOVERY - NEUTRAL TRADE"
+        return "🟢 SPIKE BEFORE DROP - SUCCESSFUL TRADE"
+
+    # No spike/drop: fallback to final gain
+    if final_gain_30d is None:
+        return None
+    elif 7 <= final_gain_30d < 15:
+        return "⚪ NEUTRAL TRADE"
     else:
-        return "❌ UNCLEAR - BAD TRADE"
+        return "🔴 FINAL GAIN TOO LOW - BAD TRADE"
 
 def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
     df["transaction_date"] = pd.to_datetime(df["transaction_date"])
@@ -321,6 +324,8 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
         ohlc = ohlc.sort_values("date")
         future_window = ohlc[ohlc["date"] > trade_date]
 
+        insider_price = row["price"]
+
         if len(future_window) >= 21:
             final_row = future_window.iloc[20]
             final_close_price = final_row["close"]
@@ -328,8 +333,6 @@ def enrich_trades_with_price_deltas(df: pd.DataFrame) -> pd.DataFrame:
             final_gain_30d.append(final_gain_value)
         else:
             final_gain_30d.append(None)
-
-        insider_price = row["price"]
 
         # Backtest 2
         sequence_result = get_drawdown_vs_gain_sequence(ohlc, trade_date, insider_price, final_gain_value)
