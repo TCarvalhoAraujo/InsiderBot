@@ -152,24 +152,13 @@ def load_finviz_all_trades(filename: str = "finviz_all_trades.csv") -> pd.DataFr
     print(f"📥 Loaded {len(df)} trades from {filename}")
     return df
 
-def save_scores(df: pd.DataFrame):
+def save_scores(df: pd.DataFrame, filename: str):
     """
     Saves all trades into a .csv file
     """
     ensure_finviz_dir()
 
-    scores_file = os.path.join(FINVIZ_DATA_DIR, "scores.csv")
+    scores_file = os.path.join(FINVIZ_DATA_DIR, filename)
 
     df.to_csv(scores_file, index=False)
     print(f"✅ Saved scored file to {scores_file}")
-
-def save_scores_filtered(df: pd.DataFrame):
-    """
-    Saves all trades into a .csv file
-    """
-    ensure_finviz_dir()
-
-    filtered_scores_file = os.path.join(FINVIZ_DATA_DIR, "filtered_scores.csv")
-
-    df.to_csv(filtered_scores_file, index=False)
-    print(f"✅ Saved scored file to {filtered_scores_file}")
