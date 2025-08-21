@@ -1,4 +1,73 @@
 ticker,insider_name,relationship,transaction_date,transaction_type,price,shares,value,shares_total,sec_form4
+GLIBK,MALONE JOHN C,Director,2025-08-20,Buy,35.88,47449,"1,702,426","1,124,386",https://finviz.com/http://www.sec.gov/Archives/edgar/data/937797/000122520825007397/xslF345X05/doc4.xml
+GLIBK,MALONE JOHN C,Director,2025-08-19,Buy,35.96,31244,"1,123,512","1,081,781",https://finviz.com/http://www.sec.gov/Archives/edgar/data/937797/000122520825007397/xslF345X05/doc4.xml
+GLIBK,MALONE JOHN C,Director,2025-08-18,Buy,35.82,103653,"3,713,335","1,052,225",https://finviz.com/http://www.sec.gov/Archives/edgar/data/937797/000122520825007397/xslF345X05/doc4.xml
+GLIBA,MALONE JOHN C,Director,2025-08-20,Buy,35.88,47449,"1,702,426","1,124,386",https://finviz.com/http://www.sec.gov/Archives/edgar/data/937797/000122520825007397/xslF345X05/doc4.xml
+GLIBA,MALONE JOHN C,Director,2025-08-19,Buy,35.96,31244,"1,123,512","1,081,781",https://finviz.com/http://www.sec.gov/Archives/edgar/data/937797/000122520825007397/xslF345X05/doc4.xml
+GLIBA,MALONE JOHN C,Director,2025-08-18,Buy,35.82,103653,"3,713,335","1,052,225",https://finviz.com/http://www.sec.gov/Archives/edgar/data/937797/000122520825007397/xslF345X05/doc4.xml
+BLND,"Haveli Investments, L.P.",Director,2025-08-20,Buy,2.96,222449,"658,471","3,676,919",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1782665/000095017025110528/xslF345X05/ownership.xml
+BLND,"Haveli Investments, L.P.",Director,2025-08-19,Buy,3.0,292643,"877,724","3,454,470",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1782665/000095017025110528/xslF345X05/ownership.xml
+BLND,"Haveli Investments, L.P.",Director,2025-08-18,Buy,2.97,38585,"114,736","3,161,827",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1782665/000095017025110528/xslF345X05/ownership.xml
+BG,Mahoney Christopher,Director,2025-08-18,Buy,81.73,5000,"408,650","7,164",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1996862/000207467625000002/xslF345X05/wk-form4_1755729444.xml
+ISPO,Zamani Payam,CHIEF EXECUTIVE OFFICER,2025-08-19,Buy,3.01,3000,"9,030","1,146,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1487654/000162828025040937/xslF345X05/wk-form4_1755728793.xml
+ISPO,Zamani Payam,CHIEF EXECUTIVE OFFICER,2025-08-18,Buy,3.15,3000,"9,450","1,143,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1487654/000162828025040937/xslF345X05/wk-form4_1755728793.xml
+MDGL,BAKER BROS. ADVISORS LP,Director,2025-08-20,Buy,385.16,59901,"23,071,366","1,947,968",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1087939/000095017025110502/xslF345X05/ownership.xml
+MDGL,BAKER BROS. ADVISORS LP,Director,2025-08-18,Buy,373.21,37164,"13,869,831","1,893,120",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1087939/000095017025110502/xslF345X05/ownership.xml
+RCEL,McNamara Robert,Director,2025-08-19,Buy,5.0,10000,"50,000","76,771",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1387652/000095017025110499/xslF345X05/ownership.xml
+MDGL,BAKER BROS. ADVISORS LP,Director,2025-08-18,Buy,364.04,68618,"24,979,827","1,859,091",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1087939/000095017025110498/xslF345X05/ownership.xml
+PEW,Nemati Marc A.,President and CEO,2025-08-20,Buy,5.34,20000,"106,798","2,520,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/2051380/000121390025079058/xslF345X05/ownership.xml
+PEW,Reisdorf Kelly L,Director,2025-08-19,Buy,5.32,10000,"53,173","10,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1794008/000121390025079057/xslF345X05/ownership.xml
+PEW,Cox Chris W.,Director,2025-08-19,Buy,5.11,10000,"51,095","10,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/2051380/000121390025079056/xslF345X05/ownership.xml
+TPVG,Labe James,Chief Executive Officer,2025-08-12,Buy,6.28,28387,"178,341","105,087",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1580345/000121390025079055/xslF345X05/ownership.xml
+TPVG,Labe James,Chief Executive Officer,2025-08-11,Buy,6.3,76700,"483,363","76,700",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1580345/000121390025079055/xslF345X05/ownership.xml
+KYN,Baker James C,President,2025-08-20,Buy,12.2,25000,"305,000","836,040",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1293613/000163839725000027/xslF345X05/primary_doc.xml
+KYN,O'Neil Michael J,Executive VP & Secretary,2025-08-20,Buy,12.2,1050,"12,810","10,440",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1293613/000163839725000026/xslF345X05/primary_doc.xml
+ROLR,Clemes Benjamin Michael,Chief Executive Officer,2025-08-19,Buy,2.53,5754,"14,558","160,607",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1947210/000143774925027463/xslF345X05/rdgdoc.xml
+BSM,Carter Thomas L Jr,"CEO, President, and Chairman",2025-08-20,Buy,12.03,21000,"252,620","3,472,031",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1319960/000162143425000116/xslF345X05/wk-form4_1755724096.xml
+BSM,Carter Thomas L Jr,"CEO, President, and Chairman",2025-08-19,Buy,11.97,20000,"239,330","3,451,031",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1319960/000162143425000116/xslF345X05/wk-form4_1755724096.xml
+LINE,Marchetti Kevin Patrick,Co-Executive Chairman,2025-08-19,Buy,40.44,12345,"499,254","74,668",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1868159/000202123925000004/xslF345X05/wk-form4_1755724068.xml
+MDRR,KAVANAUGH FRANK,"CHAIRMAN, CEO & PRESIDENT",2025-08-20,Buy,11.24,17525,"196,981","23,111",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1271775/000141588925022481/xslF345X05/form4-08202025_090847.xml
+MDRR,KAVANAUGH FRANK,"CHAIRMAN, CEO & PRESIDENT",2025-08-19,Buy,10.85,105,"1,139","5,586",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1271775/000141588925022481/xslF345X05/form4-08202025_090847.xml
+MDRR,KAVANAUGH FRANK,"CHAIRMAN, CEO & PRESIDENT",2025-08-18,Buy,10.85,1,11,"5,481",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1271775/000141588925022481/xslF345X05/form4-08202025_090847.xml
+GLP,Global GP LLC,General Partner,2025-08-20,Buy,50.78,5000,"253,900","127,001",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1323468/000106299325014767/xslF345X05/form4.xml
+GLP,Global GP LLC,General Partner,2025-08-19,Buy,50.53,5000,"252,650","122,001",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1323468/000106299325014767/xslF345X05/form4.xml
+GLP,Global GP LLC,General Partner,2025-08-18,Buy,50.5,7500,"378,750","117,001",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1323468/000106299325014767/xslF345X05/form4.xml
+ENOV,BERRY PHILLIP BENJAMIN (BEN),"SVP, Chief Financial Officer",2025-08-20,Buy,29.71,2500,"74,275","116,729",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1420800/000195953925000003/xslF345X05/ownership.xml
+ZVRA,Bode John B,Director,2025-08-19,Buy,9.16,5000,"45,825","45,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1434647/000143774925027456/xslF345X05/rdgdoc.xml
+MITT,Jozoff Matthew,Director,2025-08-20,Buy,7.35,4000,"29,400","79,355",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1514281/000151428125000101/xslF345X05/wk-form4_1755722012.xml
+IT,GUTIERREZ JOSE M,Director,2025-08-18,Buy,239.8,417,"99,997","2,080",https://finviz.com/http://www.sec.gov/Archives/edgar/data/749251/000112760225020781/xslF345X05/form4.xml
+SHEN,"ECP Fiber Holdings GP, LLC",10% Owner,2025-08-19,Buy,12.54,10560,"132,394","3,313,630",https://finviz.com/http://www.sec.gov/Archives/edgar/data/354963/000164117225024983/xslF345X05/ownership.xml
+SHEN,"ECP Fiber Holdings GP, LLC",10% Owner,2025-08-18,Buy,12.52,20047,"250,944","3,303,070",https://finviz.com/http://www.sec.gov/Archives/edgar/data/354963/000164117225024983/xslF345X05/ownership.xml
+SHEN,"ECP ControlCo, LLC",10% Owner,2025-08-19,Buy,12.54,10560,"132,394","3,313,630",https://finviz.com/http://www.sec.gov/Archives/edgar/data/354963/000164117225024982/xslF345X05/ownership.xml
+SHEN,"ECP ControlCo, LLC",10% Owner,2025-08-18,Buy,12.52,20047,"250,944","3,303,070",https://finviz.com/http://www.sec.gov/Archives/edgar/data/354963/000164117225024982/xslF345X05/ownership.xml
+WU,Cagwin Matthew,Chief Financial Officer,2025-08-18,Buy,8.36,17500,"146,300","225,611",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1365135/000122520825007375/xslF345X05/doc4.xml
+FSK,Adams Barbara,Director,2025-08-15,Buy,17.52,3750,"65,681","29,452",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1422183/000110465925080922/xslF345X05/tm2523796-1_4seq1.xml
+DLHC,Mink Brook Asset Management LL,10% Owner,2025-08-20,Buy,5.5,14154,"77,847","1,819,361",https://finviz.com/http://www.sec.gov/Archives/edgar/data/785557/000078555725000089/xslF345X05/wk-form4_1755721158.xml
+DLHC,Mink Brook Asset Management LL,10% Owner,2025-08-19,Buy,5.5,26803,"147,416","1,805,207",https://finviz.com/http://www.sec.gov/Archives/edgar/data/785557/000078555725000089/xslF345X05/wk-form4_1755721158.xml
+DLHC,Mink Brook Asset Management LL,10% Owner,2025-08-18,Buy,5.5,2083,"11,456","1,778,404",https://finviz.com/http://www.sec.gov/Archives/edgar/data/785557/000078555725000089/xslF345X05/wk-form4_1755721158.xml
+TNXP,Treco James,Director,2025-08-20,Buy,36.0,250,"9,000",250,https://finviz.com/http://www.sec.gov/Archives/edgar/data/1430306/000199937125011754/xslF345X05/treco-form4_082025.xml
+LOB,LUCHT DAVID G,Director,2025-08-18,Buy,25.12,4000,"100,499","4,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1231645/000157856325000365/xslF345X05/wk-form4_1755720810.xml
+ACOG,MERTZ LEONARD POWELL,Director,2025-08-18,Buy,9.0,27778,"250,002","121,503",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1655923/000091228225000889/xslF345X05/form4.xml
+SCWO,Mandel Peter,General Counsel,2025-08-19,Buy,0.25,4980,"1,244","263,575",https://finviz.com/http://www.sec.gov/Archives/edgar/data/933972/000165495425009860/xslF345X05/section16.xml
+SCWO,Mandel Peter,General Counsel,2025-08-18,Buy,0.25,20,5,"258,595",https://finviz.com/http://www.sec.gov/Archives/edgar/data/933972/000165495425009860/xslF345X05/section16.xml
+NWTG,Hoge Brett Widney,Director,2025-08-19,Buy,1.7,20000,"33,966","134,118",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1934245/000164117225024978/xslF345X05/ownership.xml
+NWTG,Hoge Brett Widney,Director,2025-08-18,Buy,1.62,16506,"26,690","114,118",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1934245/000164117225024978/xslF345X05/ownership.xml
+GOSS,Milligan Sandra,Director,2025-08-19,Buy,1.92,26050,"50,016","58,050",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1728117/000172811725000072/xslF345X05/wk-form4_1755720270.xml
+ALXO,Shantharam Harish,Chief Financial Officer,2025-08-18,Buy,0.78,75000,"58,402","75,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1810182/000095017025110434/xslF345X05/ownership.xml
+CMT,Panda Alex Joseph,"EVP, Treasurer, Secretary, CFO",2025-08-19,Buy,17.98,59,"1,061","29,996",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1026655/000207216725000006/xslF345X05/wk-form4_1755718160.xml
+CMT,Panda Alex Joseph,"EVP, Treasurer, Secretary, CFO",2025-08-18,Buy,17.5,141,"2,468","29,937",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1026655/000207216725000006/xslF345X05/wk-form4_1755718160.xml
+FVR,Preston Stephen,"Chairman, Co-CEO and Co-Pres",2025-08-20,Buy,13.18,14831,"195,473","37,751",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1988494/000089534525000277/xslF345X05/form4.xml
+EONR,Salvucci Joseph V Sr,Director,2025-08-19,Buy,0.35,200000,"70,460","1,829,121",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1842556/000121390025078933/xslF345X05/ownership.xml
+STRZ,Mann Bruce,Director,2025-08-19,Buy,12.67,5000,"63,350","11,112",https://finviz.com/http://www.sec.gov/Archives/edgar/data/929351/000092935125000115/xslF345X05/wk-form4_1755715197.xml
+RCG,STAHL MURRAY,President/Co-Portfolio Manager,2025-08-19,Buy,2.67,774,"2,067","321,102",https://finviz.com/http://www.sec.gov/Archives/edgar/data/919567/000143774925027435/xslF345X05/rdgdoc.xml
+RCG,STAHL MURRAY,President/Co-Portfolio Manager,2025-08-19,Buy,2.67,356,951,"103,886",https://finviz.com/http://www.sec.gov/Archives/edgar/data/919567/000143774925027435/xslF345X05/rdgdoc.xml
+TPL,HORIZON KINETICS ASSET MANAGEM,10% Owner,2025-08-19,Buy,893.05,1,893,"1,163,978",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1056823/000143774925027429/xslF345X05/rdgdoc.xml
+BFC,Stayer-Suprick Michael S,Director,2025-08-19,Buy,122.67,410,"50,295","3,965",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1746109/000110465925080794/xslF345X05/tm2523993-1_4seq1.xml
+IRIX,Dizon Romeo R,Chief Financial Officer,2025-08-19,Buy,1.17,3000,"3,499","43,745",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1006045/000095017025110402/xslF345X05/ownership.xml
+RVP,SHAW THOMAS J,PRESIDENT AND CEO,2025-08-19,Buy,0.8,9042,"7,200","15,645,325",https://finviz.com/http://www.sec.gov/Archives/edgar/data/946563/000141588925022417/xslF345X05/form4-08202025_030851.xml
+GRNT,MCCARTNEY JOHN,Director,2025-08-18,Buy,5.25,5000,"26,250","82,117",https://finviz.com/http://www.sec.gov/Archives/edgar/data/923380/000092338025000016/xslF345X05/wk-form4_1755701868.xml
+ROLR,Felman Adam Jonathan,Chief Financial Officer,2025-08-18,Buy,2.39,5050,"12,070","55,050",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1947210/000143774925027416/xslF345X05/rdgdoc.xml
+ROLR,Eachus Brandon Christopher,Director,2025-08-18,Buy,2.48,20000,"49,600","89,968",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1947210/000143774925027414/xslF345X05/rdgdoc.xml
 BW,Frymyer Cameron M,Chief Financial Officer,2025-08-19,Buy,1.55,20000,"31,000","153,805",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1630805/000163080525000074/xslF345X05/form4.xml
 EPSN,Williamson Andrew,Chief Financial Officer,2025-08-18,Buy,5.64,10000,"56,400","60,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1726126/000110465925080574/xslF345X05/tm2523893-2_4seq1.xml
 EPSN,Stabell Jason,Chief Executive Officer,2025-08-19,Buy,5.71,6000,"34,260","485,339",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1726126/000110465925080571/xslF345X05/tm2523893-1_4seq1.xml
@@ -130,72 +199,3 @@ CALC,Hebbar Sudarshan,Chief Medical Officer,2025-08-14,Buy,2.58,1584,"4,095","47
 PRMB,Cramer Michael John,Director,2025-08-14,Buy,24.46,4000,"97,840","12,762",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1686485/000119312525182472/xslF345X05/ownership.xml
 DPG,Kahrer Mark G.,Director,2025-08-15,Buy,12.69,1000,"12,689","1,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1515671/000121390025077810/xslF345X05/marketforms-70301.xml
 DTF,Kahrer Mark G.,Director,2025-08-15,Buy,11.35,1000,"11,346","1,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/879535/000121390025077808/xslF345X05/marketforms-70300.xml
-RCG,STAHL MURRAY,President/Co-Portfolio Manager,2025-08-15,Buy,2.65,774,"2,051","320,510",https://finviz.com/http://www.sec.gov/Archives/edgar/data/919567/000143774925027204/xslF345X05/rdgdoc.xml
-RCG,STAHL MURRAY,President/Co-Portfolio Manager,2025-08-15,Buy,2.65,356,943,"103,174",https://finviz.com/http://www.sec.gov/Archives/edgar/data/919567/000143774925027204/xslF345X05/rdgdoc.xml
-TPL,HORIZON KINETICS ASSET MANAGEM,10% Owner,2025-08-15,Buy,894.93,1,895,"1,163,976",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1056823/000143774925027202/xslF345X05/rdgdoc.xml
-GRNT,MCCARTNEY JOHN,Director,2025-08-15,Buy,5.3,5000,"26,500","77,117",https://finviz.com/http://www.sec.gov/Archives/edgar/data/923380/000092338025000014/xslF345X05/wk-form4_1755529973.xml
-AWP,Yao Nancy,Director,2025-08-14,Buy,3.93,2000,"7,860","3,500",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1390195/000110465925079623/xslF345X05/tm2523667-1_4seq1.xml
-EXE,Viets Joshua J.,EVP & COO,2025-08-18,Buy,92.16,2000,"184,320","61,676",https://finviz.com/http://www.sec.gov/Archives/edgar/data/895126/000190871625000004/xslF345X05/wk-form4_1755526350.xml
-DMA,"Saba Capital Management, L.P.",10% Owner,2025-08-14,Buy,8.66,41802,"362,005","2,138,272",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1510281/000151028125000421/xslF345X05/primary_doc.xml
-ASA,"Saba Capital Management, L.P.",10% Owner,2025-08-15,Buy,34.53,10000,"345,300","4,060,861",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1230869/000151028125000420/xslF345X05/primary_doc.xml
-ASA,"Saba Capital Management, L.P.",10% Owner,2025-08-14,Buy,33.89,8310,"281,626","4,050,861",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1230869/000151028125000420/xslF345X05/primary_doc.xml
-QRHC,Lipstein Robert J,Director,2025-08-14,Buy,1.7,15000,"25,437","37,500",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1442236/000119380525001200/xslF345X05/e664790_4-lipstein.xml
-CMT,Panda Alex Joseph,"EVP, Treasurer, Secretary, CFO",2025-08-13,Buy,17.33,200,"3,465","29,796",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1026655/000207216725000004/xslF345X05/wk-form4_1755521732.xml
-EXE,DELL'OSSO DOMENIC J JR,President and CEO,2025-08-15,Buy,95.86,2500,"239,650","166,715",https://finviz.com/http://www.sec.gov/Archives/edgar/data/895126/000150498825000005/xslF345X05/wk-form4_1755521710.xml
-MYO,GUDONIS PAUL R,Chief Executive Officer,2025-08-15,Buy,0.95,50000,"47,295","1,259,013",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1015994/000095017025109565/xslF345X05/ownership.xml
-IHRT,PITTMAN ROBERT W,Chairman and CEO,2025-08-14,Buy,2.19,117371,"256,972","4,558,760",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1128482/000095017025109564/xslF345X05/ownership.xml
-ADC,Agree Joey,PRESIDENT & CEO,2025-08-14,Buy,72.08,2100,"151,368","635,160",https://finviz.com/http://www.sec.gov/Archives/edgar/data/917251/000141588925022149/xslF345X05/form4-08182025_060801.xml
-LAB,"Casdin Partners Master Fund, L",Director,2025-08-15,Buy,1.22,150000,"183,210","59,750,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1162194/000091957425004979/xslF345X05/ownership.xml
-LAB,"Casdin Partners Master Fund, L",Director,2025-08-14,Buy,1.21,133220,"161,543","59,600,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1162194/000091957425004979/xslF345X05/ownership.xml
-LAB,"Casdin Partners Master Fund, L",Director,2025-08-13,Buy,1.31,75000,"98,280","59,466,780",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1162194/000091957425004979/xslF345X05/ownership.xml
-CWBC,STOVESAND KIRK,Director,2025-08-15,Buy,20.3,421,"8,546","75,234",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1127371/000162828025040587/xslF345X05/wk-form4_1755305531.xml
-SMRT,Martell Frank,Chief Executive Officer,2025-08-15,Buy,1.35,120000,"161,832","748,204",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1387655/000138765525000008/xslF345X05/ownership.xml
-LNW,Throsby Timothy,Director,2025-08-14,Buy,89.37,20000,"1,787,311","42,082",https://finviz.com/http://www.sec.gov/Archives/edgar/data/750004/000095015725000681/xslF345X05/form4.xml
-FVR,FRANK ELIZABETH F,Director,2025-08-15,Buy,12.44,2808,"34,932","5,177",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1592354/000089534525000275/xslF345X05/form4.xml
-CFND,Hytha David,Chief Financial Officer,2025-08-08,Buy,10.0,5004,"50,040","5,004",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1889409/000110465925079355/xslF345X05/tm2523686-1_4seq1.xml
-FCUV,WANG DESHENG,CEO and Director,2025-08-15,Buy,2.23,11000,"24,540","2,273,800",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1163791/000168316825006262/xslF345X05/ownership.xml
-ASAN,Moskovitz Dustin A.,Director,2025-08-14,Buy,13.77,225000,"3,097,260","56,879,765",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1477720/000147772025000186/xslF345X05/wk-form4_1755296615.xml
-ASAN,Moskovitz Dustin A.,Director,2025-08-13,Buy,13.66,224861,"3,071,107","56,654,765",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1477720/000147772025000186/xslF345X05/wk-form4_1755296615.xml
-LUMN,Stansbury Christopher,EVP and CFO,2025-08-15,Buy,4.44,40000,"177,548","535,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/18926/000001892625000099/xslF345X05/wk-form4_1755296056.xml
-LUMN,Stansbury Christopher,EVP and CFO,2025-08-14,Buy,4.29,42000,"180,205","518,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/18926/000001892625000099/xslF345X05/wk-form4_1755296056.xml
-BWB,Crocker Mary Jayne,EVP & CHIEF STRATEGY OFFICER,2025-08-13,Buy,20.0,100,"2,000","5,395",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1341317/000141588925022100/xslF345X05/form4-08152025_090838.xml
-BRBR,CONWAY SHAWN,Director,2025-08-14,Buy,37.98,1316,"50,000","8,001",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1515728/000177201625000137/xslF345X05/wk-form4_1755292132.xml
-MIAX,Moore Lisa,Director,2025-08-13,Buy,23.0,5500,"126,500","5,500",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1438472/000162828025040566/xslF345X05/wk-form4_1755290973.xml
-MIAX,Jayabalan Harish,"EVP, CISO and CRO",2025-08-13,Buy,23.0,2500,"57,500","6,443",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1438472/000162828025040565/xslF345X05/wk-form4_1755290966.xml
-MIAX,Stahlin Paul,Director,2025-08-13,Buy,23.0,1000,"23,000","1,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1438472/000162828025040564/xslF345X05/wk-form4_1755290958.xml
-MIAX,Nazarali Jamil,Director,2025-08-13,Buy,23.0,2500,"57,500","2,500",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1438472/000162828025040563/xslF345X05/wk-form4_1755290950.xml
-MIAX,Smollen John,EVP Traded Products & Relation,2025-08-13,Buy,23.0,5000,"115,000","7,226",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1438472/000162828025040559/xslF345X05/wk-form4_1755290920.xml
-MIAX,Deitzel Edward,"EVP, CRO, CCO MIAX Exchanges",2025-08-13,Buy,23.0,100,"2,300","32,193",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1438472/000162828025040558/xslF345X05/wk-form4_1755290913.xml
-MIAX,Gallagher Thomas P.,Chairman & CEO,2025-08-13,Buy,23.0,12000,"276,000","12,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1438472/000162828025040557/xslF345X05/wk-form4_1755290905.xml
-MIAX,Lozier Kenneth W.,Director,2025-08-13,Buy,23.0,1000,"23,000","1,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1438472/000162828025040556/xslF345X05/wk-form4_1755290897.xml
-MIAX,Massad Mark I.,Director,2025-08-13,Buy,23.0,4500,"103,500","2,500",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1438472/000162828025040554/xslF345X05/wk-form4_1755290890.xml
-MIAX,Massad Mark I.,Director,2025-08-13,Buy,23.0,3500,"80,500","3,500",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1438472/000162828025040554/xslF345X05/wk-form4_1755290890.xml
-ECL,MacLennan David,Director,2025-08-13,Buy,278.51,600,"167,108","20,253",https://finviz.com/http://www.sec.gov/Archives/edgar/data/31462/000141588925022088/xslF345X05/form4-08152025_080821.xml
-VVV,WILLIS J KEVIN,Chief Financial Officer,2025-08-14,Buy,39.41,12725,"501,506","12,725",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1575329/000167491025000125/xslF345X05/wk-form4_1755290585.xml
-GPMT,Nikolic Lazar,Director,2025-08-13,Buy,19.61,3000,"58,830","4,193",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1703644/000170364425000122/xslF345X05/wk-form4_1755290463.xml
-AXON,Partovi Hadi,Director,2025-08-13,Buy,740.0,1358,"1,004,920","237,938",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1069183/000106918325000194/xslF345X05/wk-form4_1755290214.xml
-MDRR,KAVANAUGH FRANK,"CHAIRMAN, CEO & PRESIDENT",2025-08-15,Buy,11.14,3562,"39,681","5,480",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1271775/000141588925022081/xslF345X05/form4-08152025_080824.xml
-MDRR,KAVANAUGH FRANK,"CHAIRMAN, CEO & PRESIDENT",2025-08-14,Buy,10.85,7,76,"1,918",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1271775/000141588925022081/xslF345X05/form4-08152025_080824.xml
-MDRR,KAVANAUGH FRANK,"CHAIRMAN, CEO & PRESIDENT",2025-08-13,Buy,10.85,1911,"20,734","1,911",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1271775/000141588925022081/xslF345X05/form4-08152025_080824.xml
-GEN,Chrystal John C,Director,2025-08-13,Buy,32.1,10000,"321,000","12,901",https://finviz.com/http://www.sec.gov/Archives/edgar/data/849399/000084939925000063/xslF345X05/wk-form4_1755289553.xml
-AAOI,Lin Chih-Hsiang (Thompson),President and CEO,2025-08-14,Buy,21.62,5750,"124,315","1,661,165",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1158114/000168316825006248/xslF345X05/ownership.xml
-AAOI,Lin Chih-Hsiang (Thompson),President and CEO,2025-08-14,Buy,21.39,2325,"49,742","1,663,490",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1158114/000168316825006248/xslF345X05/ownership.xml
-AAOI,Lin Che-Wei,Director,2025-08-14,Buy,21.64,4609,"99,739","253,506",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1158114/000168316825006247/xslF345X05/ownership.xml
-CLAR,YATES MICHAEL J,Chief Financial Officer,2025-08-14,Buy,3.4,8800,"29,919","40,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/913277/000110465925079246/xslF345X05/tm2523579-1_4seq1.xml
-CLAR,YATES MICHAEL J,Chief Financial Officer,2025-08-13,Buy,3.2,6200,"19,840","31,200",https://finviz.com/http://www.sec.gov/Archives/edgar/data/913277/000110465925079246/xslF345X05/tm2523579-1_4seq1.xml
-ALSN,Bohley G Frederick,Chief Operating Officer,2025-08-14,Buy,89.5,3000,"268,500","99,074",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1411207/000174182425000005/xslF345X05/ownership.xml
-INR,Poole David P,Director,2025-08-14,Buy,13.51,7500,"101,325","7,500",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1356213/000119312525181876/xslF345X05/ownership.xml
-LLY,Montarce Lucas,EVP & CFO,2025-08-15,Buy,691.79,715,"494,627","14,685",https://finviz.com/http://www.sec.gov/Archives/edgar/data/59478/000005947825000222/xslF345X05/wk-form4_1755288778.xml
-ALDX,Alfieri Michael,Principal Financial Officer,2025-08-13,Buy,5.3,2500,"13,250","2,500",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1341235/000095017025109391/xslF345X05/ownership.xml
-LAW,Offerdahl James,Director,2025-08-14,Buy,4.92,6500,"31,980","220,652",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1490198/000162564125000129/xslF345X05/wk-form4_1755288514.xml
-GBLI,Balderston William V,Chief Marketing Officer,2025-08-13,Buy,28.57,105,"3,000",105,https://finviz.com/http://www.sec.gov/Archives/edgar/data/1494904/000201554825000003/xslF345X05/ownership.xml
-ASIC,Zimmer Stuart J.,Director,2025-08-13,Buy,19.49,5051,"98,426","38,517,491",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1858477/000110465925079225/xslF345X05/tm2523646-1_4seq1.xml
-PNFP,BURNS GREGORY L,Director,2025-08-15,Buy,92.5,652,"60,310","21,384",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1115055/000111505525000158/xslF345X05/wk-form4_1755287012.xml
-MSDL,Pessah David,Chief Financial Officer,2025-08-14,Buy,17.72,3400,"60,254","5,400",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1782524/000095017025109372/xslF345X05/ownership.xml
-UFCS,Martin Eric J,Chief Financial Officer,2025-08-11,Buy,29.0,500,"14,500","35,155",https://finviz.com/http://www.sec.gov/Archives/edgar/data/101199/000156218025005808/xslF345X05/primarydocument.xml
-BOTJ,SCRUGGS J TODD,Secretary-Treasurer,2025-08-14,Buy,14.3,356,"5,091","33,349",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1275101/000143774925027107/xslF345X05/rdgdoc.xml
-SPG,STEWART MARTA R,Director,2025-08-14,Buy,171.54,42,"7,205","16,122",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1063761/000141588925022053/xslF345X05/form4-08152025_040845.xml
-TPL,HORIZON KINETICS ASSET MANAGEM,10% Owner,2025-08-14,Buy,889.04,1,889,"1,163,975",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1056823/000143774925027102/xslF345X05/rdgdoc.xml
-AVNS,BLACKFORD GARY,Director,2025-08-13,Buy,10.99,40000,"439,800","40,000",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1156320/000160649825000111/xslF345X05/wk-form4_1755273765.xml
-AVNS,BLACKFORD GARY,Director,2025-08-13,Buy,10.97,20000,"219,500","91,593",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1156320/000160649825000111/xslF345X05/wk-form4_1755273765.xml
-AVBC,Cozzone Robert D,President & CEO,2025-08-13,Buy,14.55,3436,"49,999","6,946",https://finviz.com/http://www.sec.gov/Archives/edgar/data/1586267/000143774925027101/xslF345X05/rdgdoc.xml

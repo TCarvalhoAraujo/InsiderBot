@@ -2692,5 +2692,131 @@
     "sector": "Technology",
     "industry": "Semiconductors",
     "earnings_date": "2025-11-13"
+  },
+  "GLIBA": {
+    "market_cap": 1044539776,
+    "sector": "Communication Services",
+    "industry": "Telecom Services",
+    "earnings_date": null
+  },
+  "BLND": {
+    "market_cap": 772785536,
+    "sector": "Technology",
+    "industry": "Software - Application",
+    "earnings_date": "2025-11-05"
+  },
+  "MDGL": {
+    "market_cap": 8729709568,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-10-30"
+  },
+  "PEW": {
+    "market_cap": 162458304,
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense",
+    "earnings_date": "2025-11-13"
+  },
+  "MITT": {
+    "market_cap": 234185120,
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage",
+    "earnings_date": "2025-08-01"
+  },
+  "TNXP": {
+    "market_cap": 316010688,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-11"
+  },
+  "GLIBK": {
+    "market_cap": 1038281472,
+    "sector": "Communication Services",
+    "industry": "Telecom Services",
+    "earnings_date": null
+  },
+  "ROLR": {
+    "market_cap": 21544712,
+    "sector": "Consumer Cyclical",
+    "industry": "Gambling",
+    "earnings_date": null
+  },
+  "ISPO": {
+    "market_cap": 37160304,
+    "sector": "Consumer Cyclical",
+    "industry": "Travel Services",
+    "earnings_date": "2025-10-27"
+  },
+  "SCWO": {
+    "market_cap": 35491580,
+    "sector": "Industrials",
+    "industry": "Pollution & Treatment Controls",
+    "earnings_date": "2025-11-12"
+  },
+  "BFC": {
+    "market_cap": 1208502656,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-18"
+  },
+  "GOSS": {
+    "market_cap": 443392960,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-06"
+  },
+  "NWTG": {
+    "market_cap": 7135501,
+    "sector": "Consumer Cyclical",
+    "industry": "Leisure",
+    "earnings_date": null
+  },
+  "ZVRA": {
+    "market_cap": 520933728,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-11"
+  },
+  "IT": {
+    "market_cap": 18494683136,
+    "sector": "Technology",
+    "industry": "Information Technology Services",
+    "earnings_date": "2025-08-05"
+  },
+  "BG": {
+    "market_cap": 16479107072,
+    "sector": "Consumer Defensive",
+    "industry": "Farm Products",
+    "earnings_date": "2025-10-29"
+  },
+  "ACOG": {
+    "market_cap": 129205592,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-14"
+  },
+  "LOB": {
+    "market_cap": 1599680896,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-22"
+  },
+  "WU": {
+    "market_cap": 2680626176,
+    "sector": "Financial Services",
+    "industry": "Credit Services",
+    "earnings_date": "2025-10-22"
+  },
+  "ALXO": {
+    "market_cap": 44554516,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-06"
+  },
+  "FSK": {
+    "market_cap": 4971171328,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-11-05"
   }
 }
