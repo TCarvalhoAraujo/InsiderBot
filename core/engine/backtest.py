@@ -1,10 +1,21 @@
 import pandas as pd
 import ast
 
-from core.io.file_manager import load_latest_tagged_trades, save_scores, save_scores_filtered
+from core.io.file_manager import load_latest_tagged_trades, save_scores
 
 # --- Settings ---
-OUTCOME_TAGS = {"🟢 SUCCESSFUL TRADE C1", "⚪ NEUTRAL TRADE C1", "🔴 UNSUCCESSFUL TRADE C1"}
+OUTCOME_TAGS_C1 = {
+    "🟢 SUCCESSFUL TRADE C1",
+    "⚪ NEUTRAL TRADE C1",
+    "🔴 UNSUCCESSFUL TRADE C1"
+}
+
+OUTCOME_TAGS_C2 = {
+    "🟢 SPIKE BEFORE DROP - SUCCESSFUL TRADE",
+    "⚪ NEUTRAL TRADE",
+    "🔴 DROP BEFORE SPIKE - BAD TRADE",
+    "🔴 FINAL GAIN TOO LOW - BAD TRADE"
+}
 
 VALID_SIZE_TAGS = {"🔥 VERY LARGE TRADE", "💰 LARGE TRADE", "🟢 SMALL TRADE"}
 
@@ -40,25 +51,23 @@ COMBO_BOOSTS = {
     ("🔥 VERY LARGE TRADE", "🏥 Healthcare"): 2,
     ("💰 LARGE TRADE", "🏥 Healthcare"): 1,
     ("📈 CIO", "🏦 Financial"): 2,
-
 }
 
 # --- Step 2: Filter rows with outcome tags ---
 def filter_outcome_trades(df: pd.DataFrame) -> pd.DataFrame:
-    return df[df["tags"].apply(lambda tags: any(tag.strip() in OUTCOME_TAGS for tag in tags))]
+    return df[
+        df["tags"].apply(lambda tags: any(tag.strip() in OUTCOME_TAGS_C1 for tag in tags))
+        | df["case_2_outcome"].isin(OUTCOME_TAGS_C2)
+    ]
 
 # --- Step 3: Score each row based on tags ---
-def score_trade(tags: list[str]) -> int | None:
+def score_trade(tags: list[str]) -> int:
     """
-    Scores a trade based on tags, but only if it has a valid trade size.
-    Returns None if the trade should be ignored.
+    Scores a trade based on tags. If there is no size tag,
+    we still score (size contributes 0) so it can fall into Low Conviction.
     """
-    # ✅ Filter out trades without size
-    if not any(tag in tags for tag in VALID_SIZE_TAGS):
-        return None  # trade ignored
-    
     score = 0
-    
+
     # Base tag weights
     for tag in tags:
         score += TAG_WEIGHTS.get(tag, 0)
@@ -68,7 +77,7 @@ def score_trade(tags: list[str]) -> int | None:
         if all(tag in tags for tag in combo):
             score += bonus
 
-    return score
+    return int(score)
 
 # --- Step 4: Bucketize score ---
 def assign_bucket(score: int) -> str:
@@ -95,45 +104,134 @@ def filter_ultra_and_highest(df: pd.DataFrame, output_file: str) -> pd.DataFrame
     return filtered
 
 # --- Step 5: Run full test pipeline ---
+#def run_backtest_pipeline() -> None:
+#    df = load_latest_tagged_trades()
+#
+#    df["tags"] = df["tags"].apply(ast.literal_eval)
+#
+#    df = filter_outcome_trades(df)
+#    print(f"🔍 {len(df)} trades with outcome tags")
+#
+#    df["score"] = df["tags"].apply(score_trade)
+#    df["bucket"] = df["score"].apply(assign_bucket)
+#
+#    # Map outcome tag from TAGS (Case 1)
+#    def get_outcome_case_1(tags):
+#        for tag in tags:
+#            tag_clean = tag.strip()
+#            if tag_clean in OUTCOME_TAGS_C1:
+#                return tag_clean
+#        return None
+#
+#    df["outcome_case_1"] = df["tags"].apply(get_outcome_case_1)
+#
+#    # --- Normalize outcome from case_2_outcome column
+#    def normalize_case_2_outcome(text: str) -> str | None:
+#        if pd.isna(text):
+#            return None
+#        text = text.strip()
+#
+#        if text == "🟢 SPIKE BEFORE DROP - SUCCESSFUL TRADE":
+#            return "🟢 SUCCESSFUL TRADE"
+#        elif text in {"⚪ NEUTRAL TRADE"}:
+#            return "⚪ NEUTRAL TRADE"
+#        elif text in {"🔴 DROP BEFORE SPIKE - BAD TRADE", "🔴 FINAL GAIN TOO LOW - BAD TRADE"}:
+#            return "🔴 UNSUCCESSFUL TRADE"
+#        else:
+#            return None
+#
+#    df["outcome_case_2"] = df["case_2_outcome"].apply(normalize_case_2_outcome)
+#
+#    # Save cleaned file
+#    save_scores(df, "scores.csv")
+#
+#    # --- Backtest Case 1 ---
+#    df_case1 = df[df["outcome_case_1"].notna()]
+#    grouped_1 = (
+#        df_case1.groupby("bucket")["outcome_case_1"]
+#        .value_counts(normalize=True)
+#        .unstack()
+#        .fillna(0)
+#    )
+#
+#    print("\n📈 Case 1 – Backtest Based on 30-Day Outcome Tags:")
+#    print((grouped_1 * 100).round(1))
+#
+#    # --- Backtest Case 2 ---
+#    df_case2 = df[df["outcome_case_2"].notna()]
+#    grouped_2 = (
+#        df_case2.groupby("bucket")["outcome_case_2"]
+#        .value_counts(normalize=True)
+#        .unstack()
+#        .fillna(0)
+#    )
+#
+#    print("\n⏳ Case 2 – Backtest Based on Drawdown vs Spike Timing:")
+#    print((grouped_2 * 100).round(1))
+#
+#    filtered_df = filter_ultra_and_highest(df, "filtered_scores.csv")
+#
+#    save_scores(filtered_df, "filtered_scores.csv")
+#
+#    print(f"✅ Saved {len(filtered_df)} trades to filtered_scores.csv")
+#
+#    # --- Identify trades with no outcome tag
+#    df_unlabeled = df[
+#        df["outcome_case_1"].isna() & df["outcome_case_2"].isna()
+#    ].copy()
+#
+#    # --- Score and bucket the unlabeled ones
+#    df_unlabeled["score"] = df_unlabeled["tags"].apply(score_trade)
+#    df_unlabeled["bucket"] = df_unlabeled["score"].apply(assign_bucket)    
+#
+#    # --- Sort by date (most recent first or oldest first)
+#    df_unlabeled["transaction_date"] = pd.to_datetime(df_unlabeled["transaction_date"])
+#    df_unlabeled_sorted = df_unlabeled.sort_values("transaction_date", ascending=False)  # recent first
+#
+#
+#    save_scores(df_unlabeled_sorted, "unlabeled_scores.csv") 
+#    print(f"🆕 Scored {len(df_unlabeled_sorted)} trades without outcome tags")
+
 def run_backtest_pipeline() -> None:
-    df = load_latest_tagged_trades()
+    # --- Load everything
+    df_all = load_latest_tagged_trades()
+    df_all["tags"] = df_all["tags"].apply(ast.literal_eval)
 
-    df["tags"] = df["tags"].apply(ast.literal_eval)
-
-    df = filter_outcome_trades(df)
-    print(f"🔍 {len(df)} trades with outcome tags")
-
-    df["score"] = df["tags"].apply(score_trade)
-    df["bucket"] = df["score"].apply(assign_bucket)
-
-    # Map outcome tag from TAGS (Case 1)
+    # --- Map outcome tags
     def get_outcome_case_1(tags):
         for tag in tags:
             tag_clean = tag.strip()
-            if tag_clean in OUTCOME_TAGS:
+            if tag_clean in OUTCOME_TAGS_C1:
                 return tag_clean
         return None
 
-    df["outcome_case_1"] = df["tags"].apply(get_outcome_case_1)
+    df_all["outcome_case_1"] = df_all["tags"].apply(get_outcome_case_1)
 
-    # Step 3: Parse outcome from CASE 2 column
-    def simplify_case_2_outcome(text: str):
+    def normalize_case_2_outcome(text: str) -> str | None:
         if pd.isna(text):
             return None
-        if "SUCCESSFUL" in text:
+        text = text.strip()
+        if text == "🟢 SPIKE BEFORE DROP - SUCCESSFUL TRADE":
             return "🟢 SUCCESSFUL TRADE"
-        if "NEUTRAL" in text:
+        elif text == "⚪ NEUTRAL TRADE":
             return "⚪ NEUTRAL TRADE"
-        if "BAD" in text:
+        elif text in {"🔴 DROP BEFORE SPIKE - BAD TRADE", "🔴 FINAL GAIN TOO LOW - BAD TRADE"}:
             return "🔴 UNSUCCESSFUL TRADE"
         return None
 
-    df["outcome_case_2"] = df["case_2_outcome"].apply(simplify_case_2_outcome)
+    df_all["outcome_case_2"] = df_all["case_2_outcome"].apply(normalize_case_2_outcome)
 
-    # Save cleaned file
-    save_scores(df)
+    # --- Score and bucket ALL trades (including unlabeled)
+    df_all["score"] = df_all["tags"].apply(score_trade)
+    df_all["bucket"] = df_all["score"].apply(assign_bucket)
 
-    # --- Backtest Case 1 ---
+    # --- Save all scored trades
+    save_scores(df_all, "scores.csv")
+
+    # --- FILTER for backtest: trades WITH outcome
+    df = filter_outcome_trades(df_all)
+    print(f"🔍 {len(df)} trades with outcome tags")
+
     df_case1 = df[df["outcome_case_1"].notna()]
     grouped_1 = (
         df_case1.groupby("bucket")["outcome_case_1"]
@@ -141,11 +239,10 @@ def run_backtest_pipeline() -> None:
         .unstack()
         .fillna(0)
     )
-
+    
     print("\n📈 Case 1 – Backtest Based on 30-Day Outcome Tags:")
     print((grouped_1 * 100).round(1))
-
-    # --- Backtest Case 2 ---
+    
     df_case2 = df[df["outcome_case_2"].notna()]
     grouped_2 = (
         df_case2.groupby("bucket")["outcome_case_2"]
@@ -153,12 +250,21 @@ def run_backtest_pipeline() -> None:
         .unstack()
         .fillna(0)
     )
-
+    
     print("\n⏳ Case 2 – Backtest Based on Drawdown vs Spike Timing:")
     print((grouped_2 * 100).round(1))
-
+    
     filtered_df = filter_ultra_and_highest(df, "filtered_scores.csv")
-
-    save_scores_filtered(filtered_df)
-
+    save_scores(filtered_df, "filtered_scores.csv")
     print(f"✅ Saved {len(filtered_df)} trades to filtered_scores.csv")
+
+    # --- Get trades WITHOUT outcome
+    df_unlabeled = df_all[
+        df_all["outcome_case_1"].isna() & df_all["outcome_case_2"].isna()
+    ].copy()
+
+    df_unlabeled["transaction_date"] = pd.to_datetime(df_unlabeled["transaction_date"])
+    df_unlabeled_sorted = df_unlabeled.sort_values("transaction_date", ascending=False)
+
+    save_scores(df_unlabeled_sorted, "unlabeled_scores.csv")
+    print(f"🆕 Scored {len(df_unlabeled_sorted)} trades without outcome tags")
