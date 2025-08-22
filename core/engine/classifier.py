@@ -220,35 +220,40 @@ def classify_timing_tags(row) -> list[str]:
 
 def classify_outcome_case_1(row) -> str:
     """
-    'Case 1' 30-day strategy:
-    - 🟢 SUCCESSFUL: if any window (7d, 14d, 30d) shows > +18%
-    - ⚪ NEUTRAL: if final 30d gain is between +9% and +18%
+    Classifies a trade based on the 'Case 1' 30-day strategy:
+    - 🟢 SUCCESSFUL: if any window (7d, 14d, 30d) shows > +15%
+    - ⚪ NEUTRAL: if final 30d gain is between +9% and +15%
     - 🔴 UNSUCCESSFUL: if final 30d gain < +9%
-
-    Assumes max_gain_* columns are already in percentages (not raw $).
     """
+    entry_price = row.get("price")
 
-    SUCCESS_THRESH = 18.0   # % > 15 is success
-    NEUTRAL_MIN    = 9.0    # % between 9 and 15 is neutral
+    def normalize(val):
+        """Ensure val is a percentage, not raw diff."""
+        if pd.isna(val) or pd.isna(entry_price) or entry_price == 0:
+            return np.nan
+        # If val looks like a decimal (e.g. 0.10 = 10%), convert
+        if abs(val) < 1:
+            return val * 100
+        return val
 
-    gain_7d  = row.get("max_gain_7d")
-    gain_14d = row.get("max_gain_14d")
-    gain_30d = row.get("max_gain_30d")
-    final_30d = row.get("final_gain_30d")
+    gain_7d = normalize(row.get("max_gain_7d"))
+    gain_14d = normalize(row.get("max_gain_14d"))
+    gain_30d = normalize(row.get("max_gain_30d"))
+    final_gain_30d = normalize(row.get("final_gain_30d"))
 
-    # Success check
-    for g in [gain_7d, gain_14d, gain_30d]:
-        if pd.notna(g) and g > SUCCESS_THRESH:
+    # Spike threshold
+    for gain in [gain_7d, gain_14d, gain_30d]:
+        if pd.notna(gain) and gain >= 15:
             return "🟢 SUCCESSFUL TRADE C1"
 
-    # Fallback: check final 30d outcome
-    if pd.isna(final_30d):
+    if pd.isna(final_gain_30d):
         return ""
 
-    if NEUTRAL_MIN <= final_30d <= SUCCESS_THRESH:
+    if 9 <= final_gain_30d < 15:
         return "⚪ NEUTRAL TRADE C1"
     else:
         return "🔴 UNSUCCESSFUL TRADE C1"
+
 
 def add_cluster_buy_tag(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
