@@ -2,7 +2,7 @@ from core.scanner import scan_all_companies_from_json, daily_run, scan_for_compa
 from core.engine.analyzer import analyze_finviz_trade
 from core.io.file_manager import load_finviz_all_trades
 from core.engine.ohlc import update_ohlc
-
+from core.engine.summary import generate_trade_md
 from core.engine.backtest import run_backtest_pipeline
 
 import os
@@ -16,6 +16,8 @@ def print_main_menu():
     print("3 - Run scan from finviz website (filters only buys)")
     print("4 - Tag trades from finviz")
     print("5 - Update OHLC data")
+    print("6 - Run Backtest")
+    print("7 - Generate Summary File")
     print("0 - Exit")
 
 def print_company_menu():
@@ -71,12 +73,46 @@ def main():
         elif choice == "6":
             run_backtest_pipeline()
 
+        elif choice == "7": 
+            print("=== Insider Trade Markdown Generator ===")
+
+            # Collect inputs from user
+            ticker = input("Ticker: ").upper()
+            insider_price = float(input("Insider Buy Price: "))
+            current_price = float(input("Current Stock Price: "))
+            num_stocks = int(input("How many stocks will you buy: "))
+            date = input("Date (YYYY-MM-DD): ")
+            sma9 = float(input("SMA 9 (daily candles): "))
+            rsi14 = float(input("RSI 14 (daily candles): "))
+
+            # Optional fields
+            tags_input = input("Tags (comma separated, optional): ").strip()
+            tags = [t.strip() for t in tags_input.split(",")] if tags_input else []
+
+            news_input = input("News (semicolon separated, optional): ").strip()
+            news = [n.strip() for n in news_input.split(";")] if news_input else []
+
+            # Call generator
+            filename = generate_trade_md(
+                                    ticker=ticker,
+                                    insider_price=insider_price,
+                                    current_price=current_price,
+                                    num_stocks=num_stocks,
+                                    date=date,
+                                    sma9=sma9,
+                                    rsi14=rsi14,
+                                    tags=tags,
+                                    news=news
+                                )
+
+            print(f"\n✅ Trade card saved to {filename}")
+
         elif choice == "0":
             print("👋 Exiting InsiderBot. Have a great day!")
             break
 
         else:
-            print("❌ Invalid option. Please choose 1, 2, or 0.")
+            print("❌ Invalid option.")
 
 if __name__ == "__main__":
     main()
