@@ -3004,5 +3004,89 @@
     "sector": "Financial Services",
     "industry": "Capital Markets",
     "earnings_date": "2025-10-29"
+  },
+  "CNFR": {
+    "market_cap": 9896882,
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty",
+    "earnings_date": "2025-08-13"
+  },
+  "CEPF": {
+    "market_cap": 515871520,
+    "sector": "Financial Services",
+    "industry": "Shell Companies",
+    "earnings_date": null
+  },
+  "SELF": {
+    "market_cap": 58505112,
+    "sector": "Real Estate",
+    "industry": "REIT - Specialty",
+    "earnings_date": "2025-08-08"
+  },
+  "MDBH": {
+    "market_cap": 31991274,
+    "sector": "Financial Services",
+    "industry": "Capital Markets",
+    "earnings_date": "2025-08-12"
+  },
+  "AVTR": {
+    "market_cap": 9046676480,
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies",
+    "earnings_date": "2025-10-31"
+  },
+  "GIFT": {
+    "market_cap": 33291000,
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information",
+    "earnings_date": "2025-08-12"
+  },
+  "CLPR": {
+    "market_cap": 178348368,
+    "sector": "Real Estate",
+    "industry": "REIT - Residential",
+    "earnings_date": "2025-11-06"
+  },
+  "SQFT": {
+    "market_cap": 7241084,
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified",
+    "earnings_date": "2025-08-12"
+  },
+  "REYN": {
+    "market_cap": 4921604608,
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers",
+    "earnings_date": "2025-10-29"
+  },
+  "MHH": {
+    "market_cap": 87438768,
+    "sector": "Industrials",
+    "industry": "Staffing & Employment Services",
+    "earnings_date": "2025-11-12"
+  },
+  "NTLA": {
+    "market_cap": 1129290496,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-07"
+  },
+  "LCNB": {
+    "market_cap": 228302864,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-21"
+  },
+  "LUCD": {
+    "market_cap": 112082304,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-11-12"
+  },
+  "FORL": {
+    "market_cap": 47714356,
+    "sector": "Financial Services",
+    "industry": "Shell Companies",
+    "earnings_date": null
   }
 }
