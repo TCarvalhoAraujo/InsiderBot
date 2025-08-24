@@ -7,7 +7,7 @@ from yahooquery import Ticker
 
 from core.engine.classifier import tag_trade, add_cluster_buy_tag, add_multiple_buys_tag, add_smart_insider_tag
 from core.io.file_manager import FINVIZ_DATA_DIR, ensure_finviz_dir
-from core.io.cache import load_snapshot_cache, save_snapshot_cache
+from core.io.cache import load_snapshot_cache, save_snapshot_cache, load_ohlc_cache
 from core.utils.utils import calculate_ownership_pct
 from core.engine.ohlc import enrich_trades_with_price_deltas, update_ohlc
 from config.problematic_tickers import NO_MARKET_CAP_TICKERS, IPO_TICKERS
@@ -33,6 +33,10 @@ def analyze_finviz_trade() -> None:
 
     # --- Tag and annotate only valid ones ---
     df = tag_and_annotate(df, snapshots)
+
+    # --- Drop Edge cases ---
+    df = drop_split_merger_anomalies(df, threshold=1.70)
+    df = drop_low_atr_trades(df, min_atr_pct=0.02)
 
     tagged_path = os.path.join(FINVIZ_DATA_DIR, TAGGED_FILE)
     df.to_csv(tagged_path, index=False)
@@ -76,6 +80,7 @@ def tag_and_annotate(df: pd.DataFrame, snapshots: dict) -> pd.DataFrame:
 
     # Add additional info to dataframe
     df = enrich_trades_with_price_deltas(df)
+    df = add_atr_to_trades(df, window=14)
     df["ownership_pct"] = df.apply(lambda row: calculate_ownership_pct(row, snapshots.get(row["ticker"], {})), axis=1)
 
     # Apply simple tags
@@ -250,3 +255,138 @@ def prefilter_tickers(tickers, snapshots, min_market_cap=150_000_000):
         print(f"   ... and {len(dropped) - 10} more dropped")
 
     return valid
+
+def drop_split_merger_anomalies(df: pd.DataFrame, threshold: float = 1.70) -> pd.DataFrame:
+    """
+    Drops trades where insider buy price differs significantly
+    from the market open price on the trade date (possible split/merger).
+    
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Must include 'ticker', 'transaction_date', 'price' (insider buy), and 'market_open_at_trade'.
+    threshold : float
+        Ratio cutoff for anomaly detection (default = 1.70).
+    
+    Returns
+    -------
+    pd.DataFrame
+        Cleaned DataFrame with anomalies removed.
+    """
+    before = len(df)
+
+    ratios = df.apply(
+        lambda row: (
+            max(row["price"], row["market_open_at_trade"]) /
+            min(row["price"], row["market_open_at_trade"])
+        ) if row["market_open_at_trade"] and row["price"] else 1,
+        axis=1
+    )
+
+    anomalies = df[ratios > threshold]
+    df = df[ratios <= threshold].copy()
+    after = len(df)
+
+    print(f"🧹 Split/Merger Filter: removed {before - after} rows (ratio > {threshold}), kept {after}")
+    if not anomalies.empty:
+        print("⚠️ Dropped anomalies:")
+        for _, row in anomalies.iterrows():
+            print(f"   - {row['ticker']} on {row['transaction_date'].date()} "
+                  f"(insider price={row['price']}, open={row['market_open_at_trade']})")
+    else:
+        print("✅ No anomalies detected.")
+
+    return df
+
+def add_atr_to_trades(df: pd.DataFrame, window: int = 14) -> pd.DataFrame:
+    """
+    Adds ATR and ATR% columns per ticker using the OHLC cache.
+    Requires at least `window` days of lookback.
+    """
+
+    atr_values = []
+    atr_pct_values = []
+
+    for _, row in df.iterrows():
+        ticker = row["ticker"]
+        trade_date = row["transaction_date"].date()
+
+        ohlc = load_ohlc_cache(ticker)
+        if ohlc.empty:
+            atr_values.append(None)
+            atr_pct_values.append(None)
+            continue
+
+        # Ensure datetime index
+        ohlc["date"] = pd.to_datetime(ohlc["date"]).dt.date
+        ohlc = ohlc.sort_values("date")
+        ohlc.set_index("date", inplace=True)
+
+        if trade_date not in ohlc.index:
+            atr_values.append(None)
+            atr_pct_values.append(None)
+            continue
+
+        # Slice the window: (trade_date - window) → trade_date
+        start_idx = ohlc.index.get_loc(trade_date) - window
+        end_idx = ohlc.index.get_loc(trade_date)
+        if start_idx < 0:
+            atr_values.append(None)
+            atr_pct_values.append(None)
+            continue
+
+        window_data = ohlc.iloc[start_idx:end_idx+1].copy()
+
+        # Compute True Range
+        window_data["prev_close"] = window_data["close"].shift(1)
+        window_data["tr1"] = window_data["high"] - window_data["low"]
+        window_data["tr2"] = (window_data["high"] - window_data["prev_close"]).abs()
+        window_data["tr3"] = (window_data["low"] - window_data["prev_close"]).abs()
+        window_data["true_range"] = window_data[["tr1", "tr2", "tr3"]].max(axis=1)
+
+        atr = window_data["true_range"].rolling(window, min_periods=1).mean().iloc[-1]
+        atr_pct = atr / window_data["close"].iloc[-1]
+
+        atr_values.append(atr)
+        atr_pct_values.append(atr_pct)
+
+    df["atr_14"] = atr_values
+    df["atr_14_pct"] = atr_pct_values
+
+    return df
+
+def drop_low_atr_trades(df: pd.DataFrame, min_atr_pct: float = 0.02) -> pd.DataFrame:
+    """
+    Drops trades where ATR% is below the minimum threshold.
+    
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Must include 'ticker' and 'atr_14_pct'.
+    min_atr_pct : float
+        Minimum ATR% required (default = 0.02 = 2%).
+    
+    Returns
+    -------
+    pd.DataFrame
+        Filtered DataFrame with low-ATR trades removed.
+    """
+    before = len(df)
+
+    # Identify tickers to drop
+    dropped_rows = df[df["atr_14_pct"] < min_atr_pct]
+    dropped_tickers = dropped_rows["ticker"].unique().tolist()
+
+    # Keep only valid rows
+    df = df[df["atr_14_pct"] >= min_atr_pct].copy()
+    after = len(df)
+
+    print(f"🧹 ATR Filter: removed {before - after} rows (ATR% < {min_atr_pct:.2%}), kept {after}")
+    if dropped_tickers:
+        print("📉 Dropped tickers due to low volatility:")
+        for t in dropped_tickers:
+            print(f"   - {t}")
+    else:
+        print("✅ No tickers dropped by ATR filter.")
+
+    return df
