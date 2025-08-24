@@ -10,7 +10,7 @@ from core.io.file_manager import FINVIZ_DATA_DIR, ensure_finviz_dir
 from core.io.cache import load_snapshot_cache, save_snapshot_cache
 from core.utils.utils import calculate_ownership_pct
 from core.engine.ohlc import enrich_trades_with_price_deltas, update_ohlc
-from config.problematic_tickers import NO_MARKET_CAP_TICKERS
+from config.problematic_tickers import NO_MARKET_CAP_TICKERS, IPO_TICKERS
 
 TAGGED_FILE = "finviz_tagged.csv"
 
@@ -18,13 +18,20 @@ def analyze_finviz_trade() -> None:
     """Main entrypoint for analyzing Finviz insider trades and tagging them."""    
     df = load_finviz_data()
     tickers = df["ticker"].unique()
-    
-    update_ohlc(df)
 
+    # --- Build snapshots first ---
     snapshot_cache = load_snapshot_cache()
     snapshot_cache = fetch_missing_snapshots(tickers, snapshot_cache)
-
     snapshots = {t: snapshot_cache.get(t, {}) for t in tickers}
+
+    # --- Prefilter tickers before any heavy work ---
+    valid_tickers = prefilter_tickers(tickers, snapshots, min_market_cap=150_000_000)
+    df = df[df["ticker"].isin(valid_tickers)].copy()
+
+    # --- Now update OHLC only for valid tickers ---
+    update_ohlc(df)
+
+    # --- Tag and annotate only valid ones ---
     df = tag_and_annotate(df, snapshots)
 
     tagged_path = os.path.join(FINVIZ_DATA_DIR, TAGGED_FILE)
@@ -65,6 +72,7 @@ def tag_and_annotate(df: pd.DataFrame, snapshots: dict) -> pd.DataFrame:
     """
     # Clean up the dataframe
     df = group_same_day_insider_trades(df)
+    df = clean_dataframe(df)
 
     # Add additional info to dataframe
     df = enrich_trades_with_price_deltas(df)
@@ -194,3 +202,51 @@ def group_same_day_insider_trades(df: pd.DataFrame) -> pd.DataFrame:
     grouped["shares"] = grouped["shares"].round().astype("Int64")
 
     return grouped
+
+def clean_dataframe(df):
+    """
+    Remove rows from df where ticker is in IPO_TICKERS or NO_MARKET_CAP_TICKERS.
+    """
+    # Union of both sets
+    exclude_tickers = IPO_TICKERS.union(NO_MARKET_CAP_TICKERS)
+
+    before = len(df)
+    df_cleaned = df[~df["ticker"].isin(exclude_tickers)].copy()
+    after = len(df_cleaned)
+
+    print(f"🧹 Cleaned DataFrame: removed {before - after} rows, kept {after}")
+    return df_cleaned
+
+def prefilter_tickers(tickers, snapshots, min_market_cap=150_000_000):
+    """
+    Filters tickers before tagging:
+    - Excludes IPO_TICKERS and NO_MARKET_CAP_TICKERS
+    - Excludes tickers with market cap < min_market_cap
+    """
+    exclude_tickers = IPO_TICKERS.union(NO_MARKET_CAP_TICKERS)
+
+    valid = []
+    dropped = []
+
+    for t in tickers:
+        cap = snapshots.get(t, {}).get("market_cap", None)
+
+        if t in exclude_tickers:
+            dropped.append((t, "excluded list"))
+            continue
+        if cap is None:
+            dropped.append((t, "no market cap"))
+            continue
+        if cap < min_market_cap:
+            dropped.append((t, f"market cap {cap:,} < {min_market_cap:,}"))
+            continue
+
+        valid.append(t)
+
+    print(f"🧹 Prefilter: {len(valid)} valid tickers, {len(dropped)} dropped")
+    for t, reason in dropped[:10]:  # show a preview of reasons
+        print(f"   - {t}: {reason}")
+    if len(dropped) > 10:
+        print(f"   ... and {len(dropped) - 10} more dropped")
+
+    return valid
