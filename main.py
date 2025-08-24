@@ -82,7 +82,7 @@ def main():
             current_price = float(input("Current Stock Price: "))
             num_stocks = int(input("How many stocks will you buy: "))
             date = input("Date (YYYY-MM-DD): ")
-            sma9 = float(input("SMA 9 (daily candles): "))
+            sma20 = float(input("SMA 20 (daily candles): "))
             rsi14 = float(input("RSI 14 (daily candles): "))
 
             # Optional fields
@@ -99,7 +99,7 @@ def main():
                                     current_price=current_price,
                                     num_stocks=num_stocks,
                                     date=date,
-                                    sma9=sma9,
+                                    sma20=sma20,
                                     rsi14=rsi14,
                                     tags=tags,
                                     news=news
