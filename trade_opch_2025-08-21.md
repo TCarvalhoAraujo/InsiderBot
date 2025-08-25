@@ -6,17 +6,17 @@
 ---
 
 ## 👤 Insider Setup
-- **Buy Price:** $27.19
-- **Current Price:** $28.81 (**+5.96% vs insider entry**)
-- **Position Size:** 30 shares ($815.70)
+- **Buy Price:** $27.51
+- **Current Price:** $28.74 (**+4.47% vs insider entry**)
+- **Position Size:** 32 shares ($880.32)
 
 **Upside Potential (after 30% tax):**
-- +15% → $31.27 → Gain: **$85.65**
-- +17% → $31.81 → Gain: **$97.07**
-- +20% → $32.63 → Gain: **$114.20**
+- +15% → $31.64 → Gain: **$92.43**
+- +17% → $32.19 → Gain: **$104.76**
+- +20% → $33.01 → Gain: **$123.24**
 
 **Downside Risk:**
-- -10% → $24.47 → Loss: **$81.57**
+- -10% → $24.76 → Loss: **$88.03**
 
 **Risk-to-Reward Ratio (RRR):**
 - +15%: ~**1.50**
@@ -25,38 +25,57 @@
 
 ---
 
+
+## 👥 Cluster Analysis
+- Cluster Size: 4 trades
+- This Buy: 3 of 4
+- Cluster Duration: 1 days
+- Cluster Signal: ⚖️ Mixed Cluster
+- Price vs Avg: +0.9% vs cluster avg ($27.37)
+- Unique Insiders: 4
+- Roles Involved: Director
+
+**Progression:**
+- 2025-08-20 (KRAEMER HARRY M JANSEN JR – Director) → $27.15
+- 2025-08-20 (Pate R Carter – Director) → $27.19
+- 2025-08-21 (GOLDING DAVID W – Director) → $27.62
+- 2025-08-21 (SULLIVAN TIMOTHY P – Director) → $27.51
+
+
+---
+
 ## 💸 Trader Setup
-- **Entry Price:** $28.81
-- **Position Size:** 30 shares ($864.30)
+- **Entry Price:** $28.74
+- **Position Size:** 32 shares ($919.68)
 
 **Upside Potential (after 30% tax):**
-- +15% → $31.27 → Gain: **$51.63**
-- +17% → $31.81 → Gain: **$63.05**
-- +20% → $32.63 → Gain: **$80.18**
+- +15% → $31.64 → Gain: **$64.88**
+- +17% → $32.19 → Gain: **$77.21**
+- +20% → $33.01 → Gain: **$95.69**
 
 **Downside Risk:**
-- -10% → $24.47 → Loss: **$130.17**
+- -10% → $24.76 → Loss: **$127.39**
 
 **Risk-to-Reward Ratio (RRR):**
-- +15%: ~**0.57**
-- +17%: ~**0.69**
-- +20%: ~**0.88**
+- +15%: ~**0.73**
+- +17%: ~**0.87**
+- +20%: ~**1.07**
 
 ---
 
 ## 📈 Technicals
-- **SMA 20 (daily):** $28.58
-- **RSI 14 (daily):** 40.29
+- **SMA 20 (daily):** $28.54
+- **RSI 14 (daily):** 48.84
 
 ---
 
 ## 🧩 Tags (from Insider Bot)
-["'📋 Director'", "'🟢 SMALL TRADE'", "'🌿 MID CAP'", "'🏥 Healthcare'", "'🧨 CAUGHT THE KNIFE [7d]'", "'📉 BELOW SMA20'", "'🟡 NEUTRAL (RSI)'", "'📉 DIP SETUP'", "'🔁 CLUSTER BUY'"]
+["['📋 Director'", "'🟢 SMALL TRADE'", "'🌿 MID CAP'", "'�� Healthcare'", "'📉 BELOW CLOSE'", "'📉 BELOW SMA20'", "'🟡 NEUTRAL (RSI)'", "'🔁 CLUSTER BUY']"]
 
 ---
 
 ## 📢 News
-- 4  Dircetor buys in 4 days, New CFO announcement if news else "None"
+None
 
 ---
 
