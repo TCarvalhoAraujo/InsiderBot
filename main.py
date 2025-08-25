@@ -1,6 +1,6 @@
 from core.scanner import scan_all_companies_from_json, daily_run, scan_for_company, scan_from_finviz
 from core.engine.analyzer import analyze_finviz_trade
-from core.io.file_manager import load_finviz_all_trades
+from core.io.file_manager import load_finviz_all_trades, load_latest_tagged_trades
 from core.engine.ohlc import update_ohlc
 from core.engine.summary import generate_trade_md
 from core.engine.backtest import run_backtest_pipeline
@@ -92,6 +92,8 @@ def main():
             news_input = input("News (semicolon separated, optional): ").strip()
             news = [n.strip() for n in news_input.split(";")] if news_input else []
 
+            df = load_latest_tagged_trades()
+
             # Call generator
             filename = generate_trade_md(
                                     ticker=ticker,
@@ -101,6 +103,7 @@ def main():
                                     date=date,
                                     sma20=sma20,
                                     rsi14=rsi14,
+                                    df=df,
                                     tags=tags,
                                     news=news
                                 )

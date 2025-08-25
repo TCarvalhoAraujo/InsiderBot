@@ -1,4 +1,4 @@
-import datetime
+import pandas as pd
 
 def calculate_rrr(targets: dict, entry_price: float, stop_price: float, num_stocks: int) -> dict:
     """
@@ -25,6 +25,102 @@ def calculate_rrr(targets: dict, entry_price: float, stop_price: float, num_stoc
 
     return rr_ratios
 
+import pandas as pd
+
+def analyze_cluster(df: pd.DataFrame, ticker: str, trade_date: pd.Timestamp, window: int = 7) -> str:
+    """
+    Analyze insider buy clusters for a given ticker and trade date.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Must include ['ticker','transaction_date','price','insider_name','relationship'].
+    ticker : str
+        Ticker symbol to analyze.
+    trade_date : pd.Timestamp
+        Date of the insider trade to analyze.
+    window : int
+        Days before/after to consider part of the same cluster (default=7).
+
+    Returns
+    -------
+    str
+        Markdown-formatted cluster analysis.
+    """
+    trade_date = pd.to_datetime(trade_date).normalize()  # ensure Timestamp
+
+    df = df.copy()
+    df["transaction_date"] = pd.to_datetime(df["transaction_date"]).dt.normalize()
+
+    # Select trades in ±window days
+    cluster = df[
+        (df["ticker"] == ticker) &
+        (df["transaction_date"].between(
+            trade_date - pd.Timedelta(days=window),
+            trade_date + pd.Timedelta(days=window)
+        ))
+    ].copy()
+
+    if cluster.empty or cluster["insider_name"].nunique() < 3:
+        return "No cluster detected (isolated or <3 unique insiders)."
+
+    # Sort chronologically
+    cluster = cluster.sort_values("transaction_date")
+
+    # Cluster size & duration
+    cluster_size = len(cluster)
+    duration = (cluster["transaction_date"].max() - cluster["transaction_date"].min()).days
+
+    # Position of this trade
+    cluster.reset_index(drop=True, inplace=True)
+    pos_idx = cluster.index[cluster["transaction_date"] == trade_date].tolist()
+    position_str = f"{pos_idx[0] + 1} of {cluster_size}" if pos_idx else "Unknown"
+
+    # Detect cluster signal
+    prices = cluster["price"].tolist()
+    if all(prices[i] > prices[i+1] for i in range(len(prices)-1)):
+        signal = "📉 Averaging Down Cluster"
+    elif all(prices[i] < prices[i+1] for i in range(len(prices)-1)):
+        signal = "🚀 Chasing Up Cluster"
+    else:
+        signal = "⚖️ Mixed Cluster"
+
+    # Average price comparison
+    avg_price = cluster["price"].mean()
+    this_price = cluster.loc[pos_idx[0], "price"] if pos_idx else None
+    if this_price:
+        diff_pct = (this_price - avg_price) / avg_price * 100
+        avg_cmp = f"{diff_pct:+.1f}% vs cluster avg (${avg_price:.2f})"
+    else:
+        avg_cmp = "N/A"
+
+    # Roles summary
+    roles_summary = ", ".join(cluster["relationship"].unique())
+
+    # Progression table
+    progression_lines = []
+    for _, row in cluster.iterrows():
+        progression_lines.append(
+            f"- {row['transaction_date'].date()} ({row['insider_name']} – {row['relationship']}) → ${row['price']:.2f}"
+        )
+
+    progression_md = "\n".join(progression_lines)
+
+    # Build Markdown output
+    md = f"""
+## 👥 Cluster Analysis
+- Cluster Size: {cluster_size} trades
+- This Buy: {position_str}
+- Cluster Duration: {duration} days
+- Cluster Signal: {signal}
+- Price vs Avg: {avg_cmp}
+- Unique Insiders: {cluster['insider_name'].nunique()}
+- Roles Involved: {roles_summary}
+
+**Progression:**
+{progression_md}
+"""
+    return md
 
 def generate_trade_md(
     ticker: str,
@@ -34,6 +130,7 @@ def generate_trade_md(
     date: str,
     sma20: float,
     rsi14: float,
+    df: pd.DataFrame,
     tags: list[str] = None,
     news: list[str] = None,
     tax_rate: float = 0.30,
@@ -70,6 +167,9 @@ def generate_trade_md(
     trader_loss = (current_price - stop_target) * num_stocks
     trader_rrr_dict = calculate_rrr(targets, current_price, stop_target, num_stocks)
 
+    # --- Cluster Section
+    cluster_md = analyze_cluster(df, ticker, pd.to_datetime(date))
+
     # --- Markdown Output ---
     md = f"""
 # 📝 Trade Signal Overview – {ticker.upper()}
@@ -95,6 +195,10 @@ def generate_trade_md(
 - +15%: ~**{insider_rrr_dict[15]:.2f}**
 - +17%: ~**{insider_rrr_dict[17]:.2f}**
 - +20%: ~**{insider_rrr_dict[20]:.2f}**
+
+---
+
+{cluster_md}
 
 ---
 
