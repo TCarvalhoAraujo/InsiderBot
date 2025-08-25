@@ -32,7 +32,7 @@ def finviz_scraper():
             "shares": int(cols[6].replace(",", "")) if cols[6] else None,
             "value": cols[7],
             "shares_total": cols[8],
-            "sec_form4": "https://finviz.com/" + row.find_all("td")[9].find("a")["href"],
+            "sec_form4": row.find_all("td")[9].find("a")["href"],
         }
 
         data.append(trade)
