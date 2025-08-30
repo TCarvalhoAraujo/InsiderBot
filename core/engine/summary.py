@@ -1,4 +1,7 @@
 import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+import re
 
 def calculate_rrr(targets: dict, entry_price: float, stop_price: float, num_stocks: int) -> dict:
     """
@@ -122,6 +125,98 @@ def analyze_cluster(df: pd.DataFrame, ticker: str, trade_date: pd.Timestamp, win
 """
     return md
 
+def analyze_sec_form(df: pd.DataFrame, ticker: str, trade_date: pd.Timestamp) -> str:
+    """
+    Fetches the SEC filing for a given ticker & trade_date,
+    extracts footnotes (either XML <footnote> tags or 'Explanation of Responses'),
+    and returns a Markdown summary.
+    """
+    df["transaction_date"] = pd.to_datetime(df["transaction_date"]).dt.normalize()
+    trade_date = pd.to_datetime(trade_date).normalize()
+
+    row = df[(df["ticker"] == ticker) & (df["transaction_date"] == trade_date)]
+    if row.empty:
+        return f"❌ No filing found for {ticker} on {trade_date.date()}"
+
+    filing_url = row.iloc[0]["sec_form4"]
+
+    # Clean and normalize URL
+    if "finviz.com/" in filing_url:
+        filing_url = filing_url.split("finviz.com/")[-1]
+    filing_url = filing_url.replace("http://", "https://")
+
+    try:
+        resp = requests.get(
+            filing_url,
+            headers={"User-Agent": "InsiderBot - CaseStudy (thicoaraujo1@gmail.com)",
+                     "Accept-Encoding": "gzip, deflate",
+                     "Host": "www.sec.gov"})
+        resp.raise_for_status()
+    except Exception as e:
+        return f"❌ Error fetching SEC filing: {e}"
+
+    soup = BeautifulSoup(resp.text, "lxml")
+
+    # --- Step 1: Try XML <footnote> tags first ---
+    footnotes = [fn.get_text(strip=True) for fn in soup.find_all("footnote")]
+
+    # --- Step 2: If none found, look for "Explanation of Responses:" ---
+    if not footnotes:
+        text = soup.get_text("\n")
+        match = re.search(
+            r"Explanation of Responses:(.*?)(Remarks:|\*\* Signature of Reporting Person|Reminder:|$)",
+            text,
+            re.S
+        )
+
+        footnotes = []
+        if match:
+            block = match.group(1).strip()
+
+            # ✅ Capture only numbered footnotes ("1. ...", "2. ...", etc.)
+            numbered = re.findall(r"(\d+\..*?)(?=\n\d+\.|\Z)", block, re.S)
+            footnotes = [fn.strip().replace("\n", " ") for fn in numbered]
+
+
+    # --- Step 3: Detect signals ---
+    tags, notes = [], []
+    for fn in footnotes:
+        if "dividend reinvestment" in fn.lower():
+            tags.append("📥 DRIP")
+            notes.append("Includes shares from Dividend Reinvestment Plan (automatic, weaker signal).")
+        if "disclaims beneficial ownership" in fn.lower():
+            tags.append("⚖️ DISCLAIMER")
+            notes.append("Insider disclaims beneficial ownership → indirect/limited financial interest.")
+
+    if not tags:
+        tags.append("✅ No special footnotes")
+        notes.append("No DRIP or disclaimer language detected in this filing.")
+
+    # --- Step 4: Build Markdown ---
+    md = f"""
+# 📑 SEC Filing Footnote Analysis – {ticker}
+
+**Date:** {trade_date.date()}  
+**Filing URL:** [{filing_url}]({filing_url})
+
+---
+
+## 📝 Detected Footnotes
+{"".join([f"- {fn}\n" for fn in footnotes]) if footnotes else "None found."}
+
+---
+
+## 🧩 Tags
+{", ".join(tags)}
+
+---
+
+## ⚖️ Notes
+{"".join([f"- {n}\n" for n in notes])}
+    """.strip()
+
+    return md
+
 def generate_trade_md(
     ticker: str,
     insider_price: float,
@@ -169,6 +264,9 @@ def generate_trade_md(
 
     # --- Cluster Section
     cluster_md = analyze_cluster(df, ticker, pd.to_datetime(date))
+
+    # --- Sec Form Setion
+    sec_form = analyze_sec_form(df, ticker, pd.to_datetime(date))
 
     # --- Markdown Output ---
     md = f"""
@@ -234,6 +332,10 @@ def generate_trade_md(
 
 ## 📢 News
 {chr(10).join(f"- {n}" for n in news) if news else "None"}
+
+---
+
+{sec_form}
 
 ---
 
