@@ -3088,5 +3088,359 @@
     "sector": "Financial Services",
     "industry": "Shell Companies",
     "earnings_date": null
+  },
+  "MDT": {
+    "market_cap": 117927174144,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-11-18"
+  },
+  "CERS": {
+    "market_cap": 245374720,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-10-29"
+  },
+  "FEAM": {
+    "market_cap": 65057524,
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals",
+    "earnings_date": "2025-09-10"
+  },
+  "WVVI": {
+    "market_cap": 21595706,
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Wineries & Distilleries",
+    "earnings_date": "2025-08-11"
+  },
+  "HBNC": {
+    "market_cap": 787774720,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-22"
+  },
+  "SWIM": {
+    "market_cap": 952148160,
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment",
+    "earnings_date": "2025-11-04"
+  },
+  "DVAX": {
+    "market_cap": 1218404224,
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic",
+    "earnings_date": "2025-11-06"
+  },
+  "PSTV": {
+    "market_cap": 48153208,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-13"
+  },
+  "RRGB": {
+    "market_cap": 112654528,
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants",
+    "earnings_date": "2025-11-05"
+  },
+  "BKKT": {
+    "market_cap": 127349184,
+    "sector": "Technology",
+    "industry": "Software - Infrastructure",
+    "earnings_date": "2025-08-11"
+  },
+  "ICU": {
+    "market_cap": 24818872,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-11"
+  },
+  "SCKT": {
+    "market_cap": 8000735,
+    "sector": "Technology",
+    "industry": "Computer Hardware",
+    "earnings_date": "2025-10-23"
+  },
+  "FUSB": {
+    "market_cap": 68021584,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-22"
+  },
+  "SINT": {
+    "market_cap": 9431683,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-08-04"
+  },
+  "PODC": {
+    "market_cap": 34335988,
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information",
+    "earnings_date": "2025-11-06"
+  },
+  "CLDI": {
+    "market_cap": 5961945,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": null
+  },
+  "WATT": {
+    "market_cap": 11788417,
+    "sector": "Technology",
+    "industry": "Scientific & Technical Instruments",
+    "earnings_date": "2025-08-07"
+  },
+  "TYG": {
+    "market_cap": 740100928,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-08-06"
+  },
+  "PRU": {
+    "market_cap": 38400503808,
+    "sector": "Financial Services",
+    "industry": "Insurance - Life",
+    "earnings_date": "2025-10-29"
+  },
+  "TFSL": {
+    "market_cap": 3898756352,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-30"
+  },
+  "KIDS": {
+    "market_cap": 508743360,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-11-05"
+  },
+  "GRX": {
+    "market_cap": 147231952,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "RNXT": {
+    "market_cap": 32922676,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-14"
+  },
+  "WLKP": {
+    "market_cap": 781944576,
+    "sector": "Basic Materials",
+    "industry": "Chemicals",
+    "earnings_date": "2025-11-05"
+  },
+  "DRIO": {
+    "market_cap": 431311552,
+    "sector": "Healthcare",
+    "industry": "Health Information Services",
+    "earnings_date": "2025-11-06"
+  },
+  "LKQ": {
+    "market_cap": 8205073408,
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts",
+    "earnings_date": "2025-07-24"
+  },
+  "HSON": {
+    "market_cap": 33526456,
+    "sector": "Industrials",
+    "industry": "Staffing & Employment Services",
+    "earnings_date": "2025-08-08"
+  },
+  "D": {
+    "market_cap": 51427930112,
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric",
+    "earnings_date": "2025-10-31"
+  },
+  "RCKT": {
+    "market_cap": 378743040,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-06"
+  },
+  "DGICA": {
+    "market_cap": 621492224,
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty",
+    "earnings_date": "2025-10-23"
+  },
+  "RMT": {
+    "market_cap": 539077248,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-08-26"
+  },
+  "RGT": {
+    "market_cap": 82791424,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "RVT": {
+    "market_cap": 1932171776,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "PRSU": {
+    "market_cap": 1071186944,
+    "sector": "Consumer Cyclical",
+    "industry": "Travel Services",
+    "earnings_date": "2025-08-06"
+  },
+  "AFCG": {
+    "market_cap": 115003744,
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage",
+    "earnings_date": "2025-11-12"
+  },
+  "MX": {
+    "market_cap": 113699456,
+    "sector": "Technology",
+    "industry": "Semiconductors",
+    "earnings_date": "2025-10-29"
+  },
+  "BFLY": {
+    "market_cap": 396492064,
+    "sector": "Healthcare",
+    "industry": "Medical Devices",
+    "earnings_date": "2025-10-30"
+  },
+  "PSIX": {
+    "market_cap": 1899958528,
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery",
+    "earnings_date": "2025-11-06"
+  },
+  "EBC": {
+    "market_cap": 3399637248,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-23"
+  },
+  "CCAP": {
+    "market_cap": 579741952,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-11-14"
+  },
+  "FGBI": {
+    "market_cap": 120054392,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-22"
+  },
+  "COTY": {
+    "market_cap": 3602578432,
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products",
+    "earnings_date": "2025-11-05"
+  },
+  "ES": {
+    "market_cap": 24024129536,
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric",
+    "earnings_date": "2025-07-31"
+  },
+  "STSS": {
+    "market_cap": 17302480,
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies",
+    "earnings_date": null
+  },
+  "IZEA": {
+    "market_cap": 64292508,
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information",
+    "earnings_date": "2025-11-13"
+  },
+  "PGEN": {
+    "market_cap": 1343858304,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-13"
+  },
+  "RLMD": {
+    "market_cap": 37174592,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-11-06"
+  },
+  "TEAM": {
+    "market_cap": 46637916160,
+    "sector": "Technology",
+    "industry": "Software - Application",
+    "earnings_date": "2025-10-30"
+  },
+  "OPEN": {
+    "market_cap": 3274995200,
+    "sector": "Real Estate",
+    "industry": "Real Estate Services",
+    "earnings_date": "2025-11-06"
+  },
+  "MRBK": {
+    "market_cap": 177880880,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-24"
+  },
+  "EMN": {
+    "market_cap": 8077282304,
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals",
+    "earnings_date": "2025-10-30"
+  },
+  "BHR": {
+    "market_cap": 211513696,
+    "sector": "Real Estate",
+    "industry": "REIT - Hotel & Motel",
+    "earnings_date": "2025-07-31"
+  },
+  "ONL": {
+    "market_cap": 167254368,
+    "sector": "Real Estate",
+    "industry": "REIT - Office",
+    "earnings_date": "2025-11-06"
+  },
+  "SMC": {
+    "market_cap": 281808544,
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream",
+    "earnings_date": "2025-11-10"
+  },
+  "TZUP": {
+    "market_cap": 88694928,
+    "sector": "Communication Services",
+    "industry": "Advertising Agencies",
+    "earnings_date": null
+  },
+  "BLIN": {
+    "market_cap": 17320302,
+    "sector": "Technology",
+    "industry": "Software - Infrastructure",
+    "earnings_date": "2025-08-14"
+  },
+  "BJ": {
+    "market_cap": 12898741248,
+    "sector": "Consumer Defensive",
+    "industry": "Discount Stores",
+    "earnings_date": "2025-11-20"
+  },
+  "MTCH": {
+    "market_cap": 8984825856,
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information",
+    "earnings_date": "2025-11-04"
+  },
+  "AKTX": {
+    "market_cap": 24787172,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-18"
   }
 }
