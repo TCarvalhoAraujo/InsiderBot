@@ -89,7 +89,7 @@ def tag_and_annotate(df: pd.DataFrame, snapshots: dict) -> pd.DataFrame:
     # Post-processing multi-trade tags
     df = add_cluster_buy_tag(df)
     df = add_multiple_buys_tag(df)
-    df = add_smart_insider_tag(df, min_trades=5, min_winrate=0.7)
+    df = add_smart_insider_tag(df, outcome_col="case_2_outcome", min_trades=5, min_winrate=0.7)
     
     return df
 
