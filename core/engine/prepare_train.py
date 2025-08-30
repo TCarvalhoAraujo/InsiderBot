@@ -23,12 +23,14 @@ POSSIBLE_TAGS = [
     "📡 Tech", "🏥 Healthcare", "🛍️ Consumer Cyclical", "⚡ Energy",
     "🏗️ Industrial", "🔌 Utilities", "🏘️ Real Estate", "⚙️ Materials",
     "📞 Communication", "🧰 Other",
-    "📉 DIP BUY", "🧨 CAUGHT THE KNIFE [7d]", "🧨 CAUGHT THE KNIFE [14d]",
-    "🚀 BUYING INTO STRENGTH", "📈 ABOVE CLOSE", "📉 BELOW CLOSE",
-    "📈 ABOVE SMA20", "📉 BELOW SMA20", "⚡️ SMA SUPPORT RECLAIMED",
-    "🔻 SMA LOST", "🔻 OVERSOLD (RSI < 30)", "🚀 OVERBOUGHT (RSI > 70)",
-    "🟡 NEUTRAL (RSI)", "💪 STRONG TREND", "📉 DIP SETUP",
-    "🔁 CLUSTER BUY", "🧠 SMART INSIDER", "🧩 MULTIPLE BUYS"
+    "📉 DIP BUY", 
+    "🧨 CAUGHT THE KNIFE [7d]", "🧨 CAUGHT THE KNIFE [14d]",
+    "🚀 BUYING INTO STRENGTH", 
+    # "📈 ABOVE CLOSE", "📉 BELOW CLOSE",
+    # "📈 ABOVE SMA20", "📉 BELOW SMA20", "⚡️ SMA SUPPORT RECLAIMED",
+    # "🔻 SMA LOST", "🔻 OVERSOLD (RSI < 30)", "🚀 OVERBOUGHT (RSI > 70)",
+    # "🟡 NEUTRAL (RSI)", "💪 STRONG TREND", "📉 DIP SETUP",
+    "🔁 CLUSTER BUY", "🧠 SMART INSIDER", "🧩 MULTIPLE BUYS", "📅 NEAR EARNINGS"
 ]
 
 def one_hot_tags(df, tag_col, tag_list):
