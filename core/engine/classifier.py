@@ -312,36 +312,42 @@ def add_multiple_buys_tag(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-def add_smart_insider_tag(df: pd.DataFrame, min_trades: int = 5, min_winrate: float = 0.6) -> pd.DataFrame:
+def add_smart_insider_tag(
+    df: pd.DataFrame,
+    outcome_col: str = "case_2_outcome",
+    min_trades: int = 5,
+    min_winrate: float = 0.7
+) -> pd.DataFrame:
     """
     Adds 🧠 SMART INSIDER tag to trades if the insider has a high historical success rate.
+    Success is determined from the given outcome column.
     """
+
     df = df.copy()
-
-    # Pre-group by insider
-    grouped = df.groupby("insider_name")
-
-    # Track smart insiders
     smart_insiders = set()
 
-    for insider, trades in grouped:
+    # Group trades by insider
+    for insider, trades in df.groupby("insider_name"):
         total = len(trades)
         if total < min_trades:
             continue
 
-        wins = trades["tags"].apply(lambda tags: "🟢 SUCCESSFUL TRADE" in tags).sum()
+        # Count successful outcomes
+        wins = trades[outcome_col].apply(lambda x: "SUCCESSFUL" in str(x)).sum()
         winrate = wins / total
 
         if winrate >= min_winrate:
             smart_insiders.add(insider)
 
-    # Apply tag
+    # Apply smart insider tag
     df["tags"] = df.apply(
-        lambda row: row["tags"] + ["🧠 SMART INSIDER"] if row["insider_name"] in smart_insiders else row["tags"],
+        lambda row: row["tags"] + ["🧠 SMART INSIDER"]
+        if row["insider_name"] in smart_insiders else row["tags"],
         axis=1
     )
 
     return df
+
 
 def near_earnings_tag(row, snapshot: dict, window: int = 14) -> bool:
     """
