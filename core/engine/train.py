@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, roc_auc_score, roc_curve, auc
 import matplotlib.pyplot as plt
 import seaborn as sns
 from xgboost import XGBClassifier
@@ -35,6 +35,23 @@ def train_logreg(path: str, target_col: str):
     # Eval
     y_pred = model.predict(X_test)
     print(classification_report(y_test, y_pred, digits=3))
+
+    # Probabilities for ROC-AUC
+    y_proba = model.predict_proba(X_test)[:, 1]
+    auc_score = roc_auc_score(y_test, y_proba)
+    print(f"🎯 ROC-AUC: {auc_score:.3f}")
+
+    # ROC Curve
+    fpr, tpr, _ = roc_curve(y_test, y_proba)
+    plt.figure()
+    plt.plot(fpr, tpr, label=f"ROC curve (AUC = {auc_score:.3f})")
+    plt.plot([0, 1], [0, 1], "k--")
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    plt.title(f"ROC Curve – {path}")
+    plt.legend(loc="lower right")
+    plt.show()
+
 
     cv_scores = cross_val_score(model, X, y, cv=5, scoring="accuracy")
     print(f"📊 Cross-val Accuracy: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
@@ -87,6 +104,23 @@ def train_random_forest(path: str, target_col: str):
     y_pred = model.predict(X_test)
     print(classification_report(y_test, y_pred, digits=3))
 
+    # Probabilities for ROC-AUC
+    y_proba = model.predict_proba(X_test)[:, 1]
+    auc_score = roc_auc_score(y_test, y_proba)
+    print(f"🎯 ROC-AUC: {auc_score:.3f}")
+
+    # ROC Curve
+    fpr, tpr, _ = roc_curve(y_test, y_proba)
+    plt.figure()
+    plt.plot(fpr, tpr, label=f"ROC curve (AUC = {auc_score:.3f})")
+    plt.plot([0, 1], [0, 1], "k--")
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    plt.title(f"ROC Curve – {path}")
+    plt.legend(loc="lower right")
+    plt.show()
+
+
     cv_scores = cross_val_score(model, X, y, cv=5, scoring="accuracy")
     print(f"📊 Cross-val Accuracy: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
 
@@ -123,7 +157,7 @@ def train_xgboost(path: str, target_col: str):
     X_train = X_train.rename(columns=sanitize_column)
     X_test = X_test.rename(columns=sanitize_column)
     X = X.rename(columns=sanitize_column)  
-    
+
     # XGBoost model
     model = XGBClassifier(
         n_estimators=300,
@@ -140,6 +174,23 @@ def train_xgboost(path: str, target_col: str):
     # Eval
     y_pred = model.predict(X_test)
     print(classification_report(y_test, y_pred, digits=3))
+
+    # Probabilities for ROC-AUC
+    y_proba = model.predict_proba(X_test)[:, 1]
+    auc_score = roc_auc_score(y_test, y_proba)
+    print(f"🎯 ROC-AUC: {auc_score:.3f}")
+
+    # ROC Curve
+    fpr, tpr, _ = roc_curve(y_test, y_proba)
+    plt.figure()
+    plt.plot(fpr, tpr, label=f"ROC curve (AUC = {auc_score:.3f})")
+    plt.plot([0, 1], [0, 1], "k--")
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    plt.title(f"ROC Curve – {path}")
+    plt.legend(loc="lower right")
+    plt.show()
+
 
     cv_scores = cross_val_score(model, X, y, cv=5, scoring="accuracy")
     print(f"📊 Cross-val Accuracy: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
