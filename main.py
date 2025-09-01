@@ -1,9 +1,10 @@
 from core.scanner import scan_all_companies_from_json, daily_run, scan_for_company, scan_from_finviz
 from core.engine.analyzer import analyze_finviz_trade
-from core.io.file_manager import load_finviz_all_trades, load_latest_tagged_trades
+from core.io.file_manager import load_finviz_all_trades, load_latest_tagged_trades, load_scored_trades
 from core.engine.ohlc import update_ohlc
 from core.engine.summary import generate_trade_md
 from core.engine.backtest import run_backtest_pipeline
+from core.engine.embedding import update_motive_tags
 
 import os
 
@@ -18,6 +19,7 @@ def print_main_menu():
     print("5 - Update OHLC data")
     print("6 - Run Backtest")
     print("7 - Generate Summary File")
+    print("8 - Update motive tags to scored file")
     print("0 - Exit")
 
 def print_company_menu():
@@ -109,6 +111,11 @@ def main():
                                 )
 
             print(f"\n✅ Trade card saved to {filename}")
+
+        elif choice == "8":
+            df = load_scored_trades()
+            df_updated = update_motive_tags(df)
+            df_updated.to_csv("scores_with_tags.csv", index=False)
 
         elif choice == "0":
             print("👋 Exiting InsiderBot. Have a great day!")
