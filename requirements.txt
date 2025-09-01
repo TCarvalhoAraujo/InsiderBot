@@ -29,3 +29,4 @@ yahooquery==2.4.1
 scikit-learn
 matplotlib
 seaborn
+transformers==4.56.0
