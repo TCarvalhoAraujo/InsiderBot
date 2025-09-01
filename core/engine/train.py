@@ -1,12 +1,57 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import re
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, roc_auc_score, roc_curve, auc
-import matplotlib.pyplot as plt
-import seaborn as sns
 from xgboost import XGBClassifier
-import re
+
+def plot_lift_curve(model, X_test, y_test, path):
+    """
+    Plot cumulative gains / lift curve to show winrate by top % of trades.
+    """
+    y_proba = model.predict_proba(X_test)[:, 1]
+    sorted_idx = np.argsort(y_proba)[::-1]  # sort descending
+    y_sorted = y_test.iloc[sorted_idx].reset_index(drop=True)
+
+    # cumulative winrate at each cutoff
+    cum_winrate = np.cumsum(y_sorted) / (np.arange(len(y_sorted)) + 1)
+    baseline = y_test.mean()
+
+    # plot
+    plt.figure(figsize=(7, 5))
+    plt.plot(np.linspace(0, 100, len(cum_winrate)), cum_winrate, label="Model")
+    plt.axhline(baseline, color="red", linestyle="--", label=f"Baseline {baseline:.2f}")
+    plt.xlabel("Top % of trades (ranked by confidence)")
+    plt.ylabel("Cumulative Winrate")
+    plt.title(f"Lift Curve – {path}")
+    plt.legend()
+    plt.show()
+
+def top_decile_analysis(model, X_test, y_test, path, percentile=0.1):
+    """
+    Analyze winrate if you only trade the top X% highest-probability trades.
+    """
+    # Predict probabilities
+    y_proba = model.predict_proba(X_test)[:, 1]
+
+    # Sort by probability
+    sorted_idx = np.argsort(y_proba)[::-1]  # descending
+    cutoff = int(len(sorted_idx) * percentile)
+    top_idx = sorted_idx[:cutoff]
+
+    # Calculate winrate
+    top_winrate = y_test.iloc[top_idx].mean()
+    baseline_winrate = y_test.mean()
+
+    print(f"\n📈 Top {int(percentile*100)}% Winrate vs Baseline – {path}")
+    print(f"   Top {int(percentile*100)}% winrate: {top_winrate:.3f}")
+    print(f"   Baseline winrate: {baseline_winrate:.3f}")
+
+    return top_winrate, baseline_winrate
 
 def sanitize_column(col: str) -> str:
     # Replace problematic characters with underscores
@@ -52,6 +97,13 @@ def train_logreg(path: str, target_col: str):
     plt.legend(loc="lower right")
     plt.show()
 
+    # Top-decile analysis (10%)
+    top_decile_analysis(model, X_test, y_test, path, percentile=0.1)
+
+    # You can also test top 20% or 30%
+    top_decile_analysis(model, X_test, y_test, path, percentile=0.2)
+
+    plot_lift_curve(model, X_test, y_test, path)
 
     cv_scores = cross_val_score(model, X, y, cv=5, scoring="accuracy")
     print(f"📊 Cross-val Accuracy: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
@@ -76,7 +128,6 @@ def train_logreg(path: str, target_col: str):
     plt.show()
 
     return model
-
 
 def train_random_forest(path: str, target_col: str):
     print(f"\n🌲 Training Random Forest on {path} ...")
@@ -120,6 +171,13 @@ def train_random_forest(path: str, target_col: str):
     plt.legend(loc="lower right")
     plt.show()
 
+    # Top-decile analysis (10%)
+    top_decile_analysis(model, X_test, y_test, path, percentile=0.1)
+
+    # You can also test top 20% or 30%
+    top_decile_analysis(model, X_test, y_test, path, percentile=0.2)
+
+    plot_lift_curve(model, X_test, y_test, path)
 
     cv_scores = cross_val_score(model, X, y, cv=5, scoring="accuracy")
     print(f"📊 Cross-val Accuracy: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
@@ -191,6 +249,13 @@ def train_xgboost(path: str, target_col: str):
     plt.legend(loc="lower right")
     plt.show()
 
+    # Top-decile analysis (10%)
+    top_decile_analysis(model, X_test, y_test, path, percentile=0.1)
+
+    # You can also test top 20% or 30%
+    top_decile_analysis(model, X_test, y_test, path, percentile=0.2)
+
+    plot_lift_curve(model, X_test, y_test, path)
 
     cv_scores = cross_val_score(model, X, y, cv=5, scoring="accuracy")
     print(f"📊 Cross-val Accuracy: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
