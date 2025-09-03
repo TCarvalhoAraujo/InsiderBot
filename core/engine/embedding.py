@@ -101,20 +101,20 @@ def classify_footnotes(footnotes: list[str], classifier=None) -> tuple[list[str]
             continue
 
         # --- FALLBACK: EMBEDDING MODEL ---
-        if classifier:
-            candidate_labels = [
-                "Automatic/Scheduled",
-                "Compensation/Accounting",
-                "Ownership Disclaimer/Indirect",
-                "Conviction Buy"
-            ]
-            result = classifier(fn, candidate_labels, multi_label=False)
-            pred = result["labels"][0]
-            tags.append(pred)
-            notes.append(f"Embedding model classified as {pred}.")
-        else:
-            tags.append("Conviction Buy")
-            notes.append("No matching rule → defaulted to conviction.")
+        #if classifier:
+        #    candidate_labels = [
+        #        "Automatic/Scheduled",
+        #        "Compensation/Accounting",
+        #        "Ownership Disclaimer/Indirect",
+        #        "Conviction Buy"
+        #    ]
+        #    result = classifier(fn, candidate_labels, multi_label=False)
+        #    pred = result["labels"][0]
+        #    tags.append(pred)
+        #    notes.append(f"Embedding model classified as {pred}.")
+        #else:
+        #    tags.append("Conviction Buy")
+        #    notes.append("No matching rule → defaulted to conviction.")
 
     if not tags:
         tags.append("Conviction Buy")
@@ -129,14 +129,14 @@ def update_motive_tags(df: pd.DataFrame) -> pd.DataFrame:
     """
     all_tags, all_notes = [], []
 
-    classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+    # classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 
     # tqdm wraps the iterator so you see a progress bar
     for _, row in tqdm(df.iterrows(), total=len(df), desc="🔍 Updating motive tags"):
         try:
             html = fetch_filing_html(row["sec_form4"])
             footnotes = extract_footnotes(html)
-            tags, notes = classify_footnotes(footnotes, classifier)
+            tags, notes = classify_footnotes(footnotes, ) # classifier
         except Exception as e:
             tags, notes = ["❌ Error"], [str(e)]
 
