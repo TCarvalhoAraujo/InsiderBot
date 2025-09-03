@@ -8,6 +8,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, roc_auc_score, roc_curve, auc
 from xgboost import XGBClassifier
+import joblib
+import os
 
 def plot_lift_curve(model, X_test, y_test, path):
     """
@@ -277,6 +279,7 @@ def train_xgboost(path: str, target_col: str):
     return model
 
 if __name__ == "__main__":
+    os.makedirs("models", exist_ok=True)
     # Logistic Regression
     model_case1 = train_logreg("train_case1.csv", "outcome_case1_binary")
     model_case2 = train_logreg("train_case2.csv", "outcome_case2_binary")
@@ -288,3 +291,13 @@ if __name__ == "__main__":
     # XGBoost
     xgb_case1 = train_xgboost("train_case1.csv", "outcome_case1_binary")
     xgb_case2 = train_xgboost("train_case2.csv", "outcome_case2_binary")
+
+    # === Save all models ===
+    joblib.dump(model_case1, "models/logreg_case1.pkl")
+    joblib.dump(model_case2, "models/logreg_case2.pkl")
+    joblib.dump(rf_case1, "models/rf_case1.pkl")
+    joblib.dump(rf_case2, "models/rf_case2.pkl")
+    joblib.dump(xgb_case1, "models/xgb_case1.pkl")
+    joblib.dump(xgb_case2, "models/xgb_case2.pkl")
+
+    print("✅ All models saved to /models/")
