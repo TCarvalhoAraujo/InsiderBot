@@ -4,7 +4,7 @@ from core.io.file_manager import load_finviz_all_trades, load_latest_tagged_trad
 from core.engine.ohlc import update_ohlc
 from core.engine.summary import generate_trade_md
 from core.engine.backtest import run_backtest_pipeline
-from core.engine.embedding import update_motive_tags
+from core.engine.embedding import update_motive_tags, incremental_update
 
 import os
 
@@ -114,8 +114,10 @@ def main():
 
         elif choice == "8":
             df = load_scored_trades()
-            df_updated = update_motive_tags(df)
+            df_updated = incremental_update(df, "scores_with_tags.csv")
+            #df_updated = update_motive_tags(df)
             df_updated.to_csv("scores_with_tags.csv", index=False)
+            
 
         elif choice == "0":
             print("👋 Exiting InsiderBot. Have a great day!")

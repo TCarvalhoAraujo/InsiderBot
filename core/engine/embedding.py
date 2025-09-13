@@ -2,8 +2,10 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import re
+import os
 
-from transformers import pipeline
+from core.io.file_manager import FINVIZ_DATA_DIR, load_scored_with_tags_trades
+# from transformers import pipeline
 from tqdm import tqdm
 
 def fetch_filing_html(url: str) -> str:
@@ -146,3 +148,52 @@ def update_motive_tags(df: pd.DataFrame) -> pd.DataFrame:
     df["footnote_tags"] = all_tags
     df["footnote_notes"] = all_notes
     return df
+
+def incremental_update(df_new: pd.DataFrame, tagged_filename="scores_with_tags.csv") -> pd.DataFrame:
+    """
+    Incrementally update motive tags for new trades only.
+
+    Parameters
+    ----------
+    df_new : pd.DataFrame
+        Fresh scored trades (from load_scored_trades()).
+    tagged_filename : str
+        Filename of the tagged dataset (inside FINVIZ_DATA_DIR).
+    """
+    key_cols = ["ticker", "insider_name", "transaction_date", "price", "shares", "value"]
+
+    # Build key for new rows
+    df_new["_key"] = df_new[key_cols].astype(str).agg("|".join, axis=1)
+
+    try:
+        df_old = load_scored_with_tags_trades(tagged_filename)
+        df_old["_key"] = df_old[key_cols].astype(str).agg("|".join, axis=1)
+
+        already_tagged = set(df_old["_key"])
+        df_to_tag = df_new[~df_new["_key"].isin(already_tagged)].copy()
+
+        print(f"📥 {len(df_to_tag)} new rows to tag.")
+    except FileNotFoundError:
+        df_old = pd.DataFrame()
+        df_to_tag = df_new.copy()
+        print(f"📥 First run – tagging all {len(df_to_tag)} rows.")
+
+    if df_to_tag.empty:
+        print("✅ No new trades found.")
+        return df_old.drop(columns="_key", errors="ignore")
+
+    # Tag only the new rows
+    df_tagged = update_motive_tags(df_to_tag)
+
+    # Merge old + new
+    df_final = pd.concat([df_old, df_tagged], ignore_index=True)
+
+    # Drop helper column before saving
+    df_final = df_final.drop(columns="_key", errors="ignore")
+
+    # Save back using same directory logic
+    save_path = os.path.join(FINVIZ_DATA_DIR, tagged_filename)
+    df_final.to_csv(save_path, index=False)
+
+    print(f"💾 Saved updated dataset with {len(df_final)} rows → {save_path}")
+    return df_final

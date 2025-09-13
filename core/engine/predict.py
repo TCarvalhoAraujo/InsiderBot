@@ -65,6 +65,6 @@ if __name__ == "__main__":
     print(top_case2[["transaction_date", "ticker", "insider_name", "case1_pred_XGB", "case2_pred_XGB"]])
 
     # Save predictions
-    df_all.to_csv("predicted_trades_new.csv", index=False)
-    print("\n✅ Predictions saved to predicted_trades_new.csv")
+    df_all.to_csv("predicted_trades_new1.csv", index=False)
+    print("\n✅ Predictions saved to predicted_trades_new1.csv")
 
