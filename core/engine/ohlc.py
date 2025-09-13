@@ -184,8 +184,8 @@ def get_drawdown_vs_gain_sequence(ohlc: pd.DataFrame, trade_date: datetime.date,
     - SPIKE before DROP = SUCCESSFUL
     - Neither hit:
         - if final_gain_30d is available:
-            - +7% to +15% → NEUTRAL
-            - < +7%       → BAD
+            - +3% to +10% → NEUTRAL
+            - < +3%       → BAD
         - if final_gain_30d is missing → return None
     """
     future_rows = ohlc[ohlc["date"] > trade_date].sort_values("date")
