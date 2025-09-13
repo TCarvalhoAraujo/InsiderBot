@@ -203,7 +203,7 @@ def get_drawdown_vs_gain_sequence(ohlc: pd.DataFrame, trade_date: datetime.date,
         gain = (high - insider_price) / insider_price
         drop = (low  - insider_price) / insider_price
 
-        if gain_day is None and gain >= 0.15:
+        if gain_day is None and gain >= 0.10:
             gain_day = i
         if loss_day is None and drop <= -0.10:
             loss_day = i
@@ -220,7 +220,7 @@ def get_drawdown_vs_gain_sequence(ohlc: pd.DataFrame, trade_date: datetime.date,
     # No spike/drop: fallback to final gain
     if final_gain_30d is None:
         return None
-    elif 7 <= final_gain_30d < 15:
+    elif 3 <= final_gain_30d < 10:
         return "⚪ NEUTRAL TRADE"
     else:
         return "🔴 FINAL GAIN TOO LOW - BAD TRADE"

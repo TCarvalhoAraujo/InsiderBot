@@ -243,13 +243,13 @@ def classify_outcome_case_1(row) -> str:
 
     # Spike threshold
     for gain in [gain_7d, gain_14d, gain_30d]:
-        if pd.notna(gain) and gain >= 15:
+        if pd.notna(gain) and gain >= 10:
             return "🟢 SUCCESSFUL TRADE C1"
 
     if pd.isna(final_gain_30d):
         return ""
 
-    if 9 <= final_gain_30d < 15:
+    if 3 <= final_gain_30d < 10:
         return "⚪ NEUTRAL TRADE C1"
     else:
         return "🔴 UNSUCCESSFUL TRADE C1"
