@@ -3952,5 +3952,143 @@
     "sector": "Financial Services",
     "industry": "Credit Services",
     "earnings_date": "2025-10-21"
+  },
+  "HOFT": {
+    "market_cap": 109220000,
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances",
+    "earnings_date": "2025-12-11"
+  },
+  "NCDL": {
+    "market_cap": 731422464,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-08-05"
+  },
+  "ZD": {
+    "market_cap": 1569181184,
+    "sector": "Communication Services",
+    "industry": "Advertising Agencies",
+    "earnings_date": "2025-11-06"
+  },
+  "LGN": {
+    "market_cap": 1710111744,
+    "sector": "Industrials",
+    "industry": "Engineering & Construction",
+    "earnings_date": null
+  },
+  "CSPI": {
+    "market_cap": 113898360,
+    "sector": "Technology",
+    "industry": "Information Technology Services",
+    "earnings_date": "2025-08-14"
+  },
+  "RAND": {
+    "market_cap": 43229744,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-11-05"
+  },
+  "ED": {
+    "market_cap": 34467479552,
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric",
+    "earnings_date": "2025-11-06"
+  },
+  "ABCB": {
+    "market_cap": 5058962432,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-07-28"
+  },
+  "OCSL": {
+    "market_cap": 1173299072,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-08-05"
+  },
+  "EDF": {
+    "market_cap": 156447312,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": null
+  },
+  "BHRB": {
+    "market_cap": 922081088,
+    "sector": "Financial Services",
+    "industry": "Banks - Regional",
+    "earnings_date": "2025-10-24"
+  },
+  "GSBD": {
+    "market_cap": 1290618112,
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "earnings_date": "2025-11-06"
+  },
+  "LBRX": {
+    "market_cap": 317180128,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": null
+  },
+  "AAON": {
+    "market_cap": 6847760896,
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment",
+    "earnings_date": "2025-11-06"
+  },
+  "NEXT": {
+    "market_cap": 1826058880,
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services",
+    "earnings_date": "2025-11-06"
+  },
+  "EP": {
+    "market_cap": 139038016,
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P",
+    "earnings_date": "2025-11-13"
+  },
+  "NGL": {
+    "market_cap": 827172800,
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream",
+    "earnings_date": "2025-08-07"
+  },
+  "GHM": {
+    "market_cap": 574039552,
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery",
+    "earnings_date": "2025-08-05"
+  },
+  "TSLA": {
+    "market_cap": 1359913811968,
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers",
+    "earnings_date": "2025-10-22"
+  },
+  "SNPS": {
+    "market_cap": 79123365888,
+    "sector": "Technology",
+    "industry": "Software - Infrastructure",
+    "earnings_date": "2025-12-03"
+  },
+  "SVCO": {
+    "market_cap": 170139808,
+    "sector": "Technology",
+    "industry": "Software - Application",
+    "earnings_date": "2025-08-06"
+  },
+  "PAMT": {
+    "market_cap": 262412032,
+    "sector": "Industrials",
+    "industry": "Trucking",
+    "earnings_date": "2025-07-24"
+  },
+  "CGON": {
+    "market_cap": 2726613504,
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "earnings_date": "2025-08-07"
   }
 }
