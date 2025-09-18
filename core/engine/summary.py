@@ -125,98 +125,6 @@ def analyze_cluster(df: pd.DataFrame, ticker: str, trade_date: pd.Timestamp, win
 """
     return md
 
-def analyze_sec_form(df: pd.DataFrame, ticker: str, trade_date: pd.Timestamp) -> str:
-    """
-    Fetches the SEC filing for a given ticker & trade_date,
-    extracts footnotes (either XML <footnote> tags or 'Explanation of Responses'),
-    and returns a Markdown summary.
-    """
-    df["transaction_date"] = pd.to_datetime(df["transaction_date"]).dt.normalize()
-    trade_date = pd.to_datetime(trade_date).normalize()
-
-    row = df[(df["ticker"] == ticker) & (df["transaction_date"] == trade_date)]
-    if row.empty:
-        return f"❌ No filing found for {ticker} on {trade_date.date()}"
-
-    filing_url = row.iloc[0]["sec_form4"]
-
-    # Clean and normalize URL
-    if "finviz.com/" in filing_url:
-        filing_url = filing_url.split("finviz.com/")[-1]
-    filing_url = filing_url.replace("http://", "https://")
-
-    try:
-        resp = requests.get(
-            filing_url,
-            headers={"User-Agent": "InsiderBot - CaseStudy (thicoaraujo1@gmail.com)",
-                     "Accept-Encoding": "gzip, deflate",
-                     "Host": "www.sec.gov"})
-        resp.raise_for_status()
-    except Exception as e:
-        return f"❌ Error fetching SEC filing: {e}"
-
-    soup = BeautifulSoup(resp.text, "lxml")
-
-    # --- Step 1: Try XML <footnote> tags first ---
-    footnotes = [fn.get_text(strip=True) for fn in soup.find_all("footnote")]
-
-    # --- Step 2: If none found, look for "Explanation of Responses:" ---
-    if not footnotes:
-        text = soup.get_text("\n")
-        match = re.search(
-            r"Explanation of Responses:(.*?)(Remarks:|\*\* Signature of Reporting Person|Reminder:|$)",
-            text,
-            re.S
-        )
-
-        footnotes = []
-        if match:
-            block = match.group(1).strip()
-
-            # ✅ Capture only numbered footnotes ("1. ...", "2. ...", etc.)
-            numbered = re.findall(r"(\d+\..*?)(?=\n\d+\.|\Z)", block, re.S)
-            footnotes = [fn.strip().replace("\n", " ") for fn in numbered]
-
-
-    # --- Step 3: Detect signals ---
-    tags, notes = [], []
-    for fn in footnotes:
-        if "dividend reinvestment" in fn.lower():
-            tags.append("📥 DRIP")
-            notes.append("Includes shares from Dividend Reinvestment Plan (automatic, weaker signal).")
-        if "disclaims beneficial ownership" in fn.lower():
-            tags.append("⚖️ DISCLAIMER")
-            notes.append("Insider disclaims beneficial ownership → indirect/limited financial interest.")
-
-    if not tags:
-        tags.append("✅ No special footnotes")
-        notes.append("No DRIP or disclaimer language detected in this filing.")
-
-    # --- Step 4: Build Markdown ---
-    md = f"""
-# 📑 SEC Filing Footnote Analysis – {ticker}
-
-**Date:** {trade_date.date()}  
-**Filing URL:** [{filing_url}]({filing_url})
-
----
-
-## 📝 Detected Footnotes
-{"".join([f"- {fn}\n" for fn in footnotes]) if footnotes else "None found."}
-
----
-
-## 🧩 Tags
-{", ".join(tags)}
-
----
-
-## ⚖️ Notes
-{"".join([f"- {n}\n" for n in notes])}
-    """.strip()
-
-    return md
-
 def generate_trade_md(
     ticker: str,
     insider_price: float,
@@ -228,7 +136,7 @@ def generate_trade_md(
     df: pd.DataFrame,
     tags: list[str] = None,
     news: list[str] = None,
-    tax_rate: float = 0.30,
+    tax_rate: float = 0.15,
     filename: str = None
 ):
     """
@@ -238,9 +146,9 @@ def generate_trade_md(
     # --- Insider Section ---
     pct_change_insider = ((current_price - insider_price) / insider_price) * 100
 
-    targets = {15: insider_price * 1.15,
-               17: insider_price * 1.17,
-               20: insider_price * 1.20}
+    targets = {8: insider_price * 1.08,
+               10: insider_price * 1.1,
+               12: insider_price * 1.12}
     stop_target = insider_price * 0.90
 
     insider_gains = {}
@@ -265,9 +173,6 @@ def generate_trade_md(
     # --- Cluster Section
     cluster_md = analyze_cluster(df, ticker, pd.to_datetime(date))
 
-    # --- Sec Form Setion
-    sec_form = analyze_sec_form(df, ticker, pd.to_datetime(date))
-
     # --- Markdown Output ---
     md = f"""
 # 📝 Trade Signal Overview – {ticker.upper()}
@@ -282,17 +187,17 @@ def generate_trade_md(
 - **Position Size:** {num_stocks} shares (${insider_price * num_stocks:.2f})
 
 **Upside Potential (after {int(tax_rate*100)}% tax):**
-- +15% → ${insider_gains[15][0]:.2f} → Gain: **${insider_gains[15][1]:.2f}**
-- +17% → ${insider_gains[17][0]:.2f} → Gain: **${insider_gains[17][1]:.2f}**
-- +20% → ${insider_gains[20][0]:.2f} → Gain: **${insider_gains[20][1]:.2f}**
+- +8% → ${insider_gains[8][0]:.2f} → Gain: **${insider_gains[8][1]:.2f}**
+- +10% → ${insider_gains[10][0]:.2f} → Gain: **${insider_gains[10][1]:.2f}**
+- +12% → ${insider_gains[12][0]:.2f} → Gain: **${insider_gains[12][1]:.2f}**
 
 **Downside Risk:**
 - -10% → ${stop_target:.2f} → Loss: **${insider_loss:.2f}**
 
 **Risk-to-Reward Ratio (RRR):**
-- +15%: ~**{insider_rrr_dict[15]:.2f}**
-- +17%: ~**{insider_rrr_dict[17]:.2f}**
-- +20%: ~**{insider_rrr_dict[20]:.2f}**
+- +8%: ~**{insider_rrr_dict[8]:.2f}**
+- +10%: ~**{insider_rrr_dict[10]:.2f}**
+- +12%: ~**{insider_rrr_dict[12]:.2f}**
 
 ---
 
@@ -305,17 +210,17 @@ def generate_trade_md(
 - **Position Size:** {num_stocks} shares (${current_price * num_stocks:.2f})
 
 **Upside Potential (after {int(tax_rate*100)}% tax):**
-- +15% → ${trader_gains[15][0]:.2f} → Gain: **${trader_gains[15][1]:.2f}**
-- +17% → ${trader_gains[17][0]:.2f} → Gain: **${trader_gains[17][1]:.2f}**
-- +20% → ${trader_gains[20][0]:.2f} → Gain: **${trader_gains[20][1]:.2f}**
+- +8% → ${trader_gains[8][0]:.2f} → Gain: **${trader_gains[8][1]:.2f}**
+- +10% → ${trader_gains[10][0]:.2f} → Gain: **${trader_gains[10][1]:.2f}**
+- +12% → ${trader_gains[12][0]:.2f} → Gain: **${trader_gains[12][1]:.2f}**
 
 **Downside Risk:**
 - -10% → ${stop_target:.2f} → Loss: **${trader_loss:.2f}**
 
 **Risk-to-Reward Ratio (RRR):**
-- +15%: ~**{trader_rrr_dict[15]:.2f}**
-- +17%: ~**{trader_rrr_dict[17]:.2f}**
-- +20%: ~**{trader_rrr_dict[20]:.2f}**
+- +8%: ~**{trader_rrr_dict[8]:.2f}**
+- +10%: ~**{trader_rrr_dict[10]:.2f}**
+- +12%: ~**{trader_rrr_dict[12]:.2f}**
 
 ---
 
@@ -332,17 +237,6 @@ def generate_trade_md(
 
 ## 📢 News
 {chr(10).join(f"- {n}" for n in news) if news else "None"}
-
----
-
-{sec_form}
-
----
-
-## ⚖️ Summary
-- **Signal Strength (Insider):** (fill manually)
-- **Signal Strength (Trader):** (fill manually)
-- **Notes:** (add your notes here)
 
 ---
 """
