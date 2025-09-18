@@ -152,15 +152,35 @@ def fetch_bulk_ohlc(tickers: list[str], start_date, end_date) -> dict[str, pd.Da
 
 def get_window_stats(ohlc: pd.DataFrame, trade_date: pd.Timestamp, insider_price: float, days_forward: int):
     """
-    Returns high, low, %gain, and %drawdown for a future window if fully available.
+    Returns high, low, %gain, and %drawdown for a future window if sufficient data is available.
+    Now aligns with final_gain_30d logic using business days instead of strict calendar days.
     """
-    window = ohlc[(ohlc["date"] > trade_date) & (ohlc["date"] <= trade_date + timedelta(days=days_forward))]
+    # Make sure OHLC is sorted by date
+    ohlc = ohlc.sort_values("date")
+    future_window = ohlc[ohlc["date"] > trade_date]
     
-    if window.empty or window["date"].max() < (trade_date + timedelta(days=days_forward - 1)) or not insider_price:
+    if future_window.empty or not insider_price:
         return None, None, None, None
-
-    high = window["high"].max()
-    low = window["low"].min()
+    
+    # Define minimum business days needed for each window
+    # This aligns with the final_gain_30d logic that uses 21 business days for 30 calendar days
+    min_business_days_map = {
+        7: 5,    # ~1 business week
+        14: 10,  # ~2 business weeks  
+        30: 21   # ~1 business month (matches final_gain_30d)
+    }
+    
+    min_business_days = min_business_days_map.get(days_forward, days_forward * 5 // 7)
+    
+    if len(future_window) < min_business_days:
+        return None, None, None, None
+    
+    # Take the first N business days (or slightly more if available for better accuracy)
+    max_days_to_consider = min(len(future_window), min_business_days + 5)
+    window_data = future_window.head(max_days_to_consider)
+    
+    high = window_data["high"].max()
+    low = window_data["low"].min()
     gain = ((high - insider_price) / insider_price) * 100
     drawdown = ((low - insider_price) / insider_price) * 100
     return high, low, gain, drawdown
